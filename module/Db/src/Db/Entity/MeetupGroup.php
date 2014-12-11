@@ -300,39 +300,6 @@ class MeetupGroup implements ArraySerializableInterface
     }
 
     /**
-     * Add meetupGroupMember
-     *
-     * @param  \Db\Entity\MeetupGroupMember $meetupGroupMember
-     * @return MeetupGroup
-     */
-    public function addMeetupGroupMember(\Db\Entity\MeetupGroupMember $meetupGroupMember)
-    {
-        $this->meetupGroupMember[] = $meetupGroupMember;
-
-        return $this;
-    }
-
-    /**
-     * Remove meetupGroupMember
-     *
-     * @param \Db\Entity\MeetupGroupMember $meetupGroupMember
-     */
-    public function removeMeetupGroupMember(\Db\Entity\MeetupGroupMember $meetupGroupMember)
-    {
-        $this->meetupGroupMember->removeElement($meetupGroupMember);
-    }
-
-    /**
-     * Get meetupGroupMember
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getMeetupGroupMember()
-    {
-        return $this->meetupGroupMember;
-    }
-
-    /**
      * Add jointEvent
      *
      * @param  \Db\Entity\Event $jointEvent

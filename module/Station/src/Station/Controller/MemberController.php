@@ -16,6 +16,10 @@ class MemberController extends AbstractActionController
 
         $member = $this->plugin('Meetup')->getMember();
 
+        if (!sizeof($member->getProfile())) {
+            return $this->plugin('redirect')->toRoute('member/refresh');
+        }
+
         return new ViewModel([
             'member' => $member,
         ]);
@@ -31,6 +35,10 @@ class MemberController extends AbstractActionController
 
         $member = $this->plugin('Meetup')->getMember();
         $meetupProfiles = $meetup->getGroupProfiles(['member_id' => $member->getId()]);
+
+        if (!$meetupProfiles) {
+            throw new Exception('You are not a member of any Meetup groups.  Join a group through meetup.com and try again.');
+        }
 
         foreach ($meetupProfiles as $meetupProfile) {
             $meetupGroup = $objectManager->getRepository('Db\Entity\MeetupGroup')->find($meetupProfile['group']['id']);
@@ -92,6 +100,6 @@ class MemberController extends AbstractActionController
 
         $objectManager->flush();
 
-        die('add groups done');
+        return $this->plugin('redirect')->toRoute('member');
     }
 }

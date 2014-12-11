@@ -3,3 +3,29 @@
 </a>
 
 <h1><?= $this->escapeHtml($member->getName()); ?></h1>
+
+<table class="table">
+    <caption>Meetup Groups</caption>
+    <thead>
+        <tr>
+            <th>Picture</th>
+            <th>Meetup Group Name</th>
+            <th>Your Profile Name</th>
+            <th>Role</th>
+        </tr>
+    </thead>
+    <tbody>
+    <?php
+    foreach ($member->getProfile() as $profile) {
+    ?>
+        <tr>
+            <td><img src="<?= $profile->getProfilePhoto()->getThumb(); ?>"></td>
+            <td><?= $this->escapeHtml($profile->getMeetupGroup()->getName()); ?></td>
+            <td><?= $this->escapeHtml($profile->getName()); ?></td>
+            <td><?= $this->escapeHtml($profile->getRole()); ?></td>
+        </tr>
+    <?php
+    }
+    ?>
+    </tbody>
+</table>
