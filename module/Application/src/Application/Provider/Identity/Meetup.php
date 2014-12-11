@@ -23,8 +23,7 @@ class Meetup implements ProviderInterface
                 // This is a little hack.  If the user has no roles
                 // then the oauth2 will infinitly loop.  This happens
                 // when a session exists for the current user on a new install
-                // (delete your cookies if reinstalling) then
-                // #voodoo# happens.
+                // (delete your cookies if reinstalling)
                 if (!sizeof($user->getRole())) {
                     $this->getObjectManager()->remove($user);
                     $this->getObjectManager()->flush();

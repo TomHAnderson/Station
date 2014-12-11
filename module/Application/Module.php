@@ -17,6 +17,9 @@ use Zend\Session\Container;
 use Zend\Authentication\AuthenticationService;
 use Application\Authentication\Adapter\Meetup as MeetupAdapter;
 use Exception;
+use DateTime;
+use DateInterval;
+use Stuki\OAuth2\Client;
 
 class Module
 {
@@ -64,7 +67,34 @@ class Module
                 'MeetupClient' => function (ServiceManager $serviceManager) {
                     $container = new Container('oauth2');
                     if (isset($container->accessToken)) {
+                        $now = new DateTime();
+                        if ($container->accessTokenExpire <= $now) {
+                            // Access token has expired, refresh token
+                            $config = $serviceManager->get('Config');
+
+                            $provider = new Client\Provider\Meetup(array(
+                                'clientId' => $config['meetup']['key'],
+                                'clientSecret' => $config['meetup']['secret'],
+                                'redirectUri' => $config['meetup']['redirect'],
+                            ));
+
+                            $token = $provider->getAccessToken('refresh_token', [
+                                'refresh_token' => $container->refreshToken,
+                            ]);
+
+                            // Set the expire time for the new access token
+                            $expire = new DateTime();
+                            $expire->add(new DateInterval('PT' . $token->expires_in . 'S'));
+
+                            // Store the access and refresh token for future use
+                            $container->accessToken = $token->accessToken;
+                            $container->refreshToken = $token->refreshToken;
+                            $container->accessTokenExpire = $expire;
+                        }
+
                         $accessToken = $container->accessToken;
+
+                        // Use the refresh token every time this is called?
                     } else {
                         throw new Exception('The oauth2 session is not configured');
                     }
