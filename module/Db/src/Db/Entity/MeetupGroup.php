@@ -2,11 +2,72 @@
 
 namespace Db\Entity;
 
+use Zend\Stdlib\ArraySerializableInterface;
+use DateTime;
+
 /**
  * MeetupGroup
  */
-class MeetupGroup
+class MeetupGroup implements ArraySerializableInterface
 {
+    public function __toString()
+    {
+        return $this->getName();
+    }
+
+    public function exchangeArray(array $data)
+    {
+        foreach ($data as $key => $value) {
+            switch ($key) {
+                case 'name':
+                    $this->setName($value);
+                    break;
+                case 'created':
+                    $value = DateTime::createFromFormat('U', $value / 1000);
+                case 'createdAt':
+                    $this->setCreatedAt($value);
+                    break;
+                case 'urlname':
+                case 'urlName':
+                    $this->setUrlName($value);
+                    break;
+                case 'who':
+                    $this->setWho($value);
+                    break;
+                case 'join_mode':
+                case 'joinMode':
+                    $this->setJoinMode($value);
+                    break;
+                case 'group_lat':
+                case 'latitude':
+                    $this->setLatitude($value);
+                    break;
+                case 'group_lon':
+                case 'longitude':
+                    $this->setLongitude($value);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        return $this;
+    }
+
+    public function getArrayCopy()
+    {
+        return [
+            'id' => $this->getId(),
+            'name' => $this->getName(),
+            'createdAt' => $this->getCreatedAt(),
+            'urlName' => $this->getUrlName(),
+            'who' => $this->getWho(),
+            'joinMode' => $this->getJoinMode(),
+            'latitude' => $this->getLatitude(),
+            'longitude' => $this->getLongitude(),
+        ];
+    }
+
     /**
      * @var string
      */
@@ -302,5 +363,173 @@ class MeetupGroup
     public function getJointEvent()
     {
         return $this->jointEvent;
+    }
+    /**
+     * @var \DateTime
+     */
+    private $createdAt;
+
+    /**
+     * @var string
+     */
+    private $urlName;
+
+    /**
+     * @var string
+     */
+    private $who;
+
+    /**
+     * @var string
+     */
+    private $joinMode;
+
+    /**
+     * @var float
+     */
+    private $latitude;
+
+    /**
+     * @var float
+     */
+    private $longitude;
+
+
+    /**
+     * Set createdAt
+     *
+     * @param \DateTime $createdAt
+     * @return MeetupGroup
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Get createdAt
+     *
+     * @return \DateTime
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * Set urlName
+     *
+     * @param string $urlName
+     * @return MeetupGroup
+     */
+    public function setUrlName($urlName)
+    {
+        $this->urlName = $urlName;
+
+        return $this;
+    }
+
+    /**
+     * Get urlName
+     *
+     * @return string
+     */
+    public function getUrlName()
+    {
+        return $this->urlName;
+    }
+
+    /**
+     * Set who
+     *
+     * @param string $who
+     * @return MeetupGroup
+     */
+    public function setWho($who)
+    {
+        $this->who = $who;
+
+        return $this;
+    }
+
+    /**
+     * Get who
+     *
+     * @return string
+     */
+    public function getWho()
+    {
+        return $this->who;
+    }
+
+    /**
+     * Set joinMode
+     *
+     * @param string $joinMode
+     * @return MeetupGroup
+     */
+    public function setJoinMode($joinMode)
+    {
+        $this->joinMode = $joinMode;
+
+        return $this;
+    }
+
+    /**
+     * Get joinMode
+     *
+     * @return string
+     */
+    public function getJoinMode()
+    {
+        return $this->joinMode;
+    }
+
+    /**
+     * Set latitude
+     *
+     * @param float $latitude
+     * @return MeetupGroup
+     */
+    public function setLatitude($latitude)
+    {
+        $this->latitude = $latitude;
+
+        return $this;
+    }
+
+    /**
+     * Get latitude
+     *
+     * @return float
+     */
+    public function getLatitude()
+    {
+        return $this->latitude;
+    }
+
+    /**
+     * Set longitude
+     *
+     * @param float $longitude
+     * @return MeetupGroup
+     */
+    public function setLongitude($longitude)
+    {
+        $this->longitude = $longitude;
+
+        return $this;
+    }
+
+    /**
+     * Get longitude
+     *
+     * @return float
+     */
+    public function getLongitude()
+    {
+        return $this->longitude;
     }
 }

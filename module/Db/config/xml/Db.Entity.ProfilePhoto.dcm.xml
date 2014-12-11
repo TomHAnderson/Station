@@ -5,10 +5,10 @@
     <field name="photo" type="string" nullable="true"/>
     <field name="highResolution" type="string" nullable="true"/>
     <field name="thumb" type="string" nullable="true"/>
-    <many-to-one field="profile" target-entity="Db\Entity\Profile" inversed-by="profilePhoto">
+    <one-to-one field="profile" target-entity="Db\Entity\Profile" inversed-by="profilePhoto">
       <join-columns>
-        <join-column name="profile_id" referenced-column-name="id"/>
+        <join-column name="profile_id" referenced-column-name="id" nullable="false" unique="true"/>
       </join-columns>
-    </many-to-one>
+    </one-to-one>
   </entity>
 </doctrine-mapping>

@@ -30,18 +30,68 @@ class MemberController extends AbstractActionController
         $objectManager = $this->getServiceLocator()->get('doctrine.entitymanager.orm_default');
 
         $member = $this->plugin('Meetup')->getMember();
-        $profiles = $meetup->getGroupProfiles(['member_id' => $member->getId()]);
+        $meetupProfiles = $meetup->getGroupProfiles(['member_id' => $member->getId()]);
 
-        foreach ($profiles as $profile) {
-            $meetupGroup = $objectManager->find($profile['group']['id']);
+        foreach ($meetupProfiles as $meetupProfile) {
+            $meetupGroup = $objectManager->getRepository('Db\Entity\MeetupGroup')->find($meetupProfile['group']['id']);
 
+            // Refreshing of meetup groups is an administrative function
+            // Add if not found
             if (!$meetupGroup) {
                 $meetupGroup = new Entity\MeetupGroup();
-                $meetupGroup->exchangeArray($profile['group']);
+                $meetupGroup->setId($meetupProfile['group']['id']);
+                $meetupGroup->exchangeArray($meetupProfile['group']);
                 $objectManager->persist($meetupGroup);
+            }
+
+            $profile = $objectManager->getRepository('Db\Entity\Profile')->findOneBy([
+                'member' => $member,
+                'meetupGroup' => $meetupGroup,
+            ]);
+
+            // Create or update profile
+            if (!$profile) {
+                $profile = new Entity\Profile();
+                $profile->setMember($member);
+                $profile->setMeetupGroup($meetupGroup);
+                $objectManager->persist($profile);
+            }
+            $profile->exchangeArray($meetupProfile);
+
+            // Create or update the the profile photo
+            if (isset($meetupProfile['photo'])) {
+                $photo = $profile->getProfilePhoto();
+
+                if (!$photo) {
+                    $photo = new Entity\ProfilePhoto();
+                    $photo->setId($meetupProfile['photo']['photo_id']);
+                    $photo->setProfile($profile);
+                    $objectManager->persist($photo);
+                }
+
+                $photo->exchangeArray($meetupProfile['photo']);
+            } else {
+                $objectManager->remove($profile->getProfilePhoto());
+            }
+
+            // Clear answers and recreate
+            if ($profile->getProfileAnswer()) {
+                foreach ($profile->getProfileAnswer() as $answer) {
+                    $objectManager->remove($answer);
+                }
+            }
+
+            if (isset($meetupProfile['answers']) and is_array($meetupProfile['answers'])) {
+                foreach ($meetupProfile['answers'] as $meetupAnswer) {
+                    $answer = new Entity\ProfileAnswer();
+                    $objectManager->persist($answer);
+                    $answer->exchangeArray($meetupAnswer);
+                }
             }
         }
 
-        die();
+        $objectManager->flush();
+
+        die('add groups done');
     }
 }

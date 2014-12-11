@@ -29,7 +29,6 @@ return array(
         'Phpro\\DoctrineHydrationModule',
         'ZF\\Apigility\\Doctrine\\Server',
         'MaglMarkdown',
-        'SoliantEntityAudit',
         'Db',
         'Station',
         'ContentManagement',

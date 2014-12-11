@@ -307,19 +307,19 @@
       <field name="photo" type="string" uuid="952dc7dc-1e63-44a6-88f3-b50e3c912721"/>
       <field name="highResolution" type="string" uuid="ee803d79-84a7-4995-b96a-7b364597609a"/>
       <field name="thumb" type="string" uuid="3f622ecb-64e1-4e60-8cdd-9a443b74b9ce"/>
-      <field name="profile_id" type="integer" uuid="7decc8a6-e2be-47f9-8d49-ad148917511c"/>
+      <field name="profile_id" type="integer" required="true" unique="true" uuid="7decc8a6-e2be-47f9-8d49-ad148917511c"/>
     </entity>
     <association from="ProfilePhoto" to="Profile" owner-alias="profilePhoto" inverse-alias="profile" uuid="624e153a-00b4-450e-9bc0-6e1fce0a8dd1">
       <association-field from="profile_id" to="id"/>
     </association>
-    <entity name="ProfileAnswers" uuid="6db0e6b2-b817-493e-9589-4f336a66a0ed">
+    <entity name="ProfileAnswer" uuid="6db0e6b2-b817-493e-9589-4f336a66a0ed">
       <field name="id" type="integer" required="true" unique="true" primary="true" auto-increment="true" uuid="50abada3-fbab-49da-b68e-17294ed0d95e"/>
       <field name="question" type="string" uuid="7d3c950e-01b3-4920-b312-6a2fbd0faf1b"/>
       <field name="answer" type="string" uuid="351bca30-cdba-45d9-8e75-3b9d59892eae"/>
       <field name="questionId" type="integer" uuid="8316bdd9-31c7-4c43-a887-c9960b84587f"/>
       <field name="profile_id" type="integer" uuid="31fba509-806e-4b00-9a5e-10e8891ab877"/>
     </entity>
-    <association from="ProfileAnswers" to="Profile" owner-alias="profileAnswers" inverse-alias="profile" uuid="bd7db317-cc2a-4922-8fdb-f2203fcce032">
+    <association from="ProfileAnswer" to="Profile" owner-alias="profileAnswer" inverse-alias="profile" uuid="bd7db317-cc2a-4922-8fdb-f2203fcce032">
       <association-field from="profile_id" to="id"/>
     </association>
     <comment caption="Station" description="Author: Tom Anderson&#10;Version: 1.0.0&#10;Date: 2014-11-20" uuid="484af149-29c2-488e-bae7-12436d51e779"/>
@@ -350,7 +350,7 @@
       <entity-ref name="MemberToRole"/>
       <entity-ref name="Profile"/>
       <entity-ref name="ProfilePhoto"/>
-      <entity-ref name="ProfileAnswers"/>
+      <entity-ref name="ProfileAnswer"/>
     </region>
     <region caption="MeetupGroup" uuid="d5771e08-38ad-41c3-a83c-6ece690bcc52">
       <comment caption="EventToHost" description="A many to many with Member.  The members linked to the event through this entity are the event host(s)" uuid="2a158aef-9b82-471b-b09f-c0b20c626ab0"/>
@@ -390,7 +390,7 @@
     <entity uuid="55ccc5ec-f2f4-4ab0-a2b5-a7fd7d855d3a" bg-color="4294967295" hdr-color="4292006610" position-x="-24" position-y="44" size-x="0" size-x2="95" size-y="0" size-y2="87"/>
     <association uuid="585805fa-5b6a-4473-bfd6-c5ce90a2dbf3" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
     <entity uuid="605b7a29-eb1c-4c4a-9ed5-6cb6bfe9d247" bg-color="4294967295" hdr-color="4292006610" position-x="115" position-y="-31" size-x="0" size-x2="130" size-y="0" size-y2="60"/>
-    <association uuid="624e153a-00b4-450e-9bc0-6e1fce0a8dd1" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
+    <association uuid="624e153a-00b4-450e-9bc0-6e1fce0a8dd1" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4294901760"/>
     <entity uuid="6739cfe1-d85d-4ae5-886d-ac30b309ea02" bg-color="4294967295" hdr-color="4292006610" position-x="24" position-y="436" size-x="0" size-x2="110" size-y="0" size-y2="87"/>
     <many-to-many-association-entity uuid="67f92d5b-f24b-4c3b-aae2-c626bcb7d17f" split="1"/>
     <project uuid="68b6e974-35fb-4337-a482-3e3553b0227b" size-x="52" size-x2="1595" size-y="51" size-y2="1210"/>
