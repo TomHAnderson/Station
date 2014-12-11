@@ -89,7 +89,7 @@ return array(
     ),
     'controller_plugins' => array(
         'invokables' => array(
-            'MeetupClient' => 'Application\Plugin\MeetupClientPlugin',
+            'Meetup' => 'Application\Controller\Plugin\Meetup',
         ),
     ),
     'view_helpers' => array(

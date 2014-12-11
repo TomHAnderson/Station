@@ -3,11 +3,17 @@
   <entity name="Db\Entity\MeetupGroup">
     <id name="id" type="integer"/>
     <field name="name" type="string" nullable="false"/>
+    <field name="createdAt" type="datetime" nullable="true"/>
+    <field name="urlName" type="string" nullable="true"/>
+    <field name="who" type="string" nullable="true"/>
+    <field name="joinMode" type="string" nullable="true"/>
+    <field name="latitude" type="float" nullable="true"/>
+    <field name="longitude" type="float" nullable="true"/>
     <one-to-many field="event" target-entity="Db\Entity\Event" mapped-by="meetupGroup"/>
     <one-to-many field="sponsor" target-entity="Db\Entity\Sponsor" mapped-by="meetupGroup"/>
     <one-to-many field="meetupGroupLink" target-entity="Db\Entity\MeetupGroupLink" mapped-by="meetupGroup"/>
     <one-to-many field="presentationProposal" target-entity="Db\Entity\PresentationProposal" mapped-by="meetupGroup"/>
-    <one-to-many field="meetupGroupMember" target-entity="Db\Entity\MeetupGroupMember" mapped-by="meetupGroup"/>
+    <one-to-many field="meetupGroupMember" target-entity="Db\Entity\Profile" mapped-by="meetupGroup"/>
     <many-to-many field="jointEvent" target-entity="Db\Entity\Event" mapped-by="jointMeetupGroup"/>
   </entity>
 </doctrine-mapping>

@@ -1,1 +1,5 @@
-Action "index", controller "Member", module "Station".
+<a class="pull-right btn btn-warning" href="<?= $this->url('member/refresh', ['id' => $member->getId()]); ?>">
+    Refresh Profile
+</a>
+
+<h1><?= $this->escapeHtml($member->getName()); ?></h1>

@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xsi="http://www.w3.org/2001/XMLSchema-instance" schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Db\Entity\ProfileAnswers">
+    <id name="id" type="integer">
+      <generator strategy="AUTO"/>
+    </id>
+    <field name="question" type="string" nullable="true"/>
+    <field name="answer" type="string" nullable="true"/>
+    <field name="questionId" type="integer" nullable="true"/>
+    <many-to-one field="profile" target-entity="Db\Entity\Profile" inversed-by="profileAnswers">
+      <join-columns>
+        <join-column name="profile_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

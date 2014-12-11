@@ -47,6 +47,7 @@ return [
                 array('route' => 'page-create', 'roles' => array('administrator')),
 
                 array('route' => 'member', 'roles' => array('member')),
+                array('route' => 'member/refresh', 'roles' => array('member')),
 
                 # Administration
                 array('route' => 'admin', 'roles' => array('administrator')),

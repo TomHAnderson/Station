@@ -19,7 +19,19 @@ return array(
                     ),
                 ),
                 'may_terminate' => true,
-                'child_routes' => array(),
+                'child_routes' => array(
+                    'refresh' => array(
+                        'type'    => 'Segment',
+                        'options' => array(
+                            'route'    => '/refresh',
+                            'defaults' => array(
+                                '__NAMESPACE__' => 'Station\Controller',
+                                'controller'    => 'Member',
+                                'action'        => 'refresh',
+                            ),
+                        ),
+                    ),
+                ),
             ),
         ),
     ),
