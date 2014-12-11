@@ -284,17 +284,17 @@
     </many-to-many>
     <entity name="Profile" uuid="906eea33-9694-451a-b568-9560d7792695">
       <field name="id" type="integer" required="true" unique="true" primary="true" auto-increment="true" uuid="009e5773-e39a-4ab9-8928-1469b3c0dcfd"/>
-      <field name="role" type="string" uuid="000b2159-7bab-4683-bef8-8dbb320db77a"/>
+      <field name="member_id" type="integer" uuid="2977050b-6f99-4e36-a959-ffbd89dcec69"/>
       <field name="meetup_group_id" type="integer" uuid="8b71c5d4-f74c-4fce-a4b1-fed75876f548"/>
-      <field name="url" type="string" uuid="cf133fbf-15b6-4d99-94ad-cc95c8b2f39d"/>
-      <field name="status" type="string" uuid="afc1d352-a96b-40d4-9007-68778055486f"/>
-      <field name="lastVisitedAt" type="datetime" uuid="e49d6e97-8393-4096-9876-ee9865330fbc"/>
-      <field name="biography" type="text" uuid="eeaf31eb-e898-4da0-a70c-f04b115e7ee6"/>
-      <field name="createdAt" type="datetime" uuid="438abb84-5195-424e-bf0a-86b5b8436508"/>
-      <field name="updatedAt" type="datetime" uuid="7df45ad7-8ff9-45f6-9206-1b4bea34d904"/>
       <field name="name" type="string" uuid="fe555baa-cece-45b8-aa32-f1f26dba2f81"/>
       <field name="title" type="string" uuid="651a00ce-1cb1-400c-8900-3a2ac90d62d8"/>
-      <field name="member_id" type="integer" uuid="2977050b-6f99-4e36-a959-ffbd89dcec69"/>
+      <field name="role" type="string" uuid="000b2159-7bab-4683-bef8-8dbb320db77a"/>
+      <field name="status" type="string" uuid="afc1d352-a96b-40d4-9007-68778055486f"/>
+      <field name="biography" type="text" uuid="eeaf31eb-e898-4da0-a70c-f04b115e7ee6"/>
+      <field name="url" type="string" uuid="cf133fbf-15b6-4d99-94ad-cc95c8b2f39d"/>
+      <field name="lastVisitedAt" type="datetime" uuid="e49d6e97-8393-4096-9876-ee9865330fbc"/>
+      <field name="createdAt" type="datetime" uuid="438abb84-5195-424e-bf0a-86b5b8436508"/>
+      <field name="updatedAt" type="datetime" uuid="7df45ad7-8ff9-45f6-9206-1b4bea34d904"/>
     </entity>
     <association from="Profile" to="MeetupGroup" owner-alias="meetupGroupMember" inverse-alias="meetupGroup" uuid="ba61cebc-7507-48f7-9a6f-8611299e4347">
       <association-field from="meetup_group_id" to="id"/>
