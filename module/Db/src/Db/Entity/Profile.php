@@ -454,4 +454,27 @@ class Profile implements ArraySerializableInterface
         return $this;
     }
 
+
+    /**
+     * Add profileAnswer
+     *
+     * @param \Db\Entity\ProfileAnswer $profileAnswer
+     * @return Profile
+     */
+    public function addProfileAnswer(\Db\Entity\ProfileAnswer $profileAnswer)
+    {
+        $this->profileAnswer[] = $profileAnswer;
+
+        return $this;
+    }
+
+    /**
+     * Remove profileAnswer
+     *
+     * @param \Db\Entity\ProfileAnswer $profileAnswer
+     */
+    public function removeProfileAnswer(\Db\Entity\ProfileAnswer $profileAnswer)
+    {
+        $this->profileAnswer->removeElement($profileAnswer);
+    }
 }

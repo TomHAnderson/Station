@@ -6,6 +6,7 @@ use Zend\Mvc\Controller\Plugin\AbstractPlugin;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorAwareTrait;
 use Zend\Authentication\AuthenticationService;
+use BjyAuthorize\Exception\UnAuthorizedException;
 
 class Meetup extends AbstractPlugin implements ServiceLocatorAwareInterface
 {
@@ -23,5 +24,29 @@ class Meetup extends AbstractPlugin implements ServiceLocatorAwareInterface
         }
 
         return null;
+    }
+
+    public function validateMeetupGroupPermission($meetupGroupId, $permission, $override = true)
+    {
+        # FIXME:  override is for debugging only
+        if ($override) return true;
+        $objectManager = $this->getServiceLocator()->getServiceLocator()->get('doctrine.entitymanager.orm_default');
+        $meetupGroup = $objectManager->getRepository('Db\Entity\MeetupGroup')->find($meetupGroupId);
+
+        $memberProfile = null;
+        foreach ($this->getMember()->getProfile() as $profile) {
+            if ($profile->getMeetupGroup() == $meetupGroup) {
+                $memberProfile = $profile;
+                break;
+            }
+        }
+
+        // The member must have role permissions for this group
+        # FIXME:  Improve to use Meetup permission authorize tree
+        if (!$memberProfile or !$memberProfile->getRole() or $memberProfile->getRole() !== $permission) {
+            throw new UnAuthorizedException();
+        }
+
+        return true;
     }
 }

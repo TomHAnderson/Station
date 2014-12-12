@@ -499,4 +499,42 @@ class MeetupGroup implements ArraySerializableInterface
     {
         return $this->longitude;
     }
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $profile;
+
+
+    /**
+     * Add profile
+     *
+     * @param \Db\Entity\Profile $profile
+     * @return MeetupGroup
+     */
+    public function addProfile(\Db\Entity\Profile $profile)
+    {
+        $this->profile[] = $profile;
+
+        return $this;
+    }
+
+    /**
+     * Remove profile
+     *
+     * @param \Db\Entity\Profile $profile
+     */
+    public function removeProfile(\Db\Entity\Profile $profile)
+    {
+        $this->profile->removeElement($profile);
+    }
+
+    /**
+     * Get profile
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getProfile()
+    {
+        return $this->profile;
+    }
 }

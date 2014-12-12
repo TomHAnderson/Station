@@ -3,6 +3,8 @@ return array(
     'controllers' => array(
         'invokables' => array(
             'Admin\Controller\Index' => 'Admin\Controller\IndexController',
+            'Admin\Controller\MeetupGroup' => 'Admin\Controller\MeetupGroupController',
+            'Admin\Controller\Event' => 'Admin\Controller\EventController',
         ),
     ),
 
@@ -25,13 +27,26 @@ return array(
                 ),
                 'may_terminate' => true,
                 'child_routes' => array(
-                    'placeholder' => array(
+                    'meetup-group' => array(
                         'type'    => 'Segment',
                         'options' => array(
-                            'route'    => '/placeholder',
+                            'route'    => '/meetup-group/:id',
                             'defaults' => array(
-                                'controller'    => 'Admin\Controller\Index',
-                                'action'        => 'placeholder',
+                                'controller'    => 'Admin\Controller\MeetupGroup',
+                                'action'        => 'index',
+                            ),
+                        ),
+                        'may_terminate' => true,
+                        'child_routes' => array(
+                            'event-refresh-all' => array(
+                                'type'    => 'Segment',
+                                'options' => array(
+                                    'route'    => '/event/refresh-all',
+                                    'defaults' => array(
+                                        'controller'    => 'Admin\Controller\Event',
+                                        'action'        => 'refreshAll',
+                                    ),
+                                ),
                             ),
                         ),
                     ),

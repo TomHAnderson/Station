@@ -296,7 +296,7 @@
       <field name="createdAt" type="datetime" uuid="438abb84-5195-424e-bf0a-86b5b8436508"/>
       <field name="updatedAt" type="datetime" uuid="7df45ad7-8ff9-45f6-9206-1b4bea34d904"/>
     </entity>
-    <association from="Profile" to="MeetupGroup" owner-alias="meetupGroupMember" inverse-alias="meetupGroup" uuid="ba61cebc-7507-48f7-9a6f-8611299e4347">
+    <association from="Profile" to="MeetupGroup" owner-alias="profile" inverse-alias="meetupGroup" uuid="ba61cebc-7507-48f7-9a6f-8611299e4347">
       <association-field from="meetup_group_id" to="id"/>
     </association>
     <association from="Profile" to="Member" owner-alias="profile" inverse-alias="member" uuid="247c2b8a-306b-4ff9-8336-100d1b1f0862">
