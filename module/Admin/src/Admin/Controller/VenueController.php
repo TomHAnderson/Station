@@ -10,44 +10,13 @@ class VenueController extends AbstractActionController
 {
     public function indexAction()
     {
-        $this->plugin('Meetup')->validateVenuePermission($this->params()->fromRoute('id'), 'any', true);
         $objectManager = $this->getServiceLocator()->get('doctrine.entitymanager.orm_default');
+        $venue = $objectManager->getRepository('Db\Entity\Venue')->find($this->params()->fromRoute('id'));
 
-
-        $objectManager = $this->getServiceLocator()->get('doctrine.entitymanager.orm_default');
-        $meetupGroup = $objectManager->getRepository('Db\Entity\MeetupGroup')->find($this->params()->fromRoute('id'));
-
-        $meetup = $this->getServiceLocator()->get('MeetupClient');
-        $meetupEvents = $meetup->getEvents(['group_id' => $meetupGroup->getId()])->toArray();
-
-        foreach ($meetupEvents as $meetupEvent) {
-            $event = $objectManager->getRepository('Db\Entity\Event')->find($meetupEvent['id']);
-
-            if (!$event) {
-                $event = new Entity\Event();
-                $event->setId($meetupEvent['id']);
-                $event->setMeetupGroup($meetupGroup);
-                $objectManager->persist($event);
-            }
-
-            $event->exchangeArray($meetupEvent);
-
-            if (isset($meetupEvent['venue']) and isset($meetupEvent['venue']['id'])) {
-                $venue = $objectManager->getRepository('Db\Entity\Venue')->find($meetupEvent['venue']['id']);
-
-                if (!$venue) {
-                    $venue = new Entity\Venue();
-                    $venue->setId($meetupEvent['venue']['id']);
-                    $objectManager->persist($venue);
-                }
-
-                $venue->exchangeArray($meetupEvent['venue']);
-                $event->setVenue($venue);
-            }
+        if (!$venue) {
+            $this->plugin('Meetup')->unAuthorized();
         }
 
-        $objectManager->flush();
-
-        return $this->plugin('redirect')->toRoute('admin/meetup-group', ['id' => $meetupGroup->getId()]);
+        return new ViewModel(['venue' => $venue]);
     }
 }

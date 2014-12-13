@@ -36,9 +36,15 @@ of <?= $apiMeetupGroup['members']; ?> Meetup members
             <td><?= $event->getScheduledAt()->format('Y-m-d H:i:s'); ?></td>
             <td><?= $this->escapeHtml($event->getName()); ?></td>
             <td>
+                <?php
+                if ($event->getVenue()) {
+                ?>
                 <a class="btn btn-info" href="<?= $this->url('admin/venue', ['id' => $event->getVenue()->getId()]); ?>">
                     <?= $this->escapeHtml($event->getVenue()->getName()); ?>
                 </a>
+                <?php
+                }
+                ?>
             </td>
         </tr>
     <?php

@@ -51,8 +51,12 @@ return [
 
                 # Administration
                 array('route' => 'admin', 'roles' => array('administrator')),
+
                 array('route' => 'admin/meetup-group', 'roles' => array('member')),
                 array('route' => 'admin/meetup-group/event-refresh-all', 'roles' => array('member')),
+                array('route' => 'admin/venue', 'roles' => array('member')),
+                array('route' => 'admin/event', 'roles' => array('member')),
+                array('route' => 'admin/event/edit', 'roles' => array('member')),
 
                 array('route' => 'audit', 'roles' => array('administrator')),
                 array('route' => 'audit/page', 'roles' => array('administrator')),

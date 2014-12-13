@@ -46,6 +46,16 @@
     </entity>
     <association from="Event" to="Venue" owner-alias="event" inverse-alias="venue" uuid="9b361ee5-6abb-4d1e-ba57-4babb79542e3">
       <association-field from="venue_id" to="id"/>
+      <orm-attributes>
+        <attribute name="side-inverse">
+          <attribute name="order-by">
+            <attribute name="order-by-field">
+              <attribute name="direction">DESC</attribute>
+              <attribute name="field">scheduledAt</attribute>
+            </attribute>
+          </attribute>
+        </attribute>
+      </orm-attributes>
     </association>
     <association from="Event" to="MeetupGroup" owner-alias="event" inverse-alias="meetupGroup" uuid="6fad6168-d51b-42b1-95f1-ca62b36d6aa1">
       <association-field from="meetup_group_id" to="id"/>

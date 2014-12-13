@@ -26,6 +26,11 @@ class Meetup extends AbstractPlugin implements ServiceLocatorAwareInterface
         return null;
     }
 
+    public function unAuthorized()
+    {
+        throw new UnAuthorizedException();
+    }
+
     public function validateMeetupGroupPermission($meetupGroupId, $permission, $override = true)
     {
         # FIXME:  override is for debugging only
@@ -44,7 +49,7 @@ class Meetup extends AbstractPlugin implements ServiceLocatorAwareInterface
         // The member must have role permissions for this group
         # FIXME:  Improve to use Meetup permission authorize tree
         if (!$memberProfile or !$memberProfile->getRole() or $memberProfile->getRole() !== $permission) {
-            throw new UnAuthorizedException();
+            $this->unAuthorized();
         }
 
         return true;

@@ -15,7 +15,7 @@ class EventController extends AbstractActionController
         $meetupGroup = $objectManager->getRepository('Db\Entity\MeetupGroup')->find($this->params()->fromRoute('id'));
 
         $meetup = $this->getServiceLocator()->get('MeetupClient');
-        $meetupEvents = $meetup->getEvents(['group_id' => $meetupGroup->getId()])->toArray();
+        $meetupEvents = $meetup->getEvents(['group_id' => $meetupGroup->getId(), 'status' => 'upcoming,past'])->toArray();
 
         foreach ($meetupEvents as $meetupEvent) {
             $event = $objectManager->getRepository('Db\Entity\Event')->find($meetupEvent['id']);
