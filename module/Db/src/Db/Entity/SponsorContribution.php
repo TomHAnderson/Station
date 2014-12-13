@@ -245,4 +245,32 @@ class SponsorContribution
     {
         return $this->event;
     }
+    /**
+     * @var \Db\Entity\MeetupGroup
+     */
+    private $meetupGroup;
+
+
+    /**
+     * Set meetupGroup
+     *
+     * @param \Db\Entity\MeetupGroup $meetupGroup
+     * @return SponsorContribution
+     */
+    public function setMeetupGroup(\Db\Entity\MeetupGroup $meetupGroup)
+    {
+        $this->meetupGroup = $meetupGroup;
+
+        return $this;
+    }
+
+    /**
+     * Get meetupGroup
+     *
+     * @return \Db\Entity\MeetupGroup 
+     */
+    public function getMeetupGroup()
+    {
+        return $this->meetupGroup;
+    }
 }

@@ -133,4 +133,32 @@ class SponsorContact
     {
         return $this->member;
     }
+    /**
+     * @var \Db\Entity\MeetupGroup
+     */
+    private $meetupGroup;
+
+
+    /**
+     * Set meetupGroup
+     *
+     * @param \Db\Entity\MeetupGroup $meetupGroup
+     * @return SponsorContact
+     */
+    public function setMeetupGroup(\Db\Entity\MeetupGroup $meetupGroup = null)
+    {
+        $this->meetupGroup = $meetupGroup;
+
+        return $this;
+    }
+
+    /**
+     * Get meetupGroup
+     *
+     * @return \Db\Entity\MeetupGroup 
+     */
+    public function getMeetupGroup()
+    {
+        return $this->meetupGroup;
+    }
 }

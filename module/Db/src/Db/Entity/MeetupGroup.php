@@ -537,4 +537,80 @@ class MeetupGroup implements ArraySerializableInterface
     {
         return $this->profile;
     }
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $sponsorContact;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $sponsorContribution;
+
+
+    /**
+     * Add sponsorContact
+     *
+     * @param \Db\Entity\SponsorContact $sponsorContact
+     * @return MeetupGroup
+     */
+    public function addSponsorContact(\Db\Entity\SponsorContact $sponsorContact)
+    {
+        $this->sponsorContact[] = $sponsorContact;
+
+        return $this;
+    }
+
+    /**
+     * Remove sponsorContact
+     *
+     * @param \Db\Entity\SponsorContact $sponsorContact
+     */
+    public function removeSponsorContact(\Db\Entity\SponsorContact $sponsorContact)
+    {
+        $this->sponsorContact->removeElement($sponsorContact);
+    }
+
+    /**
+     * Get sponsorContact
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getSponsorContact()
+    {
+        return $this->sponsorContact;
+    }
+
+    /**
+     * Add sponsorContribution
+     *
+     * @param \Db\Entity\SponsorContribution $sponsorContribution
+     * @return MeetupGroup
+     */
+    public function addSponsorContribution(\Db\Entity\SponsorContribution $sponsorContribution)
+    {
+        $this->sponsorContribution[] = $sponsorContribution;
+
+        return $this;
+    }
+
+    /**
+     * Remove sponsorContribution
+     *
+     * @param \Db\Entity\SponsorContribution $sponsorContribution
+     */
+    public function removeSponsorContribution(\Db\Entity\SponsorContribution $sponsorContribution)
+    {
+        $this->sponsorContribution->removeElement($sponsorContribution);
+    }
+
+    /**
+     * Get sponsorContribution
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getSponsorContribution()
+    {
+        return $this->sponsorContribution;
+    }
 }
