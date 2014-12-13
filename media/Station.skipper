@@ -26,34 +26,39 @@
       <association-field from="member_id" to="id"/>
     </association>
     <entity name="Event" uuid="ae947869-b539-475c-a96e-44a0aa05c2a3">
-      <field name="id" type="integer" required="true" unique="true" primary="true" uuid="2c7cbdff-97ce-45f5-b142-fd1387456ac3"/>
+      <field name="id" type="string" required="true" unique="true" primary="true" uuid="2c7cbdff-97ce-45f5-b142-fd1387456ac3"/>
       <field name="meetup_group_id" type="integer" required="true" uuid="39ba95a3-42d8-4b88-b667-e460c482c7af"/>
       <field name="venue_id" type="integer" uuid="c32ccce9-98cb-420b-a45f-541adf1f70ae"/>
-      <field name="scheduledAt" type="datetime" uuid="7a2ae00c-7bff-4f25-8d22-e0fed79747a2"/>
-      <field name="videoUrl" type="string" uuid="f4eb903f-f994-4b3d-b2bc-935cdef02c97"/>
-      <field name="videoStartAt" type="datetime" uuid="47be1392-166d-47ec-b5d2-56cde9ce29a0"/>
-      <field name="startAt" type="datetime" uuid="9690bfb7-65e8-47f2-941d-7c172ceb0e72"/>
-      <field name="name" type="string" uuid="e1e064f4-d2b7-4700-b8ca-301f829111d9"/>
-      <field name="abstract" type="text" uuid="24f31f04-4652-477a-bf51-d38764b5ee82"/>
-      <field name="description" type="text" uuid="d66d2e3c-144b-4b51-8fbd-d8d7773aad5b"/>
-      <field name="why" type="string" uuid="8ab1238f-1922-44fd-b34b-46287804afa1"/>
-      <field name="duration" type="integer" uuid="8f4e9ff3-9117-4331-905a-671f86ec19a5"/>
-      <field name="guestLimit" type="integer" uuid="9f04b321-dc76-4b39-94a7-b46e77d432dd"/>
-      <field name="directions" type="text" uuid="f889403d-d738-4789-a7a9-9fcb50e85915"/>
-      <field name="isPublished" type="integer" uuid="7bf22415-0c6b-411a-ad53-b10225eca57c"/>
-      <field name="rsvpOpen" type="datetime" uuid="1ce4a30d-7cf2-486a-8122-854fb0839839"/>
-      <field name="rsvpClose" type="datetime" uuid="e69e31f0-3632-47df-8af9-a56f7ae0feb3"/>
-      <field name="rsvpLimit" type="integer" uuid="3c147af5-a284-489c-bd6e-b69e69408166"/>
-      <field name="waitListing" type="string" uuid="f0b9decd-d014-4a9c-b302-f8c7cc7cde2c"/>
-      <field name="hostInstruction" type="text" uuid="1fedceac-318c-4cff-a684-1dbf9c634224"/>
-      <field name="enableEmailReminders" type="boolean" uuid="a3eee362-42f3-483c-8b6d-095ba4790fbd"/>
-      <field name="isVenuePublic" type="boolean" uuid="533748be-dcb1-4df8-bd06-1e396aca1d0d"/>
+      <field name="rsvpLimit" type="integer" uuid="43cc088e-01dc-48d5-94b9-e63ad983a6c5"/>
+      <field name="status" type="string" uuid="67effd0e-7d32-4b63-a6ef-74922d8297ba"/>
+      <field name="visibility" type="string" uuid="0d98465a-7030-428d-9aff-48eaed9b7371"/>
+      <field name="maybeRsvpCount" type="integer" uuid="f65aff28-98a9-4d5c-8f16-1028b804b5ee"/>
+      <field name="utcOffset" type="integer" uuid="8c6811fc-b436-4d22-a883-855939d53418"/>
+      <field name="scheduledAt" description="field=time" type="datetime" uuid="2c70eebb-f2dc-4338-b643-47ea6e6bf705"/>
+      <field name="waitlistCount" type="integer" uuid="83067d17-6060-4992-b388-b593db5200f9"/>
+      <field name="updatedAt" type="datetime" uuid="5c9c23aa-56d2-46d6-a8c9-ac8c39dd0962"/>
+      <field name="yesRsvpCount" type="integer" uuid="5f37d00a-f6d9-4de9-abcc-adff2065cbab"/>
+      <field name="createdAt" type="datetime" uuid="81eb1178-97a5-445e-aa56-0cc3c7588784"/>
+      <field name="url" type="string" uuid="b983e108-c3b6-433f-bdff-249fcc0a41b8"/>
+      <field name="description" type="text" uuid="bc964d8a-40d5-4b0d-958f-dae47026a843"/>
+      <field name="name" type="string" uuid="df79fd66-7d5e-4f56-bd45-7b9d30fb551e"/>
+      <field name="headcount" type="integer" uuid="a1c44c4f-7016-43d4-850e-7a96be2bc9ee"/>
     </entity>
     <association from="Event" to="Venue" owner-alias="event" inverse-alias="venue" uuid="9b361ee5-6abb-4d1e-ba57-4babb79542e3">
       <association-field from="venue_id" to="id"/>
     </association>
     <association from="Event" to="MeetupGroup" owner-alias="event" inverse-alias="meetupGroup" uuid="6fad6168-d51b-42b1-95f1-ca62b36d6aa1">
       <association-field from="meetup_group_id" to="id"/>
+      <orm-attributes>
+        <attribute name="side-inverse">
+          <attribute name="order-by">
+            <attribute name="order-by-field">
+              <attribute name="direction">DESC</attribute>
+              <attribute name="field">scheduledAt</attribute>
+            </attribute>
+          </attribute>
+        </attribute>
+      </orm-attributes>
     </association>
     <entity name="Sponsor" uuid="1f8cf830-8dfa-45fc-b3d4-80acc80cedea">
       <field name="id" type="integer" required="true" unique="true" primary="true" auto-increment="true" uuid="ad7d1052-4b77-441e-878d-66db3dca4396"/>
@@ -192,13 +197,12 @@
     </association>
     <entity name="Venue" uuid="ba59c5cd-24cd-4cdf-ba90-935ded7734a9">
       <field name="id" type="integer" required="true" unique="true" primary="true" uuid="490db093-c68a-48d8-a4b8-0c634f0f218a"/>
-      <field name="sponsor_id" type="integer" required="true" uuid="b446a93e-0751-42c1-8645-b9e6fd5ddb7b"/>
+      <field name="sponsor_id" type="integer" uuid="b446a93e-0751-42c1-8645-b9e6fd5ddb7b"/>
       <field name="name" type="string" uuid="0f81f189-dd82-40b4-8ad6-5e44f49866d5"/>
       <field name="address1" type="string" uuid="597d8b7e-cb02-483f-b362-05b81f44e42d"/>
       <field name="address2" type="string" uuid="2d3a9953-1b40-421a-9f23-57962adbac6e"/>
       <field name="address3" type="string" uuid="9f17006f-a0cd-4fb0-a7b3-cc7834f22620"/>
-      <field name="cityStateCountry" type="string" uuid="8df31093-4ff7-4611-9394-071d433f2613"/>
-      <field name="latLon" type="string" uuid="b14d66e2-371b-4c2b-a8ba-852059c1eaee"/>
+      <field name="city" type="string" uuid="8df31093-4ff7-4611-9394-071d433f2613"/>
       <field name="phone" type="string" uuid="e2aacb89-8da1-43dd-8d5d-d028ca2f8105"/>
       <field name="zip" type="string" uuid="c8e5d568-9f40-4144-9a24-061ac432b5aa"/>
       <field name="capacity" type="integer" uuid="1e17791d-b993-4bc1-982b-443256fcf6de"/>
@@ -206,6 +210,11 @@
       <field name="contact" type="text" uuid="947ecdc9-fb34-4e8c-b376-4c3a1dda9c6a"/>
       <field name="security" type="text" uuid="7ccaa36f-75d6-4fd3-928c-ef50f5d6991e"/>
       <field name="equipment" type="text" uuid="0a6a1fec-88be-4f3e-8446-a55e7bab5c18"/>
+      <field name="latitude" type="float" uuid="b14d66e2-371b-4c2b-a8ba-852059c1eaee"/>
+      <field name="longitude" type="float" uuid="705aa04d-dc05-48cc-81ed-e8e7769a8d3b"/>
+      <field name="state" type="string" uuid="6c83be48-0d95-4116-a4e8-028403e66e4b"/>
+      <field name="country" type="string" uuid="c7959cab-a655-4563-919b-6ec6d159f859"/>
+      <field name="repinned" type="boolean" uuid="bbe51585-49a7-40a1-a2df-5515953ce5cd"/>
     </entity>
     <association from="Venue" to="Sponsor" owner-alias="venue" inverse-alias="sponsor" uuid="eae3d069-0c15-46cb-af69-a06dea936a5c">
       <association-field from="sponsor_id" to="id"/>

@@ -12,7 +12,38 @@
 Station members: <?= sizeof($this->meetupGroup->getProfile()); ?>
 of <?= $apiMeetupGroup['members']; ?> Meetup members
 
+<table class="table table-striped table-hover">
+    <caption>Events</caption>
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Date</th>
+            <th>Name</th>
+            <th>Venue</th>
+        </tr>
+    </thead>
 
+    <tbody>
+    <?php
+    foreach ($this->meetupGroup->getEvent() as $event) {
+    ?>
+        <tr>
+            <td>
+                <a class="btn btn-info" href="<?= $this->url('admin/event', ['id' => $event->getId()]); ?>">
+                    <?= $this->escapeHtml($event->getId()); ?>
+                </a>
+            </td>
+            <td><?= $event->getScheduledAt()->format('Y-m-d H:i:s'); ?></td>
+            <td><?= $this->escapeHtml($event->getName()); ?></td>
+            <td>
+                <a class="btn btn-info" href="<?= $this->url('admin/venue', ['id' => $event->getVenue()->getId()]); ?>">
+                    <?= $this->escapeHtml($event->getVenue()->getName()); ?>
+                </a>
+            </td>
+        </tr>
+    <?php
+    }
+    ?>
+    </tbody>
+</table>
 
-<?php
-#print_r($apiMeetupGroup);

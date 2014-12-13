@@ -9,7 +9,11 @@
     <field name="joinMode" type="string" nullable="true"/>
     <field name="latitude" type="float" nullable="true"/>
     <field name="longitude" type="float" nullable="true"/>
-    <one-to-many field="event" target-entity="Db\Entity\Event" mapped-by="meetupGroup"/>
+    <one-to-many field="event" target-entity="Db\Entity\Event" mapped-by="meetupGroup">
+      <order-by>
+        <order-by-field name="scheduledAt" direction="DESC"/>
+      </order-by>
+    </one-to-many>
     <one-to-many field="sponsor" target-entity="Db\Entity\Sponsor" mapped-by="meetupGroup"/>
     <one-to-many field="meetupGroupLink" target-entity="Db\Entity\MeetupGroupLink" mapped-by="meetupGroup"/>
     <one-to-many field="presentationProposal" target-entity="Db\Entity\PresentationProposal" mapped-by="meetupGroup"/>

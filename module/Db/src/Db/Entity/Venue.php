@@ -2,11 +2,109 @@
 
 namespace Db\Entity;
 
+use Zend\Stdlib\ArraySerializableInterface;
+use DateTime;
+
 /**
  * Venue
  */
-class Venue
+class Venue implements ArraySerializableInterface
 {
+    public function __toString()
+    {
+        return $this->getName();
+    }
+
+    public function exchangeArray(array $data)
+    {
+        foreach ($data as $key => $value) {
+            switch ($key) {
+                case 'name':
+                    $this->setName($value);
+                    break;
+                case 'address_1':
+                case 'address1':
+                    $this->setAddress1($value);
+                    break;
+                case 'address_2':
+                case 'address2':
+                    $this->setAddress2($value);
+                    break;
+                case 'address_3':
+                case 'address3':
+                    $this->setAddress3($value);
+                    break;
+                case 'city':
+                    $this->setCity($value);
+                    break;
+                case 'state':
+                    $this->setState($value);
+                    break;
+                case 'zip':
+                    $this->setZip($value);
+                    break;
+                case 'country':
+                    $this->setCountry($value);
+                    break;
+                case 'phone':
+                    $this->setPhone($value);
+                    break;
+                case 'capacity':
+                    $this->setCapacity($value);
+                    break;
+                case 'description':
+                    $this->setDescription($value);
+                    break;
+                case 'contact':
+                    $this->setContact($value);
+                    break;
+                case 'security':
+                    $this->setSecurity($value);
+                    break;
+                case 'equipment':
+                    $this->setEquipment($value);
+                    break;
+                case 'latitude':
+                    $this->setLatitude($value);
+                    break;
+                case 'longitude':
+                    $this->setLongitude($value);
+                    break;
+                case 'repinned':
+                    $this->setRepinned($value);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        return $this;
+    }
+
+    public function getArrayCopy()
+    {
+        return [
+            'id' => $this->getId(),
+            'name' => $this->getName(),
+            'address1' => $this->getAddress1(),
+            'address2' => $this->getAddress2(),
+            'address3' => $this->getAddress3(),
+            'city' => $this->getCity(),
+            'state' => $this->getState(),
+            'zip' => $this->getZip(),
+            'country' => $this->getCountry(),
+            'phone' => $this->getPhone(),
+            'capacity' => $this->getCapacity(),
+            'description' => $this->getDescription(),
+            'contact' => $this->getContact(),
+            'security' => $this->getSecurity(),
+            'equipment' => $this->getEquipment(),
+            'latitude' => $this->getLatitude(),
+            'longitude' => $this->getLongitude(),
+            'repinned' => $this->getRepinned(),
+        ];
+    }
+
     /**
      * @var string
      */
@@ -510,5 +608,173 @@ class Venue
     public function getSponsor()
     {
         return $this->sponsor;
+    }
+    /**
+     * @var string
+     */
+    private $city;
+
+    /**
+     * @var float
+     */
+    private $latitude;
+
+    /**
+     * @var float
+     */
+    private $longitude;
+
+    /**
+     * @var string
+     */
+    private $state;
+
+    /**
+     * @var string
+     */
+    private $country;
+
+    /**
+     * @var boolean
+     */
+    private $repinned;
+
+
+    /**
+     * Set city
+     *
+     * @param string $city
+     * @return Venue
+     */
+    public function setCity($city)
+    {
+        $this->city = $city;
+
+        return $this;
+    }
+
+    /**
+     * Get city
+     *
+     * @return string
+     */
+    public function getCity()
+    {
+        return $this->city;
+    }
+
+    /**
+     * Set latitude
+     *
+     * @param float $latitude
+     * @return Venue
+     */
+    public function setLatitude($latitude)
+    {
+        $this->latitude = $latitude;
+
+        return $this;
+    }
+
+    /**
+     * Get latitude
+     *
+     * @return float
+     */
+    public function getLatitude()
+    {
+        return $this->latitude;
+    }
+
+    /**
+     * Set longitude
+     *
+     * @param float $longitude
+     * @return Venue
+     */
+    public function setLongitude($longitude)
+    {
+        $this->longitude = $longitude;
+
+        return $this;
+    }
+
+    /**
+     * Get longitude
+     *
+     * @return float
+     */
+    public function getLongitude()
+    {
+        return $this->longitude;
+    }
+
+    /**
+     * Set state
+     *
+     * @param string $state
+     * @return Venue
+     */
+    public function setState($state)
+    {
+        $this->state = $state;
+
+        return $this;
+    }
+
+    /**
+     * Get state
+     *
+     * @return string
+     */
+    public function getState()
+    {
+        return $this->state;
+    }
+
+    /**
+     * Set country
+     *
+     * @param string $country
+     * @return Venue
+     */
+    public function setCountry($country)
+    {
+        $this->country = $country;
+
+        return $this;
+    }
+
+    /**
+     * Get country
+     *
+     * @return string
+     */
+    public function getCountry()
+    {
+        return $this->country;
+    }
+
+    /**
+     * Set repinned
+     *
+     * @param boolean $repinned
+     * @return Venue
+     */
+    public function setRepinned($repinned)
+    {
+        $this->repinned = $repinned;
+
+        return $this;
+    }
+
+    /**
+     * Get repinned
+     *
+     * @return boolean
+     */
+    public function getRepinned()
+    {
+        return $this->repinned;
     }
 }

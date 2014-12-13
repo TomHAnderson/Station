@@ -27,6 +27,26 @@ return array(
                 ),
                 'may_terminate' => true,
                 'child_routes' => array(
+                    'event' => array(
+                        'type'    => 'Segment',
+                        'options' => array(
+                            'route'    => '/event/:id',
+                            'defaults' => array(
+                                'controller'    => 'Admin\Controller\Event',
+                                'action'        => 'index',
+                            ),
+                        ),
+                    ),
+                    'venue' => array(
+                        'type'    => 'Segment',
+                        'options' => array(
+                            'route'    => '/venue/:id',
+                            'defaults' => array(
+                                'controller'    => 'Admin\Controller\Venue',
+                                'action'        => 'index',
+                            ),
+                        ),
+                    ),
                     'meetup-group' => array(
                         'type'    => 'Segment',
                         'options' => array(
