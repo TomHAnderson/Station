@@ -1,4 +1,6 @@
 <?php
+    use DateInterval;
+
     $this->headTitle('Meetup Group Administration');
 ?>
 
@@ -16,9 +18,9 @@ of <?= $apiMeetupGroup['members']; ?> Meetup members
     <caption>Events</caption>
     <thead>
         <tr>
-            <th>Id</th>
             <th>Date</th>
             <th>Name</th>
+            <th>RSVP</th>
             <th>Venue</th>
         </tr>
     </thead>
@@ -30,11 +32,11 @@ of <?= $apiMeetupGroup['members']; ?> Meetup members
         <tr>
             <td>
                 <a class="btn btn-info" href="<?= $this->url('admin/event', ['id' => $event->getId()]); ?>">
-                    <?= $this->escapeHtml($event->getId()); ?>
+                    <?= $event->getScheduledAtWithOffset()->format('Y-m-d H:i:s'); ?>
                 </a>
             </td>
-            <td><?= $event->getScheduledAt()->format('Y-m-d H:i:s'); ?></td>
             <td><?= $this->escapeHtml($event->getName()); ?></td>
+            <td><?= $this->escapeHtml($event->getYesRsvpCount()); ?></td>
             <td>
                 <?php
                 if ($event->getVenue()) {

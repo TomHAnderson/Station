@@ -4,6 +4,7 @@ namespace Db\Entity;
 
 use Zend\Stdlib\ArraySerializableInterface;
 use DateTime;
+use DateInterval;
 
 /**
  * Event
@@ -282,6 +283,19 @@ class Event implements ArraySerializableInterface
     public function getScheduledAt()
     {
         return $this->scheduledAt;
+    }
+
+    public function getScheduledAtWithOffset()
+    {
+        $date = clone $this->getScheduledAt();
+
+        if ($this->getUtcOffset() > 0) {
+            $date->add(new DateInterval('PT' . $this->getUtcOffset() / 1000 . 'S'));
+        } elseif ($this->getUtcOffset() < 0) {
+            $date->sub(new DateInterval('PT' . abs($this->getUtcOffset()) / 1000 . 'S'));
+        }
+
+        return $date;
     }
 
     /**
@@ -1186,6 +1200,19 @@ class Event implements ArraySerializableInterface
         return $this->updatedAt;
     }
 
+    public function getUpdatedAtWithOffset()
+    {
+        $date = clone $this->getUpdatedAt();
+
+        if ($this->getUtcOffset() > 0) {
+            $date->add(new DateInterval('PT' . $this->getUtcOffset() / 1000 . 'S'));
+        } elseif ($this->getUtcOffset() < 0) {
+            $date->sub(new DateInterval('PT' . abs($this->getUtcOffset()) / 1000 . 'S'));
+        }
+
+        return $date;
+    }
+
     /**
      * Set yesRsvpCount
      *
@@ -1230,6 +1257,19 @@ class Event implements ArraySerializableInterface
     public function getCreatedAt()
     {
         return $this->createdAt;
+    }
+
+    public function getCreatedAtWithOffset()
+    {
+        $date = clone $this->getCreatedAt();
+
+        if ($this->getUtcOffset() > 0) {
+            $date->add(new DateInterval('PT' . $this->getUtcOffset() / 1000 . 'S'));
+        } elseif ($this->getUtcOffset() < 0) {
+            $date->sub(new DateInterval('PT' . abs($this->getUtcOffset()) / 1000 . 'S'));
+        }
+
+        return $date;
     }
 
     /**

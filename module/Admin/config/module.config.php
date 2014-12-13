@@ -6,6 +6,7 @@ return array(
             'Admin\Controller\MeetupGroup' => 'Admin\Controller\MeetupGroupController',
             'Admin\Controller\Event' => 'Admin\Controller\EventController',
             'Admin\Controller\Venue' => 'Admin\Controller\VenueController',
+            'Admin\Controller\Sponsor' => 'Admin\Controller\SponsorController',
         ),
     ),
 
@@ -35,6 +36,52 @@ return array(
                             'defaults' => array(
                                 'controller'    => 'Admin\Controller\Event',
                                 'action'        => 'index',
+                            ),
+                        ),
+                    ),
+                    'sponsor-create' => array(
+                        'type'    => 'Segment',
+                        'options' => array(
+                            'route'    => '/sponsor/create',
+                            'defaults' => array(
+                                'controller'    => 'Admin\Controller\Sponsor',
+                                'action'        => 'create',
+                            ),
+                        ),
+                    ),
+                    'sponsor' => array(
+                        'type'    => 'Segment',
+                        'options' => array(
+                            'route'    => '/sponsor',
+                            'defaults' => array(
+                                'controller'    => 'Admin\Controller\Sponsor',
+                                'action'        => 'index',
+                            ),
+                        ),
+                        'may_terminate' => true,
+                        'child_routes' => array(
+                            'detail' => array(
+                                'type'    => 'Segment',
+                                'options' => array(
+                                    'route'    => '/:id',
+                                    'defaults' => array(
+                                        'controller'    => 'Admin\Controller\Sponsor',
+                                        'action'        => 'detail',
+                                    ),
+                                ),
+                                'may_terminate' => true,
+                                'child_routes' => array(
+                                    'edit' => array(
+                                        'type'    => 'Segment',
+                                        'options' => array(
+                                            'route'    => '/edit',
+                                            'defaults' => array(
+                                                'controller'    => 'Admin\Controller\Venue',
+                                                'action'        => 'edit',
+                                            ),
+                                        ),
+                                    ),
+                                ),
                             ),
                         ),
                     ),
