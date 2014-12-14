@@ -1,7 +1,7 @@
 <?php
 if ($this->isAllowed('administration', 'access')) {
 ?>
-    <a class="btn btn-warning pull-right" href="https://www.meetup.com">Edit at meetup.com</a>
+    <a class="btn btn-warning pull-right" href="<?= $this->url('admin/venue/edit', ['id' => $this->venue->getId()]); ?>">Edit Venue</a>
 <?php
 }
 ?>
@@ -16,40 +16,7 @@ if ($this->isAllowed('administration', 'access')) {
             <tr>
                 <th>Address</th>
                 <td>
-                    <?php
-                    if ($this->venue->getAddress1()) {
-                        echo $this->escapeHtml($this->venue->getAddress1());
-                        echo '<br>';
-                    }
-
-                    if ($this->venue->getAddress2()) {
-                        echo $this->escapeHtml($this->venue->getAddress2());
-                        echo '<br>';
-                    }
-
-                    if ($this->venue->getAddress3()) {
-                        echo $this->escapeHtml($this->venue->getAddress3());
-                        echo '<br>';
-                    }
-
-                    if ($this->venue->getCity()) {
-                        echo $this->escapeHtml($this->venue->getCity());
-                        echo ', ';
-                    }
-
-                    if ($this->venue->getState()) {
-                        echo $this->escapeHtml($this->venue->getState());
-                    }
-
-                    if ($this->venue->getZip()) {
-                        echo ' ' . $this->escapeHtml($this->venue->getZip());
-                    }
-
-                    if ($this->venue->getCountry()) {
-                        echo '<br>';
-                        echo $this->escapeHtml($this->venue->getCountry());
-                    }
-                    ?>
+                <?= nl2br($this->escapeHtml($this->venue->getCompleteAddress())); ?>
 
                 </td>
             </tr>

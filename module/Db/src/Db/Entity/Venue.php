@@ -10,6 +10,46 @@ use DateTime;
  */
 class Venue implements ArraySerializableInterface
 {
+    public function getCompleteAddress()
+    {
+        $completeAddress = '';
+
+        if ($this->getAddress1()) {
+            $completeAddress .= $this->getAddress1();
+            $completeAddress .= "\n";
+        }
+
+        if ($this->getAddress2()) {
+            $completeAddress .= $this->getAddress2();
+            $completeAddress .= "\n";
+        }
+
+        if ($this->getAddress3()) {
+            $completeAddress .= $this->getAddress3();
+            $completeAddress .= "\n";
+        }
+
+        if ($this->getCity()) {
+            $completeAddress .= $this->getCity();
+            $completeAddress .= ', ';
+        }
+
+        if ($this->getState()) {
+            $completeAddress .= $this->getState();
+        }
+
+        if ($this->getZip()) {
+            $completeAddress .= ' ' . $this->getZip();
+        }
+
+        if ($this->getCountry()) {
+            $completeAddress .= "\n";
+            $completeAddress .= $this->getCountry();
+        }
+
+        return $completeAddress;
+    }
+
     public function __toString()
     {
         return $this->getName();
@@ -196,7 +236,7 @@ class Venue implements ArraySerializableInterface
     public function __construct()
     {
         $this->event = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->venueQuestion = new \Doctrine\Common\Collections\ArrayCollection();
+        $thisQuestion = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -562,7 +602,7 @@ class Venue implements ArraySerializableInterface
      */
     public function addVenueQuestion(\Db\Entity\VenueQuestion $venueQuestion)
     {
-        $this->venueQuestion[] = $venueQuestion;
+        $thisQuestion[] = $venueQuestion;
 
         return $this;
     }
@@ -574,7 +614,7 @@ class Venue implements ArraySerializableInterface
      */
     public function removeVenueQuestion(\Db\Entity\VenueQuestion $venueQuestion)
     {
-        $this->venueQuestion->removeElement($venueQuestion);
+        $thisQuestion->removeElement($venueQuestion);
     }
 
     /**
@@ -584,7 +624,7 @@ class Venue implements ArraySerializableInterface
      */
     public function getVenueQuestion()
     {
-        return $this->venueQuestion;
+        return $thisQuestion;
     }
 
     /**

@@ -39,16 +39,6 @@ return array(
                             ),
                         ),
                     ),
-                    'sponsor-create' => array(
-                        'type'    => 'Segment',
-                        'options' => array(
-                            'route'    => '/sponsor/create',
-                            'defaults' => array(
-                                'controller'    => 'Admin\Controller\Sponsor',
-                                'action'        => 'create',
-                            ),
-                        ),
-                    ),
                     'sponsor' => array(
                         'type'    => 'Segment',
                         'options' => array(
@@ -60,6 +50,16 @@ return array(
                         ),
                         'may_terminate' => true,
                         'child_routes' => array(
+                            'create' => array(
+                                'type'    => 'Segment',
+                                'options' => array(
+                                    'route'    => '/create',
+                                    'defaults' => array(
+                                        'controller'    => 'Admin\Controller\Sponsor',
+                                        'action'        => 'create',
+                                    ),
+                                ),
+                            ),
                             'detail' => array(
                                 'type'    => 'Segment',
                                 'options' => array(
@@ -68,18 +68,21 @@ return array(
                                         'controller'    => 'Admin\Controller\Sponsor',
                                         'action'        => 'detail',
                                     ),
+                                    'constraints' => array(
+                                        'id' => '[0-9]*',
+                                    ),
                                 ),
-                                'may_terminate' => true,
-                                'child_routes' => array(
-                                    'edit' => array(
-                                        'type'    => 'Segment',
-                                        'options' => array(
-                                            'route'    => '/edit',
-                                            'defaults' => array(
-                                                'controller'    => 'Admin\Controller\Venue',
-                                                'action'        => 'edit',
-                                            ),
-                                        ),
+                            ),
+                            'edit' => array(
+                                'type'    => 'Segment',
+                                'options' => array(
+                                    'route'    => '/:id/edit',
+                                    'defaults' => array(
+                                        'controller'    => 'Admin\Controller\Sponsor',
+                                        'action'        => 'edit',
+                                    ),
+                                    'constraints' => array(
+                                        'id' => '[0-9]*',
                                     ),
                                 ),
                             ),
@@ -88,7 +91,7 @@ return array(
                     'venue' => array(
                         'type'    => 'Segment',
                         'options' => array(
-                            'route'    => '/venue/:id',
+                            'route'    => '/venue',
                             'defaults' => array(
                                 'controller'    => 'Admin\Controller\Venue',
                                 'action'        => 'index',
@@ -96,13 +99,29 @@ return array(
                         ),
                         'may_terminate' => true,
                         'child_routes' => array(
+                            'detail' => array(
+                                'type'    => 'Segment',
+                                'options' => array(
+                                    'route'    => '/:id',
+                                    'defaults' => array(
+                                        'controller'    => 'Admin\Controller\Venue',
+                                        'action'        => 'detail',
+                                    ),
+                                    'constraints' => array(
+                                        'id' => '[0-9]*',
+                                    ),
+                                ),
+                            ),
                             'edit' => array(
                                 'type'    => 'Segment',
                                 'options' => array(
-                                    'route'    => '/edit',
+                                    'route'    => '/:id/edit',
                                     'defaults' => array(
                                         'controller'    => 'Admin\Controller\Venue',
                                         'action'        => 'edit',
+                                    ),
+                                    'constraints' => array(
+                                        'id' => '[0-9]*',
                                     ),
                                 ),
                             ),

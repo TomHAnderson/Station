@@ -93,11 +93,11 @@
     </association>
     <entity name="SponsorContact" uuid="818d0972-b832-40af-a6ca-e698fc59a29a">
       <field name="id" type="integer" required="true" unique="true" primary="true" auto-increment="true" uuid="aac64135-8ed9-4998-97c1-094065c9938f"/>
+      <field name="sponsor_id" type="integer" required="true" uuid="b13d708d-0dea-4c2c-be3a-1d846011b412"/>
+      <field name="meetup_group_id" type="integer" required="true" uuid="12dd455d-fa78-41eb-90f7-e794af13507f"/>
+      <field name="member_id" type="integer" uuid="568cec1f-066a-4217-af83-dfd200308b56"/>
       <field name="title" type="string" uuid="be73a588-8f7d-422f-9a6b-6293dfae6bc9"/>
       <field name="description" type="text" uuid="614f4a62-81a8-43f7-b4db-0cce8a2a0886"/>
-      <field name="sponsor_id" type="integer" required="true" uuid="b13d708d-0dea-4c2c-be3a-1d846011b412"/>
-      <field name="member_id" type="integer" uuid="568cec1f-066a-4217-af83-dfd200308b56"/>
-      <field name="meetup_group_id" type="integer" uuid="12dd455d-fa78-41eb-90f7-e794af13507f"/>
     </entity>
     <association from="SponsorContact" to="Sponsor" owner-alias="sponsorContact" inverse-alias="sponsor" uuid="870a76d6-fd69-495a-9a43-899ca364f115">
       <association-field from="sponsor_id" to="id"/>
@@ -424,7 +424,7 @@
     <entity uuid="762aeefa-c5c8-48cc-9e3b-9232bad71b3f" bg-color="4294967295" hdr-color="4292006610" position-x="566" position-y="41" size-x="0" size-x2="130" size-y="0" size-y2="157"/>
     <association uuid="77965304-d08a-49e1-a2df-5ec5133b220c" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030" split="1"/>
     <many-to-many-association uuid="7b7523ce-cc2f-4223-a1b4-2c7d8430a0fd" color="4288059030"/>
-    <entity uuid="818d0972-b832-40af-a6ca-e698fc59a29a" bg-color="4294967295" hdr-color="4292006610" position-x="219" position-y="35" size-x="0" size-x2="105" size-y="0" size-y2="87"/>
+    <entity uuid="818d0972-b832-40af-a6ca-e698fc59a29a" bg-color="4294967295" hdr-color="4292006610" position-x="215" position-y="47" size-x="0" size-x2="130" size-y="0" size-y2="101"/>
     <comment uuid="81ce1590-aff5-4de8-9cb6-19690b156a46" bg-color="4294967264" position-x="188" position-y="256" size-x="0" size-x2="201" size-y="0" size-y2="80" txt-color="4278190080"/>
     <association uuid="870a76d6-fd69-495a-9a43-899ca364f115" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
     <association uuid="886ed065-1cfd-4d90-b248-8c5156385cfc" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
@@ -453,7 +453,7 @@
     <module uuid="d4d884ea-2c99-4815-b2b0-6a99bb5c7050" bg-color="4287612913" position-x="9" position-y="21" size-x="11" size-x2="1515" size-y="22" size-y2="1139"/>
     <region uuid="d5771e08-38ad-41c3-a83c-6ece690bcc52" bg-color="4293391335" position-x="24" position-y="59" size-x="0" size-x2="633" size-y="47" size-y2="320"/>
     <association uuid="d5ea86da-2ff2-452b-9502-a0509ae3311b" center-position-x="0" center-position-y="-20" color="4288059030"/>
-    <entity uuid="e1a13ebd-6690-4b38-967b-e0addecc5bf6" bg-color="4294967295" hdr-color="4292006610" position-x="236" position-y="171" size-x="0" size-x2="96" size-y="0" size-y2="59"/>
+    <entity uuid="e1a13ebd-6690-4b38-967b-e0addecc5bf6" bg-color="4294967295" hdr-color="4292006610" position-x="231" position-y="188" size-x="0" size-x2="96" size-y="0" size-y2="59"/>
     <entity uuid="e627778e-ea46-4737-959f-b91958266913" bg-color="4294967295" hdr-color="4292006610" position-x="392" position-y="64" size-x="0" size-x2="87" size-y="0" size-y2="59"/>
     <many-to-many-association-entity uuid="ea450f70-191f-4a16-983d-99b6521b90b0" center-position-x="0" center-position-y="0"/>
     <association uuid="eae3d069-0c15-46cb-af69-a06dea936a5c" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030" split="1"/>

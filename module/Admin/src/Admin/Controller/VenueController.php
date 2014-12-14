@@ -8,7 +8,7 @@ use Db\Entity;
 
 class VenueController extends AbstractActionController
 {
-    public function indexAction()
+    public function detailAction()
     {
         $objectManager = $this->getServiceLocator()->get('doctrine.entitymanager.orm_default');
         $venue = $objectManager->getRepository('Db\Entity\Venue')->find($this->params()->fromRoute('id'));
@@ -18,5 +18,12 @@ class VenueController extends AbstractActionController
         }
 
         return new ViewModel(['venue' => $venue]);
+    }
+
+    public function editAction()
+    {
+        $objectManager = $this->getServiceLocator()->get('doctrine.entitymanager.orm_default');
+        $venue = $objectManager->getRepository('Db\Entity\Venue')->find($this->params()->fromRoute('id'));
+
     }
 }

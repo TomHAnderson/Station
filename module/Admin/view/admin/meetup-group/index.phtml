@@ -1,6 +1,4 @@
 <?php
-    use DateInterval;
-
     $this->headTitle('Meetup Group Administration');
 ?>
 
@@ -41,7 +39,7 @@ of <?= $apiMeetupGroup['members']; ?> Meetup members
                 <?php
                 if ($event->getVenue()) {
                 ?>
-                <a class="btn btn-info" href="<?= $this->url('admin/venue', ['id' => $event->getVenue()->getId()]); ?>">
+                <a class="btn btn-info" href="<?= $this->url('admin/venue/detail', ['id' => $event->getVenue()->getId()]); ?>">
                     <?= $this->escapeHtml($event->getVenue()->getName()); ?>
                 </a>
                 <?php

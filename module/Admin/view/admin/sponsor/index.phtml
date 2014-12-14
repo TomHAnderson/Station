@@ -1,4 +1,4 @@
-<a class="btn btn-success pull-right" href="<?= $this->url('admin/sponsor-create'); ?>">
+<a class="btn btn-success pull-right" href="<?= $this->url('admin/sponsor/create'); ?>">
     Create Sponsor
 </a>
 
@@ -20,8 +20,19 @@
     foreach ($sponsors as $sponsor) {
     ?>
         <tr>
-            <td><img src="<?= $sponsor->getLogoUrl(); ?> width="40"></td>
-            <td><?= $this->escapeHtml($sponsor->getName()); ?></td>
+            <td><?php
+                if ($sponsor->getLogoUrl()) {
+                ?>
+                    <img src="<?= $sponsor->getLogoUrl(); ?> width="40">
+                <?php
+                }
+                ?>
+            </td>
+            <td>
+                <a class="btn btn-info" href="<?= $this->url('admin/sponsor/detail', ['id' => $sponsor->getId()]); ?>">
+                    <?= $this->escapeHtml($sponsor->getName()); ?>
+                </a>
+            </td>
             <td>
                 <a href="<?= $sponsor->getUrl(); ?>">
                     <?= $this->escapeHtml($sponsor->getUrl()); ?>
