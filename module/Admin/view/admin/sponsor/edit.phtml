@@ -1,10 +1,9 @@
 <?php
-
-$this->headTitle('Create Sponsor');
+$this->headTitle('Edit Sponsor');
 ?>
 
 <h1>
-    Create Sponsor
+    Edit Sponsor
 </h1>
 
 <?php
@@ -18,12 +17,13 @@ $form->add(array(
     ),
     'attributes' => array(
         'type'  => 'submit',
-        'class' => 'btn btn-success',
-        'value' => 'Create',
+        'class' => 'btn btn-warning',
+        'value' => 'Edit',
     )
 ));
 
-$form->setAttribute('action', $this->url('admin/sponsor/create'));
+
+$form->setAttribute('action', $this->url('admin/sponsor/edit', ['id' => $this->sponsor->getId()]));
 $form->prepare();
 
 echo $this->form()->openTag($form);

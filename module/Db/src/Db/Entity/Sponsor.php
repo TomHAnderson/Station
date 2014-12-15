@@ -18,6 +18,19 @@ class Sponsor implements InputFilterAwareInterface, ArraySerializableInterface
         return $this->getName();
     }
 
+    public function canDelete()
+    {
+        if (!sizeof($this->getVenue())
+            and !sizeof($this->getSponsorContribution())
+            and !sizeof($this->getSponsorContact())
+            and !sizeof($this->getSponsorLink())
+        ) {
+            return true;
+        }
+
+        return false;
+    }
+
     public function exchangeArray(array $data)
     {
         foreach ($data as $key => $value) {

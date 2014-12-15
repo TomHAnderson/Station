@@ -2,14 +2,82 @@
 
 namespace Db\Entity;
 
+use Zend\InputFilter\Factory as InputFactory;
+use Zend\InputFilter\InputFilter;
+use Zend\InputFilter\InputFilterAwareInterface;
+use Zend\InputFilter\InputFilterInterface;
 use Zend\Stdlib\ArraySerializableInterface;
 use DateTime;
 
 /**
  * Venue
  */
-class Venue implements ArraySerializableInterface
+class Venue implements InputFilterAwareInterface, ArraySerializableInterface
 {
+    public function setInputFilter(InputFilterInterface $inputFilter)
+    {
+        throw new \Exception("Not used");
+    }
+
+    public function getInputFilter()
+    {
+        $inputFilter = new InputFilter();
+        $factory = new InputFactory();
+
+        $inputFilter->add($factory->createInput([
+            'name' => 'phone',
+            'required' => false,
+            'filters' => array(
+                array('name' => 'StringTrim'),
+            ),
+            'validators' => array(
+            ),
+        ]));
+
+        $inputFilter->add($factory->createInput([
+            'name' => 'capacity',
+            'required' => false,
+            'filters' => array(
+                array('name' => 'Int'),
+            ),
+        ]));
+
+        $inputFilter->add($factory->createInput([
+            'name' => 'description',
+            'required' => false,
+            'filters' => array(
+                array('name' => 'StringTrim'),
+            ),
+        ]));
+
+        $inputFilter->add($factory->createInput([
+            'name' => 'contact',
+            'required' => false,
+            'filters' => array(
+                array('name' => 'StringTrim'),
+            ),
+        ]));
+
+        $inputFilter->add($factory->createInput([
+            'name' => 'security',
+            'required' => false,
+            'filters' => array(
+                array('name' => 'StringTrim'),
+            ),
+        ]));
+
+        $inputFilter->add($factory->createInput([
+            'name' => 'equipment',
+            'required' => false,
+            'filters' => array(
+                array('name' => 'StringTrim'),
+            ),
+        ]));
+
+
+        return $inputFilter;
+    }
+
     public function getCompleteAddress()
     {
         $completeAddress = '';

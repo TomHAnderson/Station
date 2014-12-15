@@ -55,6 +55,7 @@ return [
                 array('route' => 'admin/sponsor/create', 'roles' => array('administrator')),
                 array('route' => 'admin/sponsor/detail', 'roles' => array('administrator')),
                 array('route' => 'admin/sponsor/edit', 'roles' => array('administrator')),
+                array('route' => 'admin/sponsor/delete', 'roles' => array('administrator')),
 
                 array('route' => 'admin/meetup-group', 'roles' => array('member')),
                 array('route' => 'admin/meetup-group/event-refresh-all', 'roles' => array('member')),

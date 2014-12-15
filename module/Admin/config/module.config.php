@@ -10,6 +10,12 @@ return array(
         ),
     ),
 
+    'form_elements' => array(
+        'factories' => array(
+            'SponsorSelect' => 'Admin\Form\Element\SponsorSelectFactory',
+        ),
+    ),
+
     'view_manager' => array(
         'template_path_stack' => array(
             __DIR__.'/../view',
@@ -80,6 +86,19 @@ return array(
                                     'defaults' => array(
                                         'controller'    => 'Admin\Controller\Sponsor',
                                         'action'        => 'edit',
+                                    ),
+                                    'constraints' => array(
+                                        'id' => '[0-9]*',
+                                    ),
+                                ),
+                            ),
+                            'delete' => array(
+                                'type'    => 'Segment',
+                                'options' => array(
+                                    'route'    => '/:id/delete',
+                                    'defaults' => array(
+                                        'controller'    => 'Admin\Controller\Sponsor',
+                                        'action'        => 'delete',
                                     ),
                                     'constraints' => array(
                                         'id' => '[0-9]*',

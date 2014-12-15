@@ -77,6 +77,9 @@
       <field name="url" type="string" uuid="874b5c05-2588-475f-b4ff-bea036eb014e"/>
       <field name="isSiteListed" type="boolean" uuid="58de58b4-b191-46f5-aa75-eb3968a59937"/>
       <field name="logoUrl" type="string" uuid="37a6f77b-a846-4c34-83e6-a269a4e8b4fe"/>
+      <orm-attributes>
+        <attribute name="repository-class">Db\Repository\SponsorRepository</attribute>
+      </orm-attributes>
     </entity>
     <entity name="MeetupMember" uuid="6739cfe1-d85d-4ae5-886d-ac30b309ea02">
       <field name="id" type="integer" required="true" unique="true" primary="true" auto-increment="true" uuid="87721338-edc5-47c2-b6c6-f8613774c9d7"/>

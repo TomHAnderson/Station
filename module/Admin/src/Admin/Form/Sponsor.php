@@ -65,19 +65,5 @@ class Sponsor extends Form
             'name' => 'csrf',
             'type' => 'Zend\Form\Element\Csrf',
         ));
-
-
-        $this->add(array(
-            'type' => 'Button',
-            'name' => 'submit',
-            'options' => array(
-                'label'   => 'Create',
-            ),
-            'attributes' => array(
-                'type'  => 'submit',
-                'class' => 'btn btn-success',
-                'value' => 'Create',
-            )
-        ));
     }
 }

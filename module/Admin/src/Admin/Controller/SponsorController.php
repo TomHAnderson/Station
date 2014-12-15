@@ -12,10 +12,37 @@ class SponsorController extends AbstractActionController
     public function indexAction()
     {
         $objectManager = $this->getServiceLocator()->get('doctrine.entitymanager.orm_default');
-        $sponsors = $objectManager->getRepository('Db\Entity\Sponsor')->findAll(['name' => 'ASC']);
+        $sponsors = $objectManager->getRepository('Db\Entity\Sponsor')->findBy([], ['name' => 'ASC']);
 
         return new ViewModel([
             'sponsors' => $sponsors
+        ]);
+    }
+
+    public function editAction()
+    {
+        $objectManager = $this->getServiceLocator()->get('doctrine.entitymanager.orm_default');
+        $sponsor = $objectManager->getRepository('Db\Entity\Sponsor')->find($this->params()->fromRoute('id'));
+
+        $form = new Form\Sponsor();
+
+        if ($this->getRequest()->isPost()) {
+            $form->setInputFilter($sponsor->getInputFilter());
+            $form->setData($this->getRequest()->getPost());
+
+            if ($form->isValid()) {
+                $sponsor->exchangeArray($form->getData());
+                $objectManager->flush();
+
+                return $this->plugin('redirect')->toRoute('admin/sponsor/detail', ['id' => $sponsor->getId()]);
+            }
+        } else {
+            $form->setData($sponsor->getArrayCopy());
+        }
+
+        return new ViewModel([
+            'sponsor' => $sponsor,
+            'form' => $form
         ]);
     }
 
@@ -58,6 +85,18 @@ class SponsorController extends AbstractActionController
         return new ViewModel([
             'sponsor' => $sponsor
         ]);
+    }
 
+    public function deleteAction()
+    {
+        $objectManager = $this->getServiceLocator()->get('doctrine.entitymanager.orm_default');
+        $sponsor = $objectManager->getRepository('Db\Entity\Sponsor')->find($this->params()->fromRoute('id'));
+
+        if ($sponsor and $sponsor->canDelete()) {
+            $objectManager->remove($sponsor);
+            $objectManager->flush();
+        }
+
+        return $this->plugin('redirect')->toRoute('admin/sponsor');
     }
 }

@@ -9,6 +9,15 @@ if ($this->isAllowed('administration', 'access')) {
 
 <h1>Venue</h1>
 <h2><?= $this->escapeHtml($this->venue->getName()); ?></h2>
+<?php
+if ($this->venue->getSponsor()) {
+?>
+    <a class="btn btn-info" href="<?= $this->url('admin/sponsor/detail', ['id' => $this->venue->getSponsor()->getId()]); ?>">
+        <?= $this->escapeHtml($this->venue->getSponsor()->getName()); ?>
+    </a>
+<?php
+}
+?>
 
 <div class="container">
     <table class="table">

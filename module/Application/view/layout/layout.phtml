@@ -98,6 +98,7 @@
                     <?php
                     if ($this->isAllowed('administration', 'access')) {
                     ?>
+                        <li><a href="<?= $this->url('admin/venue') ?>">Venues</a></li>
                         <li><a href="<?= $this->url('admin/sponsor') ?>">Sponsors</a></li>
                         <li><a href="<?= $this->url('admin') ?>">Administration</a></li>
                     <?php
@@ -113,7 +114,7 @@
             <?php echo $this->content; ?>
             <hr>
             <footer>
-                <p>&copy; 2005 - <?php echo date('Y') ?> by Zend Technologies Ltd. <?php echo $this->translate('All rights reserved.') ?></p>
+                <p>&copy; <?php echo date('Y') ?> by sfphp.org <?php echo $this->translate('All rights reserved.') ?></p>
             </footer>
         </div> <!-- /container -->
         <?php echo $this->inlineScript() ?>

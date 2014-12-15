@@ -1,18 +1,44 @@
-<a class="btn btn-warning pull-right" href="<?= $this->url('admin/sponsor/edit', ['id' => $this->sponsor->getId()]); ?>">
-    Edit Sponsor
-</a>
+<div class="btn-group pull-right" role="group">
+    <a class="btn btn-warning" href="<?= $this->url('admin/sponsor/edit', ['id' => $this->sponsor->getId()]); ?>">
+        Edit Sponsor
+    </a>
 
-<h1>Sponsor</h1>
+    <?php
+    if ($this->sponsor->canDelete()) {
+    ?>
+    <a class="btn btn-danger" href="<?= $this->url('admin/sponsor/delete', ['id' => $this->sponsor->getId()]); ?>">
+        Delete Sponsor
+    </a>
+    <?php
+    }
+    ?>
+</div>
+
+<span class="h1">
+    <?php
+    if ($this->sponsor->getLogoUrl()) {
+    ?>
+    <img title="<?= $this->escapeHtml($this->sponsor->getName()); ?>" width="100" src="<?= $this->sponsor->getLogoUrl(); ?>">
+    <?php
+    }
+    ?>
+
+    <?= $this->escapeHtml($this->sponsor->getName()); ?>
+    <span class="h4">
+        <a href="<?= $this->sponsor->getUrl(); ?>">
+            link
+            <i class="fa fa-external-link"></i>
+        </a>
+    </span>
+</span>
 
 <?php
-if ($this->sponsor->getLogoUrl()) {
+if ($this->sponsor->getDescription()) {
 ?>
-<img title="<?= $this->escapeHtml($this->sponsor->getName()); ?> src="<?= $this->sponsor->getLogoUrl(); ?>">
+    <pre><?= $this->sponsor->getDescription(); ?></pre>
 <?php
 }
 ?>
-
-<h2><?= $this->escapeHtml($this->sponsor->getName()); ?></h2>
 
 <?php
 if (sizeof($this->sponsor->getVenue())) {
@@ -32,8 +58,12 @@ if (sizeof($this->sponsor->getVenue())) {
     foreach ($this->sponsor->getVenue() as $venue) {
     ?>
         <tr>
-            <td><?= $this->escapeHtml($venue->getName()); ?></td>
-            <td><?= nl2br($this->escapeHtml($this->venue->getCompleteAddress())); ?></td>
+            <td>
+                <a class="btn btn-info" href="<?= $this->url('admin/venue/detail', ['id' => $venue->getId()]); ?>">
+                    <?= $this->escapeHtml($venue->getName()); ?>
+                </a>
+            </td>
+            <td><?= nl2br($this->escapeHtml($venue->getCompleteAddress())); ?></td>
             <td><?= $this->escapeHtml($venue->getContact()); ?></td>
         </tr>
     <?php
