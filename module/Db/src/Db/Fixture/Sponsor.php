@@ -11,7 +11,7 @@ class Sponsor implements FixtureInterface
     public function load(ObjectManager $manager)
     {
         $sponsor = new Entity\Sponsor();
-        $sponsor->setName('APPDynamics, Inc');
+        $sponsor->setName('AppDynamics, Inc');
         $sponsor->setUrl('http://www.appdynamics.com/');
         $sponsor->setLogoUrl('http://www.gabsha.com/images/AppDynamics.png');
         $manager->persist($sponsor);
@@ -29,7 +29,7 @@ class Sponsor implements FixtureInterface
         $manager->persist($sponsor);
 
         $sponsor = new Entity\Sponsor();
-        $sponsor->setName('IGN Entertainment');
+        $sponsor->setName('IGN Entertainment, Inc.');
         $sponsor->setUrl('http://corp.ign.com/');
         $sponsor->setLogoUrl('https://lh5.ggpht.com/o4TLwXw2A8XzcVMAv47nEePwYnv-8Kw7P2TCD5FtOzw2KImHLGph2dXd-Ok_795dUfg=w300');
         $manager->persist($sponsor);
@@ -41,7 +41,7 @@ class Sponsor implements FixtureInterface
         $manager->persist($sponsor);
 
         $sponsor = new Entity\Sponsor();
-        $sponsor->setName('Bigcommerce');
+        $sponsor->setName('BigCommerce');
         $sponsor->setUrl('https://www.bigcommerce.com/');
         $sponsor->setLogoUrl('https://d1zu5lttu3m0bt.cloudfront.net/assets/cms/bigcommerce-logo-82a234ef7f226d015d294cc0b66fc35f.png');
         $manager->persist($sponsor);
@@ -59,7 +59,7 @@ class Sponsor implements FixtureInterface
         $manager->persist($sponsor);
 
         $sponsor = new Entity\Sponsor();
-        $sponsor->setName('Digital Garage');
+        $sponsor->setName('Digital Garage Development LLC');
         $sponsor->setUrl('http://www.garage.co.jp/en/');
         $sponsor->setLogoUrl('http://www.microsoft.com/global/ja-jp/casestudies/PublishingImages/showcase/5000/5663-WI1/5663-WI1_logo.gif');
         $manager->persist($sponsor);

@@ -316,7 +316,7 @@ return array(
                                     'create' => array(
                                         'type'    => 'Segment',
                                         'options' => array(
-                                            'route'    => '/create',
+                                            'route'    => '/create[/:event_id]',
                                             'defaults' => array(
                                                 'controller'    => 'Admin\Controller\SponsorContribution',
                                                 'action'        => 'create',

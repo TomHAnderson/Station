@@ -1,0 +1,18 @@
+<?php
+    $this->headTitle('Meetup Group Event');
+?>
+<div class="btn-group pull-right">
+    <a class="btn btn-success" href="<?= $this->url('admin/meetup-group/sponsor-contribution/create', ['id' => $this->event->getMeetupGroup()->getId(), 'event_id' => $this->event->getId()]); ?>">
+        Create Sponsor Contribution
+    </a>
+</div>
+
+<h1>Meetup Group Event</h1>
+<h2> Meetup Group:
+    <a class="btn btn-info" href="<?= $this->url('admin/meetup-group', ['id' => $this->event->getMeetupGroup()->getId()]); ?>">
+        <?= $this->escapeHtml($this->event->getMeetupGroup()->getName()); ?>
+    </a>
+</h2>
+<h3><?= $this->event->getScheduledAtWithOffset()->format('Y-m-d H:i:s'); ?> <?= $this->escapeHtml($this->event->getName()); ?></h3>
+
+<?= $this->partial('admin/partial/sponsor-contribution-table', ['sponsorContributions' => $this->event->getSponsorContribution()]); ?>

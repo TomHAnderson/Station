@@ -22,6 +22,7 @@ of <?= $apiMeetupGroup['members']; ?> Meetup members
     <thead>
         <tr>
             <th>Logo</th>
+            <th>Sponsor</th>
             <th>Venue</th>
             <th>Date</th>
             <th>Name</th>
@@ -39,6 +40,17 @@ of <?= $apiMeetupGroup['members']; ?> Meetup members
                 if ($event->getVenue() and $event->getVenue()->getSponsor() and $event->getVenue()->getSponsor()->getLogoUrl()) {
                 ?>
                     <img src="<?= $event->getVenue()->getSponsor()->getLogoUrl(); ?>" width="40">
+                <?php
+                }
+                ?>
+            </td>
+            <td>
+                <?php
+                if ($event->getVenue() and $event->getVenue()->getSponsor() and $event->getVenue()->getSponsor()->getLogoUrl()) {
+                ?>
+                    <a class="btn btn-info" href="<?= $this->url('admin/sponsor/detail', ['id' => $event->getVenue()->getSponsor()->getId()]); ?>">
+                        <?= $this->escapeHtml($event->getVenue()->getSponsor()->getName()); ?>
+                    </a>
                 <?php
                 }
                 ?>

@@ -21,7 +21,11 @@ $form->add(array(
     )
 ));
 
-$form->setAttribute('action', $this->url('admin/meetup-group/sponsor-contribution/create', ['id' => $this->meetupGroup->getId()]));
+if ($this->event) {
+    $form->setAttribute('action', $this->url('admin/meetup-group/sponsor-contribution/create', ['id' => $this->meetupGroup->getId(), 'event_id' => $this->event->getId()]));
+} else {
+    $form->setAttribute('action', $this->url('admin/meetup-group/sponsor-contribution/create', ['id' => $this->meetupGroup->getId()]));
+}
 $form->prepare();
 
 echo $this->form()->openTag($form);

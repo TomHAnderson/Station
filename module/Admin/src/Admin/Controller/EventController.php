@@ -5,9 +5,24 @@ namespace Admin\Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Db\Entity;
+use DateTime;
 
 class EventController extends AbstractActionController
 {
+    public function indexAction()
+    {
+        $objectManager = $this->getServiceLocator()->get('doctrine.entitymanager.orm_default');
+        $event = $objectManager->getRepository('Db\Entity\Event')->find($this->params()->fromRoute('id'));
+
+        if (!$event) {
+            $this->plugin('Meetup')->unAuthorized();
+        }
+
+        return new ViewModel([
+            'event' => $event
+        ]);
+    }
+
     public function refreshAllAction()
     {
         $this->plugin('Meetup')->validateMeetupGroupPermission($this->params()->fromRoute('id'), 'any', true);
@@ -35,6 +50,28 @@ class EventController extends AbstractActionController
                 if (!$venue) {
                     $venue = new Entity\Venue();
                     $venue->setId($meetupEvent['venue']['id']);
+
+                    // Match sponsor by venue name
+                    $sponsor = $objectManager->getRepository('Db\Entity\Sponsor')->findOneBy([
+                        'name' => trim($meetupEvent['venue']['name']),
+                    ]);
+                    if ($sponsor) {
+                        $venue->setSponsor($sponsor);
+
+                        // Save a sponsor contribution for each venue
+                        if ($sponsor) {
+                            $sponsorContribution = new Entity\SponsorContribution();
+                            $sponsorContribution->setCreatedAt(new DateTime());
+                            $sponsorContribution->setMeetupGroup($meetupGroup);
+                            $sponsorContribution->setSponsor($sponsor);
+                            $sponsorContribution->setEvent($event);
+                            $sponsorContribution->setTitle('Automated Venue Host');
+                            $sponsorContribution->setDescription("Event was hosted at sponsor's venue");
+
+                            $objectManager->persist($sponsorContribution);
+                        }
+                    }
+
                     $objectManager->persist($venue);
                 }
 
