@@ -11,7 +11,6 @@
             <th>Picture</th>
             <th>Meetup Group Name</th>
             <th>Your Profile Name</th>
-            <th>Role</th>
         </tr>
     </thead>
     <tbody>
@@ -37,12 +36,6 @@
             <td><img src="<?= $profile->getProfilePhoto()->getThumb(); ?>"></td>
             <td><?= $this->escapeHtml($profile->getMeetupGroup()->getName()); ?></td>
             <td><?= $this->escapeHtml($profile->getName()); ?></td>
-            <td>
-                <a href="<?= $this->url('admin/meetup-group', ['id' => $profile->getMeetupGroup()->getId()]); ?>">
-                    <?= $this->escapeHtml($profile->getRole()); ?>
-                    link
-                </a>
-            </td>
         </tr>
     <?php
     }

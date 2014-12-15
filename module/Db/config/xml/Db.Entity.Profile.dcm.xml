@@ -23,7 +23,11 @@
         <join-column name="member_id" referenced-column-name="id"/>
       </join-columns>
     </many-to-one>
-    <one-to-one field="profilePhoto" target-entity="Db\Entity\ProfilePhoto" mapped-by="profile"/>
+    <many-to-one field="profilePhoto" target-entity="Db\Entity\ProfilePhoto" inversed-by="profile">
+      <join-columns>
+        <join-column name="profile_photo_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
     <one-to-many field="profileAnswer" target-entity="Db\Entity\ProfileAnswer" mapped-by="profile"/>
   </entity>
 </doctrine-mapping>

@@ -66,18 +66,23 @@ class MemberController extends AbstractActionController
             }
             $profile->exchangeArray($meetupProfile);
 
+
             // Create or update the the profile photo
             if (isset($meetupProfile['photo'])) {
                 $photo = $profile->getProfilePhoto();
 
                 if (!$photo) {
-                    $photo = new Entity\ProfilePhoto();
-                    $photo->setId($meetupProfile['photo']['photo_id']);
-                    $photo->setProfile($profile);
-                    $objectManager->persist($photo);
+                    $photo = $objectManager->getRepository('Db\Entity\ProfilePhoto')->find($meetupProfile['photo']['photo_id']);
+
+                    if (!$photo) {
+                        $photo = new Entity\ProfilePhoto();
+                        $photo->setId($meetupProfile['photo']['photo_id']);
+                        $objectManager->persist($photo);
+                    }
                 }
 
                 $photo->exchangeArray($meetupProfile['photo']);
+                $profile->setProfilePhoto($photo);
             } else {
                 $objectManager->remove($profile->getProfilePhoto());
             }

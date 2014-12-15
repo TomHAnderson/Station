@@ -342,6 +342,7 @@
       <field name="lastVisitedAt" type="datetime" uuid="e49d6e97-8393-4096-9876-ee9865330fbc"/>
       <field name="createdAt" type="datetime" uuid="438abb84-5195-424e-bf0a-86b5b8436508"/>
       <field name="updatedAt" type="datetime" uuid="7df45ad7-8ff9-45f6-9206-1b4bea34d904"/>
+      <field name="profile_photo_id" type="integer" uuid="506d91fc-fb79-41b4-8547-d49323b4a262"/>
     </entity>
     <association from="Profile" to="MeetupGroup" owner-alias="profile" inverse-alias="meetupGroup" uuid="ba61cebc-7507-48f7-9a6f-8611299e4347">
       <association-field from="meetup_group_id" to="id"/>
@@ -349,16 +350,18 @@
     <association from="Profile" to="Member" owner-alias="profile" inverse-alias="member" uuid="247c2b8a-306b-4ff9-8336-100d1b1f0862">
       <association-field from="member_id" to="id"/>
     </association>
+    <association from="Profile" to="ProfilePhoto" owner-alias="profile" inverse-alias="profilePhoto" uuid="0f8f0523-0d91-4b55-8f22-693508ac13e3">
+      <association-field from="profile_photo_id" to="id"/>
+    </association>
     <entity name="ProfilePhoto" uuid="3e2b709b-26d8-4613-bc03-2a74207c51ad">
       <field name="id" type="integer" required="true" unique="true" primary="true" uuid="46b8deaa-18c3-4f29-a33e-8fa9589159f3"/>
       <field name="photo" type="string" uuid="952dc7dc-1e63-44a6-88f3-b50e3c912721"/>
       <field name="highResolution" type="string" uuid="ee803d79-84a7-4995-b96a-7b364597609a"/>
       <field name="thumb" type="string" uuid="3f622ecb-64e1-4e60-8cdd-9a443b74b9ce"/>
-      <field name="profile_id" type="integer" required="true" unique="true" uuid="7decc8a6-e2be-47f9-8d49-ad148917511c"/>
+      <index name="compound_primary_key" unique="true">
+        <index-field name="id"/>
+      </index>
     </entity>
-    <association from="ProfilePhoto" to="Profile" owner-alias="profilePhoto" inverse-alias="profile" uuid="624e153a-00b4-450e-9bc0-6e1fce0a8dd1">
-      <association-field from="profile_id" to="id"/>
-    </association>
     <entity name="ProfileAnswer" uuid="6db0e6b2-b817-493e-9589-4f336a66a0ed">
       <field name="id" type="integer" required="true" unique="true" primary="true" auto-increment="true" uuid="50abada3-fbab-49da-b68e-17294ed0d95e"/>
       <field name="question" type="string" uuid="7d3c950e-01b3-4920-b312-6a2fbd0faf1b"/>
@@ -416,6 +419,7 @@
   </module>
   <visual-data>
     <comment uuid="0ad67346-4d68-4a8b-b470-f5b58d8ea3aa" bg-color="4294967264" position-x="612" position-y="50" size-x="0" size-x2="168" size-y="0" size-y2="66" txt-color="4278190080"/>
+    <association uuid="0f8f0523-0d91-4b55-8f22-693508ac13e3" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
     <association uuid="112f52ba-c270-4c92-9fdd-6f9dab47ee12" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030" split="1"/>
     <region uuid="154be245-3bc2-4284-a346-3470850d1417" bg-color="4294897635" position-x="672" position-y="14" size-x="0" size-x2="738" size-y="0" size-y2="364"/>
     <association uuid="1e9e16b4-1592-412e-b5f9-cf7dfeb8e7cc" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
@@ -437,7 +441,6 @@
     <entity uuid="55ccc5ec-f2f4-4ab0-a2b5-a7fd7d855d3a" bg-color="4294967295" hdr-color="4292006610" position-x="-24" position-y="44" size-x="0" size-x2="95" size-y="0" size-y2="87"/>
     <association uuid="585805fa-5b6a-4473-bfd6-c5ce90a2dbf3" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030"/>
     <entity uuid="605b7a29-eb1c-4c4a-9ed5-6cb6bfe9d247" bg-color="4294967295" hdr-color="4292006610" position-x="115" position-y="-31" size-x="0" size-x2="130" size-y="0" size-y2="60"/>
-    <association uuid="624e153a-00b4-450e-9bc0-6e1fce0a8dd1" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4294901760"/>
     <entity uuid="6739cfe1-d85d-4ae5-886d-ac30b309ea02" bg-color="4294967295" hdr-color="4292006610" position-x="24" position-y="436" size-x="0" size-x2="110" size-y="0" size-y2="87"/>
     <many-to-many-association-entity uuid="67f92d5b-f24b-4c3b-aae2-c626bcb7d17f" split="1"/>
     <project uuid="68b6e974-35fb-4337-a482-3e3553b0227b" size-x="52" size-x2="1595" size-y="51" size-y2="1210"/>
@@ -478,7 +481,7 @@
     <region uuid="d5771e08-38ad-41c3-a83c-6ece690bcc52" bg-color="4293391335" position-x="24" position-y="59" size-x="0" size-x2="633" size-y="47" size-y2="320"/>
     <association uuid="d5ea86da-2ff2-452b-9502-a0509ae3311b" center-position-x="0" center-position-y="-20" color="4288059030"/>
     <entity uuid="e1a13ebd-6690-4b38-967b-e0addecc5bf6" bg-color="4294967295" hdr-color="4292006610" position-x="231" position-y="188" size-x="0" size-x2="96" size-y="0" size-y2="59"/>
-    <entity uuid="e627778e-ea46-4737-959f-b91958266913" bg-color="4294967295" hdr-color="4292006610" position-x="392" position-y="64" size-x="0" size-x2="87" size-y="0" size-y2="59"/>
+    <entity uuid="e627778e-ea46-4737-959f-b91958266913" bg-color="4294967295" hdr-color="4292006610" position-x="406" position-y="104" size-x="0" size-x2="87" size-y="0" size-y2="59"/>
     <many-to-many-association-entity uuid="ea450f70-191f-4a16-983d-99b6521b90b0" center-position-x="0" center-position-y="0"/>
     <association uuid="eae3d069-0c15-46cb-af69-a06dea936a5c" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030" split="1"/>
     <entity uuid="eb901b94-e591-4cab-badf-c5a37cd4886e" bg-color="4294967295" hdr-color="4292006610" position-x="397" position-y="384" size-x="0" size-x2="105" size-y="0" size-y2="60"/>

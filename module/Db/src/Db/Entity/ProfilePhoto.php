@@ -72,11 +72,7 @@ class ProfilePhoto implements ArraySerializableInterface
      */
     private $id;
 
-    /**
-     * @var \Db\Entity\Profile
-     */
     private $profile;
-
 
     /**
      * Set photo
@@ -171,23 +167,13 @@ class ProfilePhoto implements ArraySerializableInterface
     }
 
     /**
-     * Set profile
-     *
-     * @param \Db\Entity\Profile $profile
-     * @return ProfilePhoto
+     * Constructor
      */
-    public function setProfile(\Db\Entity\Profile $profile = null)
+    public function __construct()
     {
-        $this->profile = $profile;
-
-        return $this;
+        $this->profile = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
-    /**
-     * Get profile
-     *
-     * @return \Db\Entity\Profile
-     */
     public function getProfile()
     {
         return $this->profile;

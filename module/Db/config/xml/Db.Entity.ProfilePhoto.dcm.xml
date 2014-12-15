@@ -5,10 +5,9 @@
     <field name="photo" type="string" nullable="true"/>
     <field name="highResolution" type="string" nullable="true"/>
     <field name="thumb" type="string" nullable="true"/>
-    <one-to-one field="profile" target-entity="Db\Entity\Profile" inversed-by="profilePhoto">
-      <join-columns>
-        <join-column name="profile_id" referenced-column-name="id" nullable="false" unique="true"/>
-      </join-columns>
-    </one-to-one>
+    <unique-constraints>
+      <unique-constraint name="compound_primary_key" columns="id"/>
+    </unique-constraints>
+    <one-to-many field="profile" target-entity="Db\Entity\Profile" mapped-by="profilePhoto"/>
   </entity>
 </doctrine-mapping>
