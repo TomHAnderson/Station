@@ -15,9 +15,20 @@ class Member implements ArraySerializableInterface
         return $this->getName();
     }
 
-    public function exchangeArray(array $array)
+    public function getProfileByMeetupGroup(MeetupGroup $meetupGroup)
     {
-        foreach ($array as $field => $value) {
+        foreach ($this->getProfile() as $profile) {
+            if ($profile->getMeetupGroup() == $meetupGroup) {
+                return $profile;
+            }
+        }
+
+        return null;
+    }
+
+    public function exchangeArray(array $data)
+    {
+        foreach ($data as $field => $value) {
             switch ($field) {
                 case 'id':
                     $this->setId($value);
@@ -703,5 +714,43 @@ class Member implements ArraySerializableInterface
     public function getLastRequestAt()
     {
         return $this->lastRequestAt;
+    }
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $profile;
+
+
+    /**
+     * Add profile
+     *
+     * @param \Db\Entity\Profile $profile
+     * @return Member
+     */
+    public function addProfile(\Db\Entity\Profile $profile)
+    {
+        $this->profile[] = $profile;
+
+        return $this;
+    }
+
+    /**
+     * Remove profile
+     *
+     * @param \Db\Entity\Profile $profile
+     */
+    public function removeProfile(\Db\Entity\Profile $profile)
+    {
+        $this->profile->removeElement($profile);
+    }
+
+    /**
+     * Get profile
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getProfile()
+    {
+        return $this->profile;
     }
 }

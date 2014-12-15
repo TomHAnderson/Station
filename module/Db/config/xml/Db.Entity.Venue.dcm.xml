@@ -6,8 +6,7 @@
     <field name="address1" type="string" nullable="true"/>
     <field name="address2" type="string" nullable="true"/>
     <field name="address3" type="string" nullable="true"/>
-    <field name="cityStateCountry" type="string" nullable="true"/>
-    <field name="latLon" type="string" nullable="true"/>
+    <field name="city" type="string" nullable="true"/>
     <field name="phone" type="string" nullable="true"/>
     <field name="zip" type="string" nullable="true"/>
     <field name="capacity" type="integer" nullable="true"/>
@@ -15,12 +14,25 @@
     <field name="contact" type="text" nullable="true"/>
     <field name="security" type="text" nullable="true"/>
     <field name="equipment" type="text" nullable="true"/>
+    <field name="latitude" type="float" nullable="true"/>
+    <field name="longitude" type="float" nullable="true"/>
+    <field name="state" type="string" nullable="true"/>
+    <field name="country" type="string" nullable="true"/>
+    <field name="repinned" type="boolean" nullable="true"/>
     <many-to-one field="sponsor" target-entity="Db\Entity\Sponsor" inversed-by="venue">
       <join-columns>
-        <join-column name="sponsor_id" referenced-column-name="id" nullable="false"/>
+        <join-column name="sponsor_id" referenced-column-name="id"/>
       </join-columns>
     </many-to-one>
-    <one-to-many field="event" target-entity="Db\Entity\Event" mapped-by="venue"/>
-    <one-to-many field="venueQuestion" target-entity="Db\Entity\VenueQuestion" mapped-by="venue"/>
+    <one-to-many field="event" target-entity="Db\Entity\Event" mapped-by="venue">
+      <order-by>
+        <order-by-field name="scheduledAt" direction="DESC"/>
+      </order-by>
+    </one-to-many>
+    <one-to-many field="venueQuestion" target-entity="Db\Entity\VenueQuestion" mapped-by="venue">
+      <order-by>
+        <order-by-field name="body" direction="ASC"/>
+      </order-by>
+    </one-to-many>
   </entity>
 </doctrine-mapping>

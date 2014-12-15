@@ -1,1 +1,44 @@
-Action "index", controller "Member", module "Station".
+<a class="pull-right btn btn-warning" href="<?= $this->url('member/refresh', ['id' => $member->getId()]); ?>">
+    Refresh Profile
+</a>
+
+<h1><?= $this->escapeHtml($member->getName()); ?></h1>
+
+<table class="table">
+    <caption>Meetup Groups</caption>
+    <thead>
+        <tr>
+            <th>Picture</th>
+            <th>Meetup Group Name</th>
+            <th>Your Profile Name</th>
+        </tr>
+    </thead>
+    <tbody>
+    <?php
+    // Sort user profiles by meetup group name
+    $profiles = $member->getProfile()->toArray();
+
+    uasort($profiles, function($a, $b) {
+        if ($a->getMeetupGroup()->getName() == $b->getMeetupGroup()->getName()) {
+            return 0;
+        }
+
+        if ($a->getMeetupGroup()->getName() > $b->getMeetupGroup()->getName()) {
+            return 1;
+        }
+
+        return -1;
+    });
+
+    foreach ($profiles as $profile) {
+    ?>
+        <tr>
+            <td><img src="<?= $profile->getProfilePhoto()->getThumb(); ?>"></td>
+            <td><?= $this->escapeHtml($profile->getMeetupGroup()->getName()); ?></td>
+            <td><?= $this->escapeHtml($profile->getName()); ?></td>
+        </tr>
+    <?php
+    }
+    ?>
+    </tbody>
+</table>

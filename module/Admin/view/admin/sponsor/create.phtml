@@ -1,0 +1,88 @@
+<?php
+
+$this->headTitle('Create Sponsor');
+?>
+
+<h1>
+    Create Sponsor
+</h1>
+
+<?php
+$form = $this->form;
+
+$form->add(array(
+    'type' => 'Button',
+    'name' => 'submit',
+    'options' => array(
+        'label'   => 'Create',
+    ),
+    'attributes' => array(
+        'type'  => 'submit',
+        'class' => 'btn btn-success',
+        'value' => 'Create',
+    )
+));
+
+$form->setAttribute('action', $this->url('admin/sponsor/create'));
+$form->prepare();
+
+echo $this->form()->openTag($form);
+?>
+<div class="form-container container">
+    <div class="col-md-12">
+        <?php
+        echo $this->formLabel($form->get('name'));
+        echo $this->formText($form->get('name'));
+        echo $this->formElementErrors()
+            ->setMessageOpenFormat('<div class="alert alert-danger alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button><ul><li>')
+            ->setMessageSeparatorString('</li><li>')
+            ->setMessageCloseString('</li></ul></div>')
+            ->render($form->get('name'));
+        ?>
+    </div>
+
+    <div class="col-md-12">
+        <?php
+        echo $this->formLabel($form->get('url'));
+        echo $this->formUrl($form->get('url'));
+        echo $this->formElementErrors()
+            ->setMessageOpenFormat('<div class="alert alert-danger alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button><ul><li>')
+            ->setMessageSeparatorString('</li><li>')
+            ->setMessageCloseString('</li></ul></div>')
+            ->render($form->get('url'));
+        ?>
+    </div>
+
+    <div class="col-md-12">
+        <?php
+        echo $this->formLabel($form->get('logoUrl'));
+        echo $this->formUrl($form->get('logoUrl'));
+        echo $this->formElementErrors()
+            ->setMessageOpenFormat('<div class="alert alert-danger alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button><ul><li>')
+            ->setMessageSeparatorString('</li><li>')
+            ->setMessageCloseString('</li></ul></div>')
+            ->render($form->get('logoUrl'));
+        ?>
+    </div>
+
+    <div class="col-md-12">
+        <?php
+        echo $this->formLabel($form->get('description'));
+        echo $this->formTextarea($form->get('description'));
+        echo $this->formElementErrors()
+            ->setMessageOpenFormat('<div class="alert alert-danger alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button><ul><li>')
+            ->setMessageSeparatorString('</li><li>')
+            ->setMessageCloseString('</li></ul></div>')
+            ->render($form->get('description'));
+        ?>
+    </div>
+</div>
+<br>
+<div class="form-container container">
+    <div class="col-md-12">
+        <?= $this->formSubmit($form->get('submit')); ?>
+        <?= $this->formHidden($form->get('csrf')); ?>
+    </div>
+</div>
+
+<?= $this->form()->closeTag(); ?>

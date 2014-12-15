@@ -2,11 +2,157 @@
 
 namespace Db\Entity;
 
+use Zend\InputFilter\Factory as InputFactory;
+use Zend\InputFilter\InputFilter;
+use Zend\InputFilter\InputFilterAwareInterface;
+use Zend\InputFilter\InputFilterInterface;
+use Zend\Stdlib\ArraySerializableInterface;
+
 /**
  * Sponsor
  */
-class Sponsor
+class Sponsor implements InputFilterAwareInterface, ArraySerializableInterface
 {
+    public function __toString()
+    {
+        return $this->getName();
+    }
+
+    public function canDelete()
+    {
+        if (!sizeof($this->getVenue())
+            and !sizeof($this->getSponsorContribution())
+            and !sizeof($this->getSponsorContact())
+            and !sizeof($this->getSponsorLink())
+        ) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public function exchangeArray(array $data)
+    {
+        foreach ($data as $key => $value) {
+            switch ($key) {
+                case 'name':
+                    $this->setName($value);
+                    break;
+                case 'url':
+                    $this->setUrl($value);
+                    break;
+                case 'logoUrl':
+                    $this->setLogoUrl($value);
+                    break;
+                case 'description':
+                    $this->setDescription($value);
+                    break;
+                case 'isSiteListed':
+                    $this->setIsSiteListed($value);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        return $this;
+    }
+
+    public function getArrayCopy()
+    {
+        return [
+            'id' => $this->getId(),
+            'name' => $this->getName(),
+            'url' => $this->getUrl(),
+            'logoUrl' => $this->getLogoUrl(),
+            'description' => $this->getDescription(),
+            'isSiteListed' => $this->getIsSiteListed(),
+        ];
+    }
+
+    public function setInputFilter(InputFilterInterface $inputFilter)
+    {
+        throw new \Exception("Not used");
+    }
+
+    public function getInputFilter()
+    {
+        $inputFilter = new InputFilter();
+        $factory = new InputFactory();
+
+        $inputFilter->add($factory->createInput([
+            'name' => 'name',
+            'required' => true,
+            'filters' => array(
+                array('name' => 'StringTrim'),
+            ),
+            'validators' => array(
+                array(
+                    'name'    => 'StringLength',
+                    'options' => array(
+                        'encoding' => 'UTF-8',
+                        'min'      => 1,
+                        'max'      => 255,
+                    ),
+                ),
+            ),
+        ]));
+
+        $inputFilter->add($factory->createInput([
+            'name' => 'url',
+            'required' => false,
+            'filters' => array(
+                array('name' => 'StringTrim'),
+            ),
+            'validators' => array(
+                array(
+                    'name' => 'uri',
+                ),
+                array(
+                    'name'    => 'StringLength',
+                    'options' => array(
+                        'encoding' => 'UTF-8',
+                        'min'      => 1,
+                        'max'      => 255,
+                    ),
+                ),
+            ),
+        ]));
+
+        $inputFilter->add($factory->createInput([
+            'name' => 'logoUrl',
+            'required' => false,
+            'filters' => array(
+                array('name' => 'StringTrim'),
+            ),
+            'validators' => array(
+                array(
+                    'name' => 'uri',
+                ),
+                array(
+                    'name'    => 'StringLength',
+                    'options' => array(
+                        'encoding' => 'UTF-8',
+                        'min'      => 1,
+                        'max'      => 255,
+                    ),
+                ),
+            ),
+        ]));
+
+        $inputFilter->add($factory->createInput([
+            'name' => 'description',
+            'required' => false,
+            'filters' => array(
+                array('name' => 'StringTrim'),
+            ),
+            'validators' => array(
+            ),
+        ]));
+
+        return $inputFilter;
+    }
+
     /**
      * @var string
      */

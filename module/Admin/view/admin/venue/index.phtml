@@ -1,0 +1,52 @@
+<h1>Venues</h1>
+
+<table class="table table-striped table-hover">
+    <caption>Venues</caption>
+    <thead>
+        <tr>
+            <th>Logo</th>
+            <th>Sponsor</th>
+            <th>Name</th>
+            <th>Address</th>
+            <th>Contact</th>
+        </tr>
+    </thead>
+
+    <tbody>
+    <?php
+    foreach ($venues as $venue) {
+    ?>
+        <tr>
+            <td>
+                <?php
+                if ($venue->getSponsor() and $venue->getSponsor()->getLogoUrl()) {
+                ?>
+                    <img src="<?= $venue->getSponsor()->getLogoUrl(); ?>" width="40">
+                <?php
+                }
+                ?>
+            </td>
+            <td>
+                <?php
+                if ($venue->getSponsor()) {
+                ?>
+                <a class="btn btn-info" href="<?= $this->url('admin/sponsor/detail', ['id' => $venue->getSponsor()->getId()]); ?>">
+                    <?= $this->escapeHtml($venue->getSponsor()->getName()); ?>
+                </a>
+                <?php
+                }
+                ?>
+            </td>
+            <td>
+                <a class="btn btn-info" href="<?= $this->url('admin/venue/detail', ['id' => $venue->getId()]); ?>">
+                    <?= $this->escapeHtml($venue->getName()); ?>
+                </a>
+            </td>
+            <td><?= nl2br($this->escapeHtml($venue->getCompleteAddress())); ?></td>
+            <td><?= $this->markdown($venue->getContact()); ?></td>
+        </tr>
+    <?php
+    }
+    ?>
+    </tbody>
+</table>

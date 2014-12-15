@@ -16,13 +16,8 @@ cp config/autoload/local.php.dist config/autoload/local.php
 ```
 Edit local.php with your db connection and your OAuth2 consumer.
 See /etc/hosts note below.
+Remove your old data/sqlite.db file
 
-Now edit ```config/application.config.php``` and comment out 
-```
-#    'BjyAuthorize',
-```
-This is necessary because BjyAuthorize expects the Role table to exist
-in its configuration.  This is only necessary for the following steps:
 ```
 php public/index.php development enable
 php public/index.php orm:schema-tool:create
@@ -30,10 +25,6 @@ php public/index.php data-fixture:import
 
 cd public
 bower install
-```
-Now edit ```config/application.config.php``` again and un-comment 
-```
-    'BjyAuthorize',
 ```
 
 The application is now ready to run.  You may do so with the default

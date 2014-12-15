@@ -1,0 +1,187 @@
+<div class="btn-group pull-right">
+    <a class="btn btn-warning" href="<?= $this->url('admin/venue/edit', ['id' => $this->venue->getId()]); ?>">
+        Edit Venue
+    </a>
+</div>
+
+
+<h1>Venue</h1>
+<h2><?= $this->escapeHtml($this->venue->getName()); ?></h2>
+<?php
+if ($this->venue->getSponsor()) {
+?>
+    <a class="btn btn-info" href="<?= $this->url('admin/sponsor/detail', ['id' => $this->venue->getSponsor()->getId()]); ?>">
+        <?= $this->escapeHtml($this->venue->getSponsor()->getName()); ?>
+    </a>
+<?php
+}
+?>
+
+<table class="table table-striped table-hover">
+    <caption>Details</caption>
+    <tbody>
+        <tr>
+            <th>Name</th>
+            <td>
+            <?= $this->escapeHtml($this->venue->getName()); ?>
+
+            </td>
+        </tr>
+        <tr>
+            <th>Address</th>
+            <td>
+            <?= nl2br($this->escapeHtml($this->venue->getCompleteAddress())); ?>
+
+            </td>
+        </tr>
+        <?php
+        if ($this->venue->getPhone()) {
+        ?>
+        <tr>
+            <th>Phone</th>
+            <td><?= $this->escapeHtml($this->venue->getPhone()); ?></td>
+        </tr>
+        <?php
+        }
+
+        if ($this->venue->getCapacity()) {
+        ?>
+        <tr>
+            <th>Capacity</th>
+            <td><?= (int) $this->venue->getCapacity(); ?></td>
+        </tr>
+        <?php
+        }
+
+        if ($this->venue->getContact()) {
+        ?>
+        <tr>
+            <th>Contact</th>
+            <td><?= $this->markdown($this->venue->getContact()); ?></td>
+        </tr>
+        <?php
+        }
+
+        if ($this->venue->getLatitude()) {
+        ?>
+        <tr>
+            <th>Latitude</th>
+            <td><?= $this->escapeHtml($this->venue->getLatitude()); ?></td>
+        </tr>
+        <?php
+        }
+
+        if ($this->venue->getLongitude()) {
+        ?>
+        <tr>
+            <th>Longitude</th>
+            <td><?= $this->escapeHtml($this->venue->getLongitude()); ?></td>
+        </tr>
+        <?php
+        }
+        ?>
+
+        <?php
+        if ($this->venue->getDescription()) {
+        ?>
+        <tr>
+            <th>Description</th>
+            <td><?= $this->markdown($this->venue->getDescription()); ?></td>
+        </tr>
+        <?php
+        }
+        ?>
+
+        <?php
+        if ($this->venue->getSecurity()) {
+        ?>
+        <tr>
+            <th>Security</th>
+            <td><?= $this->markdown($this->venue->getSecurity()); ?></td>
+        </tr>
+        <?php
+        }
+        ?>
+
+        <?php
+        if ($this->venue->getEquipment()) {
+        ?>
+        <tr>
+            <th>Equipment</th>
+            <td><?= $this->markdown($this->venue->getEquipment()); ?></td>
+        </tr>
+        <?php
+        }
+        ?>
+
+    </tbody>
+</table>
+
+<table class="table table-striped table-hover">
+    <caption>Venue Questions
+        <a class="btn btn-success pull-right" href="<?= $this->url('admin/venue-question/create', ['venue_id' => $this->venue->getId()]); ?>">
+            Create Venue Question
+        </a>
+    </caption>
+    <thead>
+        <tr>
+            <th>Question</th>
+            <th>Actions</th>
+        <tr>
+    </thead>
+
+    <tbody>
+        <?php
+        foreach ($this->venue->getVenueQuestion() as $venueQuestion) {
+        ?>
+            <tr>
+                <td><?= $this->escapeHtml($venueQuestion->getBody()); ?></td>
+                <td class="text-right">
+                    <div class="btn-group">
+                        <a class="btn btn-warning" href="<?= $this->url('admin/venue-question/edit', ['id' => $venueQuestion->getId()]); ?>">
+                            Edit
+                        </a>
+                        <a class="btn btn-danger" href="<?= $this->url('admin/venue-question/delete', ['id' => $venueQuestion->getId()]); ?>">
+                            Delete
+                        </a>
+                    </div>
+                </td>
+            </tr>
+        <?php
+        }
+        ?>
+    </tbody>
+</table>
+
+<?php
+if ($this->venue->getEvent()) {
+?>
+<table class="table table-striped table-hover">
+    <caption>Events</caption>
+    <thead>
+        <tr>
+            <th>Meetup Group</th>
+            <th>Scheduled At</th>
+            <th>Event</th>
+        </tr>
+    </thead>
+    <tbody>
+    <?php
+    foreach ($this->venue->getEvent() as $event) {
+    ?>
+        <tr>
+            <td><?= $this->escapeHtml($event->getMeetupGroup()->getName()); ?></td>
+            <td><?= $event->getScheduledAtWithOffset()->format('Y-m-d H:i:s'); ?></td>
+            <td>
+                <a class="btn btn-info" href="<?= $this->url('admin/event', ['id' => $event->getId()]); ?>">
+                    <?= $this->escapeHtml($event->getName()); ?>
+                </a>
+            </td>
+        </tr>
+    <?php
+    }
+    ?>
+    </tbody>
+</table>
+<?php
+}

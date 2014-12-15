@@ -1,0 +1,129 @@
+<div class="btn-group pull-right" role="group">
+    <a class="btn btn-warning" href="<?= $this->url('admin/sponsor/edit', ['id' => $this->sponsor->getId()]); ?>">
+        Edit Sponsor
+    </a>
+
+    <?php
+    if ($this->sponsor->canDelete()) {
+    ?>
+    <a class="btn btn-danger" href="<?= $this->url('admin/sponsor/delete', ['id' => $this->sponsor->getId()]); ?>">
+        Delete Sponsor
+    </a>
+    <?php
+    }
+    ?>
+</div>
+
+<span class="h1">
+    <?php
+    if ($this->sponsor->getLogoUrl()) {
+    ?>
+    <img title="<?= $this->escapeHtml($this->sponsor->getName()); ?>" width="100" src="<?= $this->sponsor->getLogoUrl(); ?>">
+    <?php
+    }
+    ?>
+
+    <?= $this->escapeHtml($this->sponsor->getName()); ?>
+    <span class="h4">
+        <a href="<?= $this->sponsor->getUrl(); ?>">
+            link
+            <i class="fa fa-external-link"></i>
+        </a>
+    </span>
+</span>
+
+<?php
+if ($this->sponsor->getDescription()) {
+?>
+    <?= $this->markdown($this->sponsor->getDescription()); ?>
+<?php
+}
+?>
+
+
+<table class="table table-stripped table-hover">
+    <caption>
+        Contacts
+
+        <a class="btn btn-success pull-right" href="<?=
+            $this->url('admin/sponsor-contact/create', ['sponsor_id' => $this->sponsor->getId()]);
+        ?>">
+            Create Contact
+        </a>
+    </caption>
+    <thead>
+        <tr>
+            <th>Meetup Group</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th class="text-right">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    <?php
+    foreach ($this->sponsor->getSponsorContact() as $contact) {
+    ?>
+        <tr>
+            <td>
+                <a class="btn btn-info" href="<?= $this->url('admin/meetup-group', ['id' => $contact->getMeetupGroup()->getId()]); ?>">
+                    <?= $this->escapeHtml($contact->getMeetupGroup()->getName()); ?>
+                </a>
+            </td>
+            <td>
+                <?= $this->escapeHtml($contact->getTitle()); ?>
+            </td>
+            <td>
+                <?= $this->markdown($contact->getDescription()); ?>
+            </td>
+            <td class="text-right">
+                <div class="btn-group">
+                    <a class="btn btn-warning" href="<?= $this->url('admin/sponsor-contact/edit', ['id' => $contact->getId()]); ?>">
+                        Edit
+                    </a>
+                    <a class="btn btn-danger" href="<?= $this->url('admin/sponsor-contact/delete', ['id' => $contact->getId()]); ?>">
+                        Delete
+                    </a>
+                </div>
+            </td>
+        </tr>
+
+
+    <?php
+    }
+    ?>
+
+
+<?php
+if (sizeof($this->sponsor->getVenue())) {
+?>
+<table class="table table-striped table-hover">
+    <caption>Venues</caption>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Address</th>
+            <th>Contact</th>
+        </tr>
+    </thead>
+
+    <tbody>
+    <?php
+    foreach ($this->sponsor->getVenue() as $venue) {
+    ?>
+        <tr>
+            <td>
+                <a class="btn btn-info" href="<?= $this->url('admin/venue/detail', ['id' => $venue->getId()]); ?>">
+                    <?= $this->escapeHtml($venue->getName()); ?>
+                </a>
+            </td>
+            <td><?= nl2br($this->escapeHtml($venue->getCompleteAddress())); ?></td>
+            <td><?= $this->markdown($venue->getContact()); ?></td>
+        </tr>
+    <?php
+    }
+    ?>
+    </tbody>
+</table>
+<?php
+}
+?>

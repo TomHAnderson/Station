@@ -2,11 +2,107 @@
 
 namespace Db\Entity;
 
+use Zend\Stdlib\ArraySerializableInterface;
+use DateTime;
+use DateInterval;
+
 /**
  * Event
  */
-class Event
+class Event implements ArraySerializableInterface
 {
+    public function __toString()
+    {
+        return $this->getName();
+    }
+
+    public function exchangeArray(array $data)
+    {
+        foreach ($data as $key => $value) {
+            switch ($key) {
+                case 'rsvp_limit':
+                case 'rsvpLimit':
+                    $this->setRsvpLimit($value);
+                    break;
+                case 'status':
+                    $this->setStatus($value);
+                    break;
+                case 'visibility':
+                    $this->setVisibility($value);
+                    break;
+                case 'maybe_rsvp_count':
+                case 'maybeRsvpCount':
+                    $this->setMaybeRsvpCount($value);
+                    break;
+                case 'utc_offset':
+                case 'utcOffset':
+                    $this->setUtcOffset($value);
+                    break;
+                case 'time':
+                    $value = DateTime::createFromFormat('U', $value / 1000);
+                case 'scheduledAt':
+                    $this->setScheduledAt($value);
+                    break;
+                case 'waitlist_count':
+                case 'waitlistCount':
+                    $this->setWaitlistCount($value);
+                    break;
+                case 'updated':
+                    $value = DateTime::createFromFormat('U', $value / 1000);
+                case 'updatedAt':
+                    $this->setUpdatedAt($value);
+                    break;
+                case 'yes_rsvp_count':
+                case 'yesRsvpCount':
+                    $this->setYesRsvpCount($value);
+                    break;
+                case 'created':
+                    $value = DateTime::createFromFormat('U', $value / 1000);
+                case 'createdAt':
+                    $this->setCreatedAt($value);
+                    break;
+                case 'event_url':
+                case 'url':
+                    $this->setUrl($value);
+                    break;
+                case 'description':
+                    $this->setDescription($value);
+                    break;
+                case 'name':
+                    $this->setName($value);
+                    break;
+                case 'headcount':
+                    $this->setHeadcount($value);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        return $this;
+    }
+
+    public function getArrayCopy()
+    {
+        return [
+            'id' => $this->getId(),
+            'rsvpLimit' => $this->getRsvpLimit(),
+            'status' => $this->getStatus(),
+            'visibility' => $this->getVisibility(),
+            'maybeRsvpCount' => $this->getMaybeRsvpCount(),
+            'utcOffset' => $this->getUtcOffset(),
+            'scheduledAt' => $this->getScheduledAt(),
+            'waitlistCount' => $this->getWaitlistCount(),
+            'updatedAt' => $this->getUpdatedAt(),
+            'yesRsvpCount' => $this->getYesRsvpCount(),
+            'createdAt' => $this->getCreatedAt(),
+            'url' => $this->getUrl(),
+            'description' => $this->getDescription(),
+            'name' => $this->getName(),
+            'headcount' => $this->getHeadcount(),
+        ];
+    }
+
     /**
      * @var \DateTime
      */
@@ -187,6 +283,19 @@ class Event
     public function getScheduledAt()
     {
         return $this->scheduledAt;
+    }
+
+    public function getScheduledAtWithOffset()
+    {
+        $date = clone $this->getScheduledAt();
+
+        if ($this->getUtcOffset() > 0) {
+            $date->add(new DateInterval('PT' . $this->getUtcOffset() / 1000 . 'S'));
+        } elseif ($this->getUtcOffset() < 0) {
+            $date->sub(new DateInterval('PT' . abs($this->getUtcOffset()) / 1000 . 'S'));
+        }
+
+        return $date;
     }
 
     /**
@@ -901,5 +1010,311 @@ class Event
     public function getHost()
     {
         return $this->host;
+    }
+    /**
+     * @var string
+     */
+    private $status;
+
+    /**
+     * @var string
+     */
+    private $visibility;
+
+    /**
+     * @var integer
+     */
+    private $maybeRsvpCount;
+
+    /**
+     * @var integer
+     */
+    private $utcOffset;
+
+    /**
+     * @var integer
+     */
+    private $waitlistCount;
+
+    /**
+     * @var \DateTime
+     */
+    private $updatedAt;
+
+    /**
+     * @var integer
+     */
+    private $yesRsvpCount;
+
+    /**
+     * @var \DateTime
+     */
+    private $createdAt;
+
+    /**
+     * @var string
+     */
+    private $url;
+
+    /**
+     * @var integer
+     */
+    private $headcount;
+
+
+    /**
+     * Set status
+     *
+     * @param string $status
+     * @return Event
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * Get status
+     *
+     * @return string
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * Set visibility
+     *
+     * @param string $visibility
+     * @return Event
+     */
+    public function setVisibility($visibility)
+    {
+        $this->visibility = $visibility;
+
+        return $this;
+    }
+
+    /**
+     * Get visibility
+     *
+     * @return string
+     */
+    public function getVisibility()
+    {
+        return $this->visibility;
+    }
+
+    /**
+     * Set maybeRsvpCount
+     *
+     * @param integer $maybeRsvpCount
+     * @return Event
+     */
+    public function setMaybeRsvpCount($maybeRsvpCount)
+    {
+        $this->maybeRsvpCount = $maybeRsvpCount;
+
+        return $this;
+    }
+
+    /**
+     * Get maybeRsvpCount
+     *
+     * @return integer
+     */
+    public function getMaybeRsvpCount()
+    {
+        return $this->maybeRsvpCount;
+    }
+
+    /**
+     * Set utcOffset
+     *
+     * @param integer $utcOffset
+     * @return Event
+     */
+    public function setUtcOffset($utcOffset)
+    {
+        $this->utcOffset = $utcOffset;
+
+        return $this;
+    }
+
+    /**
+     * Get utcOffset
+     *
+     * @return integer
+     */
+    public function getUtcOffset()
+    {
+        return $this->utcOffset;
+    }
+
+    /**
+     * Set waitlistCount
+     *
+     * @param integer $waitlistCount
+     * @return Event
+     */
+    public function setWaitlistCount($waitlistCount)
+    {
+        $this->waitlistCount = $waitlistCount;
+
+        return $this;
+    }
+
+    /**
+     * Get waitlistCount
+     *
+     * @return integer
+     */
+    public function getWaitlistCount()
+    {
+        return $this->waitlistCount;
+    }
+
+    /**
+     * Set updatedAt
+     *
+     * @param \DateTime $updatedAt
+     * @return Event
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get updatedAt
+     *
+     * @return \DateTime
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    public function getUpdatedAtWithOffset()
+    {
+        $date = clone $this->getUpdatedAt();
+
+        if ($this->getUtcOffset() > 0) {
+            $date->add(new DateInterval('PT' . $this->getUtcOffset() / 1000 . 'S'));
+        } elseif ($this->getUtcOffset() < 0) {
+            $date->sub(new DateInterval('PT' . abs($this->getUtcOffset()) / 1000 . 'S'));
+        }
+
+        return $date;
+    }
+
+    /**
+     * Set yesRsvpCount
+     *
+     * @param integer $yesRsvpCount
+     * @return Event
+     */
+    public function setYesRsvpCount($yesRsvpCount)
+    {
+        $this->yesRsvpCount = $yesRsvpCount;
+
+        return $this;
+    }
+
+    /**
+     * Get yesRsvpCount
+     *
+     * @return integer
+     */
+    public function getYesRsvpCount()
+    {
+        return $this->yesRsvpCount;
+    }
+
+    /**
+     * Set createdAt
+     *
+     * @param \DateTime $createdAt
+     * @return Event
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Get createdAt
+     *
+     * @return \DateTime
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    public function getCreatedAtWithOffset()
+    {
+        $date = clone $this->getCreatedAt();
+
+        if ($this->getUtcOffset() > 0) {
+            $date->add(new DateInterval('PT' . $this->getUtcOffset() / 1000 . 'S'));
+        } elseif ($this->getUtcOffset() < 0) {
+            $date->sub(new DateInterval('PT' . abs($this->getUtcOffset()) / 1000 . 'S'));
+        }
+
+        return $date;
+    }
+
+    /**
+     * Set url
+     *
+     * @param string $url
+     * @return Event
+     */
+    public function setUrl($url)
+    {
+        $this->url = $url;
+
+        return $this;
+    }
+
+    /**
+     * Get url
+     *
+     * @return string
+     */
+    public function getUrl()
+    {
+        return $this->url;
+    }
+
+    /**
+     * Set headcount
+     *
+     * @param integer $headcount
+     * @return Event
+     */
+    public function setHeadcount($headcount)
+    {
+        $this->headcount = $headcount;
+
+        return $this;
+    }
+
+    /**
+     * Get headcount
+     *
+     * @return integer
+     */
+    public function getHeadcount()
+    {
+        return $this->headcount;
     }
 }

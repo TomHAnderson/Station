@@ -8,6 +8,8 @@ use Zend\Session\Container;
 use Zend\Authentication\Result;
 use Application\Service\MeetupClient;
 use Application\Authentication\Adapter\Meetup as MeetupAdapter;
+use DateTime;
+use DateInterval;
 
 class AuthenticationController extends AbstractActionController
 {
@@ -57,10 +59,15 @@ class AuthenticationController extends AbstractActionController
                     return $this->plugin('redirect')->toRoute('authentication/error');
                     break;
                 case Result::SUCCESS:
+                    // Set the expire time for the access tokens
+                    $expire = new DateTime();
+                    $expire->add(new DateInterval('PT' . $token->expires_in . 'S'));
+
                     // Store the access and refresh token for future use
                     $container = new Container('oauth2');
                     $container->accessToken = $token->accessToken;
                     $container->refreshToken = $token->refreshToken;
+                    $container->accessTokenExpire = $expire;
 
                     return $this->plugin('redirect')->toRoute('member');
                     break;

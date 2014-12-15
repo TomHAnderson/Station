@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xsi="http://www.w3.org/2001/XMLSchema-instance" schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="Db\Entity\ProfilePhoto">
+    <id name="id" type="integer"/>
+    <field name="photo" type="string" nullable="true"/>
+    <field name="highResolution" type="string" nullable="true"/>
+    <field name="thumb" type="string" nullable="true"/>
+    <unique-constraints>
+      <unique-constraint name="compound_primary_key" columns="id"/>
+    </unique-constraints>
+    <one-to-many field="profile" target-entity="Db\Entity\Profile" mapped-by="profilePhoto"/>
+  </entity>
+</doctrine-mapping>

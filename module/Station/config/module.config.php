@@ -11,7 +11,7 @@ return array(
             'member' => array(
                 'type'    => 'Segment',
                 'options' => array(
-                    'route'    => '/member[/:id]',
+                    'route'    => '/member',
                     'defaults' => array(
                         '__NAMESPACE__' => 'Station\Controller',
                         'controller'    => 'Member',
@@ -19,7 +19,30 @@ return array(
                     ),
                 ),
                 'may_terminate' => true,
-                'child_routes' => array(),
+                'child_routes' => array(
+                    'refresh' => array(
+                        'type'    => 'Segment',
+                        'options' => array(
+                            'route'    => '/refresh',
+                            'defaults' => array(
+                                '__NAMESPACE__' => 'Station\Controller',
+                                'controller'    => 'Member',
+                                'action'        => 'refresh',
+                            ),
+                        ),
+                    ),
+                    'view' => array(
+                        'type'    => 'Segment',
+                        'options' => array(
+                            'route'    => '/view/:id',
+                            'defaults' => array(
+                                '__NAMESPACE__' => 'Station\Controller',
+                                'controller'    => 'Member',
+                                'action'        => 'view',
+                            ),
+                        ),
+                    ),
+                ),
             ),
         ),
     ),
