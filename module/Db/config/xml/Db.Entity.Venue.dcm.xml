@@ -29,6 +29,10 @@
         <order-by-field name="scheduledAt" direction="DESC"/>
       </order-by>
     </one-to-many>
-    <one-to-many field="venueQuestion" target-entity="Db\Entity\VenueQuestion" mapped-by="venue"/>
+    <one-to-many field="venueQuestion" target-entity="Db\Entity\VenueQuestion" mapped-by="venue">
+      <order-by>
+        <order-by-field name="body" direction="ASC"/>
+      </order-by>
+    </one-to-many>
   </entity>
 </doctrine-mapping>

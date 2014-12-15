@@ -75,6 +75,10 @@ return [
                 array('route' => 'admin/venue/detail', 'roles' => array('administrator')),
                 array('route' => 'admin/venue/edit', 'roles' => array('administrator')),
 
+                array('route' => 'admin/venue-question/create', 'roles' => array('administrator')),
+                array('route' => 'admin/venue-question/edit', 'roles' => array('administrator')),
+                array('route' => 'admin/venue-question/delete', 'roles' => array('administrator')),
+
                 array('route' => 'admin/event', 'roles' => array('administrator')),
                 array('route' => 'admin/event/edit', 'roles' => array('administrator')),
 

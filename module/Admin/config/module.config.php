@@ -9,6 +9,7 @@ return array(
             'Admin\Controller\Sponsor' => 'Admin\Controller\SponsorController',
             'Admin\Controller\SponsorContact' => 'Admin\Controller\SponsorContactController',
             'Admin\Controller\SponsorContribution' => 'Admin\Controller\SponsorContributionController',
+            'Admin\Controller\VenueQuestion' => 'Admin\Controller\VenueQuestionController',
         ),
     ),
 
@@ -153,6 +154,58 @@ return array(
                             ),
                         ),
                     ),
+                    'venue-question' => array(
+                        'type'    => 'Segment',
+                        'options' => array(
+                            'route'    => '/venue-question',
+                            'defaults' => array(
+                                'controller'    => 'Admin\Controller\VenueQuestion',
+                                'action'        => 'index',
+                            ),
+                        ),
+                        'may_terminate' => true,
+                        'child_routes' => array(
+                            'create' => array(
+                                'type'    => 'Segment',
+                                'options' => array(
+                                    'route'    => '/:venue_id/create',
+                                    'defaults' => array(
+                                        'controller'    => 'Admin\Controller\VenueQuestion',
+                                        'action'        => 'create',
+                                    ),
+                                    'constraints' => array(
+                                        'id' => '[0-9]*',
+                                    ),
+                                ),
+                            ),
+                            'edit' => array(
+                                'type'    => 'Segment',
+                                'options' => array(
+                                    'route'    => '/:id/edit',
+                                    'defaults' => array(
+                                        'controller'    => 'Admin\Controller\VenueQuestion',
+                                        'action'        => 'edit',
+                                    ),
+                                    'constraints' => array(
+                                        'id' => '[0-9]*',
+                                    ),
+                                ),
+                            ),
+                            'delete' => array(
+                                'type'    => 'Segment',
+                                'options' => array(
+                                    'route'    => '/:id/delete',
+                                    'defaults' => array(
+                                        'controller'    => 'Admin\Controller\VenueQuestion',
+                                        'action'        => 'delete',
+                                    ),
+                                    'constraints' => array(
+                                        'id' => '[0-9]*',
+                                    ),
+                                ),
+                            ),
+                        ),
+                    ),
                     'venue' => array(
                         'type'    => 'Segment',
                         'options' => array(
@@ -164,6 +217,19 @@ return array(
                         ),
                         'may_terminate' => true,
                         'child_routes' => array(
+                            'question' => array(
+                                'type'    => 'Segment',
+                                'options' => array(
+                                    'route'    => '/:id/question',
+                                    'defaults' => array(
+                                        'controller'    => 'Admin\Controller\Venue',
+                                        'action'        => 'question',
+                                    ),
+                                    'constraints' => array(
+                                        'id' => '[0-9]*',
+                                    ),
+                                ),
+                            ),
                             'detail' => array(
                                 'type'    => 'Segment',
                                 'options' => array(

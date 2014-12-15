@@ -25,16 +25,6 @@ class Venue implements InputFilterAwareInterface, ArraySerializableInterface
         $factory = new InputFactory();
 
         $inputFilter->add($factory->createInput([
-            'name' => 'phone',
-            'required' => false,
-            'filters' => array(
-                array('name' => 'StringTrim'),
-            ),
-            'validators' => array(
-            ),
-        ]));
-
-        $inputFilter->add($factory->createInput([
             'name' => 'capacity',
             'required' => false,
             'filters' => array(
@@ -692,7 +682,7 @@ class Venue implements InputFilterAwareInterface, ArraySerializableInterface
      */
     public function getVenueQuestion()
     {
-        return $thisQuestion;
+        return $this->venueQuestion;
     }
 
     /**

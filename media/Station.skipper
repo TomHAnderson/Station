@@ -298,6 +298,16 @@
     </entity>
     <association from="VenueQuestion" to="Venue" owner-alias="venueQuestion" inverse-alias="venue" uuid="8b511517-15e0-43dc-b3d3-2b0083ce52bc">
       <association-field from="venue_id" to="id"/>
+      <orm-attributes>
+        <attribute name="side-inverse">
+          <attribute name="order-by">
+            <attribute name="order-by-field">
+              <attribute name="direction">ASC</attribute>
+              <attribute name="field">body</attribute>
+            </attribute>
+          </attribute>
+        </attribute>
+      </orm-attributes>
     </association>
     <entity name="EventQuestion" uuid="ebd07b78-d6ee-4da7-b4bd-51e17171d1b2">
       <field name="id" type="integer" required="true" unique="true" primary="true" auto-increment="true" uuid="688098df-50a4-4327-9fc7-3676095b2014"/>
