@@ -57,6 +57,11 @@ return [
                 array('route' => 'admin/sponsor/edit', 'roles' => array('administrator')),
                 array('route' => 'admin/sponsor/delete', 'roles' => array('administrator')),
 
+                array('route' => 'admin/sponsor-contact', 'roles' => array('administrator')),
+                array('route' => 'admin/sponsor-contact/create', 'roles' => array('administrator')),
+                array('route' => 'admin/sponsor-contact/edit', 'roles' => array('administrator')),
+                array('route' => 'admin/sponsor-contact/delete', 'roles' => array('administrator')),
+
                 array('route' => 'admin/meetup-group', 'roles' => array('member')),
                 array('route' => 'admin/meetup-group/event-refresh-all', 'roles' => array('member')),
                 array('route' => 'admin/venue', 'roles' => array('member')),

@@ -98,15 +98,11 @@
       <field name="id" type="integer" required="true" unique="true" primary="true" auto-increment="true" uuid="aac64135-8ed9-4998-97c1-094065c9938f"/>
       <field name="sponsor_id" type="integer" required="true" uuid="b13d708d-0dea-4c2c-be3a-1d846011b412"/>
       <field name="meetup_group_id" type="integer" required="true" uuid="12dd455d-fa78-41eb-90f7-e794af13507f"/>
-      <field name="member_id" type="integer" uuid="568cec1f-066a-4217-af83-dfd200308b56"/>
       <field name="title" type="string" uuid="be73a588-8f7d-422f-9a6b-6293dfae6bc9"/>
       <field name="description" type="text" uuid="614f4a62-81a8-43f7-b4db-0cce8a2a0886"/>
     </entity>
     <association from="SponsorContact" to="Sponsor" owner-alias="sponsorContact" inverse-alias="sponsor" uuid="870a76d6-fd69-495a-9a43-899ca364f115">
       <association-field from="sponsor_id" to="id"/>
-    </association>
-    <association from="SponsorContact" to="Member" owner-alias="sponsorContact" inverse-alias="member" uuid="b153354e-a980-45f5-a193-2c1ea8b1b5e9">
-      <association-field from="member_id" to="id"/>
     </association>
     <association from="SponsorContact" to="MeetupGroup" owner-alias="sponsorContact" inverse-alias="meetupGroup" uuid="bc3acf52-e2ef-4b72-9cf4-752a0c4d1c6a">
       <association-field from="meetup_group_id" to="id"/>
@@ -120,6 +116,9 @@
       <field name="joinMode" type="string" uuid="6df7d933-2b05-4df0-987c-7dd2bd9eaf69"/>
       <field name="latitude" type="float" uuid="6fe33b65-742b-4123-b971-74aac48b9a36"/>
       <field name="longitude" type="float" uuid="47894bd3-1529-4802-bb38-3496553330f8"/>
+      <orm-attributes>
+        <attribute name="repository-class">Db\Repository\MeetupGroupRepository</attribute>
+      </orm-attributes>
     </entity>
     <entity name="MemberLink" uuid="9b84a7af-6409-4a66-97af-513e710cb616">
       <field name="id" type="integer" required="true" unique="true" primary="true" auto-increment="true" uuid="39af9104-cb24-4841-a106-4c296d8a75ae"/>
@@ -443,7 +442,6 @@
     <region uuid="ad57c374-71e8-4d53-8899-389500aedea0" bg-color="4294831087" position-x="624" position-y="609" size-x="52" size-x2="864" size-y="0" size-y2="153"/>
     <entity uuid="ae947869-b539-475c-a96e-44a0aa05c2a3" bg-color="4294967295" hdr-color="4292006610" position-x="291" position-y="-31" size-x="0" size-x2="157" size-y="0" size-y2="325"/>
     <entity uuid="aea55b4d-80da-4550-b575-253df52210ba" bg-color="4294967295" hdr-color="4292006610" position-x="511" position-y="69" size-x="0" size-x2="105" size-y="0" size-y2="60"/>
-    <association uuid="b153354e-a980-45f5-a193-2c1ea8b1b5e9" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030" split="1"/>
     <entity uuid="ba59c5cd-24cd-4cdf-ba90-935ded7734a9" bg-color="4294967295" hdr-color="4292006610" position-x="48" position-y="29" size-x="0" size-x2="20" size-y="0" size-y2="20"/>
     <association uuid="ba61cebc-7507-48f7-9a6f-8611299e4347" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030" split="1"/>
     <association uuid="bbea1d11-c211-49fc-9096-e789cbc7c7f8" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030" split="1"/>

@@ -11,11 +11,6 @@
         <join-column name="sponsor_id" referenced-column-name="id" nullable="false"/>
       </join-columns>
     </many-to-one>
-    <many-to-one field="member" target-entity="Db\Entity\Member" inversed-by="sponsorContact">
-      <join-columns>
-        <join-column name="member_id" referenced-column-name="id"/>
-      </join-columns>
-    </many-to-one>
     <many-to-one field="meetupGroup" target-entity="Db\Entity\MeetupGroup" inversed-by="sponsorContact">
       <join-columns>
         <join-column name="meetup_group_id" referenced-column-name="id" nullable="false"/>

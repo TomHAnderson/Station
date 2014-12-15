@@ -15,7 +15,6 @@
     <field name="lastRequestAt" type="datetime" nullable="true"/>
     <one-to-many field="presentation" target-entity="Db\Entity\Presentation" mapped-by="member"/>
     <one-to-many field="meetupUser" target-entity="Db\Entity\MeetupMember" mapped-by="member"/>
-    <one-to-many field="sponsorContact" target-entity="Db\Entity\SponsorContact" mapped-by="member"/>
     <one-to-many field="memberLink" target-entity="Db\Entity\MemberLink" mapped-by="member"/>
     <one-to-many field="profile" target-entity="Db\Entity\Profile" mapped-by="member"/>
     <many-to-many field="eventHost" target-entity="Db\Entity\Event" inversed-by="host">

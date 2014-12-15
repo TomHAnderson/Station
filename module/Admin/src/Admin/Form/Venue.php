@@ -8,7 +8,6 @@ class Venue extends Form
     public function init()
     {
         // we want to ignore the name passed
-        parent::__construct('sponsor');
         $this->setAttribute('method', 'post');
 
         $this->add(array(

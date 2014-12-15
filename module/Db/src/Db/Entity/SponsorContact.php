@@ -2,11 +2,97 @@
 
 namespace Db\Entity;
 
+use Zend\InputFilter\Factory as InputFactory;
+use Zend\InputFilter\InputFilter;
+use Zend\InputFilter\InputFilterAwareInterface;
+use Zend\InputFilter\InputFilterInterface;
+use Zend\Stdlib\ArraySerializableInterface;
+
 /**
  * SponsorContact
  */
-class SponsorContact
+class SponsorContact implements InputFilterAwareInterface, ArraySerializableInterface
 {
+    public function __toString()
+    {
+        return $this->getTitle();
+    }
+
+    public function exchangeArray(array $data)
+    {
+        foreach ($data as $key => $value) {
+            switch ($key) {
+                case 'title':
+                    $this->setTitle($value);
+                    break;
+                case 'description':
+                    $this->setDescription($value);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        return $this;
+    }
+
+    public function getArrayCopy()
+    {
+        return [
+            'id' => $this->getId(),
+            'title' => $this->getTitle(),
+            'description' => $this->getDescription(),
+            'meetupGroup' => $this->getMeetupGroup()->getId(),
+        ];
+    }
+
+    public function setInputFilter(InputFilterInterface $inputFilter)
+    {
+        throw new \Exception("Not used");
+    }
+
+    public function getInputFilter()
+    {
+        $inputFilter = new InputFilter();
+        $factory = new InputFactory();
+
+        $inputFilter->add($factory->createInput([
+            'name' => 'meetupGroup',
+            'required' => true,
+            'filters' => array(
+                array('name' => 'Int'),
+            ),
+        ]));
+
+        $inputFilter->add($factory->createInput([
+            'name' => 'title',
+            'required' => true,
+            'filters' => array(
+                array('name' => 'StringTrim'),
+            ),
+            'validators' => array(
+                array(
+                    'name'    => 'StringLength',
+                    'options' => array(
+                        'encoding' => 'UTF-8',
+                        'min'      => 1,
+                        'max'      => 255,
+                    ),
+                ),
+            ),
+        ]));
+
+        $inputFilter->add($factory->createInput([
+            'name' => 'description',
+            'required' => false,
+            'filters' => array(
+                array('name' => 'StringTrim'),
+            ),
+        ]));
+
+        return $inputFilter;
+    }
+
     /**
      * @var string
      */
@@ -155,7 +241,7 @@ class SponsorContact
     /**
      * Get meetupGroup
      *
-     * @return \Db\Entity\MeetupGroup 
+     * @return \Db\Entity\MeetupGroup
      */
     public function getMeetupGroup()
     {

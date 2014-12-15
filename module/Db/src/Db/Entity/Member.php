@@ -15,6 +15,17 @@ class Member implements ArraySerializableInterface
         return $this->getName();
     }
 
+    public function getProfileByMeetupGroup(MeetupGroup $meetupGroup)
+    {
+        foreach ($this->getProfile() as $profile) {
+            if ($profile->getMeetupGroup() == $meetupGroup) {
+                return $profile;
+            }
+        }
+
+        return null;
+    }
+
     public function exchangeArray(array $data)
     {
         foreach ($data as $field => $value) {

@@ -7,12 +7,14 @@ return array(
             'Admin\Controller\Event' => 'Admin\Controller\EventController',
             'Admin\Controller\Venue' => 'Admin\Controller\VenueController',
             'Admin\Controller\Sponsor' => 'Admin\Controller\SponsorController',
+            'Admin\Controller\SponsorContact' => 'Admin\Controller\SponsorContactController',
         ),
     ),
 
     'form_elements' => array(
         'factories' => array(
             'SponsorSelect' => 'Admin\Form\Element\SponsorSelectFactory',
+            'MeetupGroupSelect' => 'Admin\Form\Element\MeetupGroupSelectFactory',
         ),
     ),
 
@@ -42,6 +44,49 @@ return array(
                             'defaults' => array(
                                 'controller'    => 'Admin\Controller\Event',
                                 'action'        => 'index',
+                            ),
+                        ),
+                    ),
+                    'sponsor-contact' => array(
+                        'type'    => 'Segment',
+                        'options' => array(
+                            'route'    => '/sponsor-contact',
+                            'defaults' => array(
+                                'controller'    => 'Admin\Controller\SponsorContact',
+                                'action'        => 'index',
+                            ),
+                        ),
+                        'may_terminate' => true,
+                        'child_routes' => array(
+                            'create' => array(
+                                'type'    => 'Segment',
+                                'options' => array(
+                                    'route'    => '/create/:sponsor_id',
+                                    'defaults' => array(
+                                        'controller'    => 'Admin\Controller\SponsorContact',
+                                        'action'        => 'create',
+                                    ),
+                                ),
+                            ),
+                            'edit' => array(
+                                'type'    => 'Segment',
+                                'options' => array(
+                                    'route'    => '/edit/:id',
+                                    'defaults' => array(
+                                        'controller'    => 'Admin\Controller\SponsorContact',
+                                        'action'        => 'edit',
+                                    ),
+                                ),
+                            ),
+                            'delete' => array(
+                                'type'    => 'Segment',
+                                'options' => array(
+                                    'route'    => '/delete/:id',
+                                    'defaults' => array(
+                                        'controller'    => 'Admin\Controller\SponsorContact',
+                                        'action'        => 'delete',
+                                    ),
+                                ),
                             ),
                         ),
                     ),
