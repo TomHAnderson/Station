@@ -8,6 +8,7 @@ return array(
             'Admin\Controller\Venue' => 'Admin\Controller\VenueController',
             'Admin\Controller\Sponsor' => 'Admin\Controller\SponsorController',
             'Admin\Controller\SponsorContact' => 'Admin\Controller\SponsorContactController',
+            'Admin\Controller\SponsorContribution' => 'Admin\Controller\SponsorContributionController',
         ),
     ),
 
@@ -191,6 +192,39 @@ return array(
                             ),
                         ),
                     ),
+                    'sponsor-contribution' => array(
+                        'type'    => 'Segment',
+                        'options' => array(
+                            'route'    => '/sponsor-contribution/:id',
+                            'defaults' => array(
+                                'controller'    => 'Admin\Controller\SponsorContribution',
+                                'action'        => 'detail',
+                            ),
+                        ),
+                        'may_terminate' => true,
+                        'child_routes' => array(
+                            'edit' => array(
+                                'type'    => 'Segment',
+                                'options' => array(
+                                    'route'    => '/edit',
+                                    'defaults' => array(
+                                        'controller'    => 'Admin\Controller\SponsorContribution',
+                                        'action'        => 'edit',
+                                    ),
+                                ),
+                            ),
+                            'delete' => array(
+                                'type'    => 'Segment',
+                                'options' => array(
+                                    'route'    => '/delete',
+                                    'defaults' => array(
+                                        'controller'    => 'Admin\Controller\SponsorContribution',
+                                        'action'        => 'delete',
+                                    ),
+                                ),
+                            ),
+                        ),
+                    ),
                     'meetup-group' => array(
                         'type'    => 'Segment',
                         'options' => array(
@@ -202,6 +236,29 @@ return array(
                         ),
                         'may_terminate' => true,
                         'child_routes' => array(
+                            'sponsor-contribution' => array(
+                                'type'    => 'Segment',
+                                'options' => array(
+                                    'route'    => '/sponsor-contribution',
+                                    'defaults' => array(
+                                        'controller'    => 'Admin\Controller\MeetupGroup',
+                                        'action'        => 'sponsorContribution',
+                                    ),
+                                ),
+                                'may_terminate' => true,
+                                'child_routes' => array(
+                                    'create' => array(
+                                        'type'    => 'Segment',
+                                        'options' => array(
+                                            'route'    => '/create',
+                                            'defaults' => array(
+                                                'controller'    => 'Admin\Controller\SponsorContribution',
+                                                'action'        => 'create',
+                                            ),
+                                        ),
+                                    ),
+                                ),
+                            ),
                             'event-refresh-all' => array(
                                 'type'    => 'Segment',
                                 'options' => array(

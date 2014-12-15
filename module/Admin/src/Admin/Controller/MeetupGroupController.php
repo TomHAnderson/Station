@@ -21,4 +21,15 @@ class MeetupGroupController extends AbstractActionController
             'meetupGroup' => $meetupGroup,
         ]);
     }
+
+    public function sponsorContributionAction()
+    {
+        $this->plugin('Meetup')->validateMeetupGroupPermission($this->params()->fromRoute('id'), 'any', true);
+        $objectManager = $this->getServiceLocator()->get('doctrine.entitymanager.orm_default');
+        $meetupGroup = $objectManager->getRepository('Db\Entity\MeetupGroup')->find($this->params()->fromRoute('id'));
+
+        return new ViewModel([
+            'meetupGroup' => $meetupGroup,
+        ]);
+    }
 }

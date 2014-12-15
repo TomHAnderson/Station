@@ -43,6 +43,9 @@
       <field name="description" type="text" uuid="bc964d8a-40d5-4b0d-958f-dae47026a843"/>
       <field name="name" type="string" uuid="df79fd66-7d5e-4f56-bd45-7b9d30fb551e"/>
       <field name="headcount" type="integer" uuid="a1c44c4f-7016-43d4-850e-7a96be2bc9ee"/>
+      <orm-attributes>
+        <attribute name="repository-class">Db\Repository\EventRepository</attribute>
+      </orm-attributes>
     </entity>
     <association from="Event" to="Venue" owner-alias="event" inverse-alias="venue" uuid="9b361ee5-6abb-4d1e-ba57-4babb79542e3">
       <association-field from="venue_id" to="id"/>
@@ -190,6 +193,16 @@
     </association>
     <association from="SponsorContribution" to="MeetupGroup" owner-alias="sponsorContribution" inverse-alias="meetupGroup" uuid="3dc6e394-7298-406b-b746-3ca400c92e75">
       <association-field from="meetup_group_id" to="id"/>
+      <orm-attributes>
+        <attribute name="side-inverse">
+          <attribute name="order-by">
+            <attribute name="order-by-field">
+              <attribute name="direction">DESC</attribute>
+              <attribute name="field">createdAt</attribute>
+            </attribute>
+          </attribute>
+        </attribute>
+      </orm-attributes>
     </association>
     <entity name="PresentationProposal" uuid="ed8d9c35-c8f2-4a29-b663-4ae5298dddbd">
       <field name="id" type="integer" required="true" unique="true" primary="true" auto-increment="true" uuid="17877025-812c-41f2-a450-e427ffdc31e5"/>

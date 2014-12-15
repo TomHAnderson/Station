@@ -2,11 +2,119 @@
 
 namespace Db\Entity;
 
+use Zend\InputFilter\Factory as InputFactory;
+use Zend\InputFilter\InputFilter;
+use Zend\InputFilter\InputFilterAwareInterface;
+use Zend\InputFilter\InputFilterInterface;
+use Zend\Stdlib\ArraySerializableInterface;
+use DateTime;
+
 /**
  * SponsorContribution
  */
-class SponsorContribution
+class SponsorContribution implements InputFilterAwareInterface, ArraySerializableInterface
 {
+    public function setInputFilter(InputFilterInterface $inputFilter)
+    {
+        throw new \Exception("Not used");
+    }
+
+    public function getInputFilter()
+    {
+        $inputFilter = new InputFilter();
+        $factory = new InputFactory();
+
+        $inputFilter->add($factory->createInput([
+            'name' => 'title',
+            'required' => true,
+            'filters' => array(
+                array('name' => 'StringTrim'),
+            ),
+        ]));
+
+        $inputFilter->add($factory->createInput([
+            'name' => 'description',
+            'required' => false,
+            'filters' => array(
+                array('name' => 'StringTrim'),
+            ),
+        ]));
+
+        $inputFilter->add($factory->createInput([
+            'name' => 'receivedWhat',
+            'required' => false,
+            'filters' => array(
+                array('name' => 'StringTrim'),
+            ),
+        ]));
+
+        $inputFilter->add($factory->createInput([
+            'name' => 'receivedWhy',
+            'required' => false,
+            'filters' => array(
+                array('name' => 'StringTrim'),
+            ),
+        ]));
+
+        $inputFilter->add($factory->createInput([
+            'name' => 'receivedHow',
+            'required' => false,
+            'filters' => array(
+                array('name' => 'StringTrim'),
+            ),
+        ]));
+
+        return $inputFilter;
+    }
+
+    public function __toString()
+    {
+        return $this->getName();
+    }
+
+    public function exchangeArray(array $data)
+    {
+        foreach ($data as $key => $value) {
+            switch ($key) {
+                case 'title':
+                    $this->setTitle($value);
+                    break;
+                case 'description':
+                    $this->setDescription($value);
+                    break;
+                case 'receivedWhat':
+                    $this->setReceivedWhat($value);
+                    break;
+                case 'receivedWhy':
+                    $this->setReceivedWhy($value);
+                    break;
+                case 'receivedHow':
+                    $this->setReceivedHow($value);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        return $this;
+    }
+
+    public function getArrayCopy()
+    {
+        return [
+            'id' => $this->getId(),
+            'title' => $this->getTitle(),
+            'description' => $this->getDescription(),
+            'createdAt' => $this->getCreatedAt(),
+            'receivedWhat' => $this->getReceivedWhat(),
+            'receivedWhy' => $this->getReceivedWhy(),
+            'receivedHow' => $this->getReceivedHow(),
+            'event' => ($this->getEvent()) ? $this->getEvent()->getId(): null,
+            'sponsor' => $this->getSponsor()->getId(),
+            'meetupGroup' => $this->getMeetupGroup()->getId(),
+        ];
+    }
+
     /**
      * @var \DateTime
      */
@@ -267,7 +375,7 @@ class SponsorContribution
     /**
      * Get meetupGroup
      *
-     * @return \Db\Entity\MeetupGroup 
+     * @return \Db\Entity\MeetupGroup
      */
     public function getMeetupGroup()
     {

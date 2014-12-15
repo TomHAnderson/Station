@@ -2,9 +2,14 @@
     $this->headTitle('Meetup Group Administration');
 ?>
 
-<a class="pull-right btn btn-warning" href="<?= $this->url('admin/meetup-group/event-refresh-all', ['id' => $this->meetupGroup->getId()]); ?>">
-    Refresh Event List
-</a>
+<div class="btn-group pull-right">
+    <a class="btn btn-info" href="<?= $this->url('admin/meetup-group/sponsor-contribution', ['id' => $this->meetupGroup->getId()]); ?>">
+        Sponsor Contributions
+    </a>
+    <a class="btn btn-warning" href="<?= $this->url('admin/meetup-group/event-refresh-all', ['id' => $this->meetupGroup->getId()]); ?>">
+        Refresh Event List
+    </a>
+</div>
 
 <h1>Administration</h1>
 <h2><?= $this->escapeHtml($this->meetupGroup->getName()); ?></h2>

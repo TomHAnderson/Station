@@ -1,0 +1,117 @@
+<div class="btn-group pull-right">
+    <a class="btn btn-info" href="<?= $this->url('admin/meetup-group/sponsor-contribution', ['id' => $this->sponsorContribution->getMeetupGroup()->getId()]); ?>">
+        <?= $this->escapeHtml($this->sponsorContribution->getMeetupGroup()->getName()); ?>
+        Sponsor Contributions
+    </a>
+    <a class="btn btn-warning" href="<?= $this->url('admin/sponsor-contribution/edit', ['id' => $this->sponsorContribution->getId()]); ?>">
+        Edit
+    </a>
+    <a class="btn btn-danger" href="<?= $this->url('admin/sponsor-contribution/delete', ['id' => $this->sponsorContribution->getId()]); ?>">
+        Delete
+    </a>
+</div>
+
+
+<h1>Sponsor Contribution</h1>
+
+<div class="container">
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Title</th>
+                <td><?= $this->escapeHtml($this->sponsorContribution->getTitle()); ?></td>
+            </tr>
+            <tr>
+                <th>Created At</th>
+                <td><?= $this->sponsorContribution->getCreatedAt()->format('Y-m-d H:i:s'); ?></td>
+            </tr>
+            <tr>
+                <th>Meetup Group</th>
+                <td>
+                    <a class="btn btn-info" href="<?= $this->url('admin/meetup-group', ['id' => $this->sponsorContribution->getMeetupGroup()->getId()]); ?>">
+                        <?= $this->escapeHtml($this->sponsorContribution->getMeetupGroup()->getName()); ?>
+                    </a>
+                </td>
+            </tr>
+            <?php
+            if ($this->sponsorContribution->getEvent()) {
+            ?>
+            <tr>
+                <th>Event</th>
+                <td>
+                    <a class="btn btn-info" href="<?= $this->url('admin/event', ['id' => $this->sponsorContribution->getEvent()->getId()]); ?>">
+                        <?= $this->escapeHtml($this->sponsorContribution->getEvent()->getName()); ?>
+                    </a>
+                </td>
+            </tr>
+            <?php
+            }
+            ?>
+
+            <tr>
+                <th>Sponsor</th>
+                <td>
+                    <?php
+                    if ($this->sponsorContribution->getSponsor()->getLogoUrl()) {
+                    ?>
+                        <img width="40" src="<?= $this->sponsorContribution->getSponsor()->getLogoUrl(); ?>">
+                    <?php
+                    }
+                    ?>
+                    <a class="btn btn-info" href="<?= $this->url('admin/sponsor/detail', ['id' => $this->sponsorContribution->getSponsor()->getId()]); ?>">
+                        <?= $this->sponsorContribution->getSponsor()->getName(); ?>
+                    </a>
+                </td>
+            </tr>
+            <?php
+            if ($this->sponsorContribution->getDescription()) {
+            ?>
+            <tr>
+                <th>Description</th>
+                <td>
+                    <?= $this->markdown($this->sponsorContribution->getDescription()); ?>
+                </td>
+            </tr>
+            <?php
+            }
+            ?>
+            <?php
+            if ($this->sponsorContribution->getReceivedWhat()) {
+            ?>
+            <tr>
+                <th>Received What</th>
+                <td>
+                    <?= $this->markdown($this->sponsorContribution->getReceivedWhat()); ?>
+                </td>
+            </tr>
+            <?php
+            }
+            ?>
+            <?php
+            if ($this->sponsorContribution->getReceivedWhy()) {
+            ?>
+            <tr>
+                <th>Received Why</th>
+                <td>
+                    <?= $this->markdown($this->sponsorContribution->getReceivedWhy()); ?>
+                </td>
+            </tr>
+            <?php
+            }
+            ?>
+            <?php
+            if ($this->sponsorContribution->getReceivedHow()) {
+            ?>
+            <tr>
+                <th>Received How</th>
+                <td>
+                    <?= $this->markdown($this->sponsorContribution->getReceivedHow()); ?>
+                </td>
+            </tr>
+            <?php
+            }
+            ?>
+
+        </tbody>
+    </table>
+</div>

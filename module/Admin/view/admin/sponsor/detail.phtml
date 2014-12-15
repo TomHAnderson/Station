@@ -56,7 +56,7 @@ if ($this->sponsor->getDescription()) {
             <th>Meetup Group</th>
             <th>Title</th>
             <th>Description</th>
-            <th>Actions</th>
+            <th class="text-right">Actions</th>
         </tr>
     </thead>
     <tbody>
@@ -75,7 +75,7 @@ if ($this->sponsor->getDescription()) {
             <td>
                 <?= $this->markdown($contact->getDescription()); ?>
             </td>
-            <td>
+            <td class="text-right">
                 <div class="btn-group">
                     <a class="btn btn-warning" href="<?= $this->url('admin/sponsor-contact/edit', ['id' => $contact->getId()]); ?>">
                         Edit

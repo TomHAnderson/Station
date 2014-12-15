@@ -11,7 +11,7 @@ class SponsorSelectFactory implements FactoryInterface
     public function createService(ServiceLocatorInterface $formElementManager)
     {
         $element = new Select();
-        $valueOptions = array(0 => 'none') + $this->loadValueOptions($formElementManager);
+        $valueOptions = $this->loadValueOptions($formElementManager);
         $element->setValueOptions($valueOptions);
 
         return $element;

@@ -17,7 +17,8 @@
     foreach ($venues as $venue) {
     ?>
         <tr>
-            <td><?php
+            <td>
+                <?php
                 if ($venue->getSponsor() and $venue->getSponsor()->getLogoUrl()) {
                 ?>
                     <img src="<?= $venue->getSponsor()->getLogoUrl(); ?>" width="40">

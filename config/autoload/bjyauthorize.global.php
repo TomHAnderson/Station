@@ -62,13 +62,21 @@ return [
                 array('route' => 'admin/sponsor-contact/edit', 'roles' => array('administrator')),
                 array('route' => 'admin/sponsor-contact/delete', 'roles' => array('administrator')),
 
-                array('route' => 'admin/meetup-group', 'roles' => array('member')),
-                array('route' => 'admin/meetup-group/event-refresh-all', 'roles' => array('member')),
-                array('route' => 'admin/venue', 'roles' => array('member')),
-                array('route' => 'admin/venue/detail', 'roles' => array('member')),
-                array('route' => 'admin/venue/edit', 'roles' => array('member')),
-                array('route' => 'admin/event', 'roles' => array('member')),
-                array('route' => 'admin/event/edit', 'roles' => array('member')),
+                array('route' => 'admin/meetup-group', 'roles' => array('administrator')),
+                array('route' => 'admin/meetup-group/event-refresh-all', 'roles' => array('administrator')),
+                array('route' => 'admin/meetup-group/sponsor-contribution', 'roles' => array('administrator')),
+                array('route' => 'admin/meetup-group/sponsor-contribution/create', 'roles' => array('administrator')),
+
+                array('route' => 'admin/sponsor-contribution', 'roles' => array('administrator')),
+                array('route' => 'admin/sponsor-contribution/edit', 'roles' => array('administrator')),
+                array('route' => 'admin/sponsor-contribution/delete', 'roles' => array('administrator')),
+
+                array('route' => 'admin/venue', 'roles' => array('administrator')),
+                array('route' => 'admin/venue/detail', 'roles' => array('administrator')),
+                array('route' => 'admin/venue/edit', 'roles' => array('administrator')),
+
+                array('route' => 'admin/event', 'roles' => array('administrator')),
+                array('route' => 'admin/event/edit', 'roles' => array('administrator')),
 
                 array('route' => 'doctrine_orm_module_yuml', 'roles' => array('administrator')),
 
