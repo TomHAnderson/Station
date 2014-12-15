@@ -52,7 +52,7 @@ if ($this->venue->getSponsor()) {
             ?>
             <tr>
                 <th>Contact</th>
-                <td><?= $this->escapeHtml($this->venue->getContact()); ?></td>
+                <td><?= $this->markdown($this->venue->getContact()); ?></td>
             </tr>
             <?php
             }
@@ -75,43 +75,45 @@ if ($this->venue->getSponsor()) {
             <?php
             }
             ?>
+
+            <?php
+            if ($this->venue->getDescription()) {
+            ?>
+            <tr>
+                <th>Description</th>
+                <td><?= $this->markdown($this->venue->getDescription()); ?></td>
+            </tr>
+            <?php
+            }
+            ?>
+
+            <?php
+            if ($this->venue->getSecurity()) {
+            ?>
+            <tr>
+                <th>Security</th>
+                <td><?= $this->markdown($this->venue->getSecurity()); ?></td>
+            </tr>
+            <?php
+            }
+            ?>
+
+            <?php
+            if ($this->venue->getEquipment()) {
+            ?>
+            <tr>
+                <th>Equipment</th>
+                <td><?= $this->markdown($this->venue->getEquipment()); ?></td>
+            </tr>
+            <?php
+            }
+            ?>
+
         </tbody>
     </table>
 </div>
 
 <?php
-if ($this->venue->getDescription()) {
-?>
-<div class="container">
-    <h3>Description</h3>
-    <?= $this->escapeHtml($this->venue->getDescription()); ?>
-</div>
-<?php
-}
-?>
-
-<?php
-if ($this->venue->getSecurity()) {
-?>
-<div class="container">
-    <h3>Security</h3>
-    <?= $this->escapeHtml($this->venue->getSecurity()); ?>
-</div>
-<?php
-}
-?>
-
-<?php
-if ($this->venue->getEquipment()) {
-?>
-<div class="container">
-    <h3>Equipment</h3>
-    <?= $this->escapeHtml($this->venue->getEquipment()); ?>
-</div>
-<?php
-}
-
-
 if ($this->venue->getEvent()) {
 ?>
 <table class="table table-striped table-hover">

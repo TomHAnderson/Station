@@ -12,19 +12,6 @@ class Venue extends Form
         $this->setAttribute('method', 'post');
 
         $this->add(array(
-            'name' => 'phone',
-            'type'  => 'text',
-            'attributes' => array(
-                'placeholder' => 'phone number',
-                'required' => false,
-                'class' => 'form-control',
-            ),
-            'options' => array(
-                'label' => 'Phone Number',
-            ),
-        ));
-
-        $this->add(array(
             'name' => 'capacity',
             'type'  => 'number',
             'attributes' => array(

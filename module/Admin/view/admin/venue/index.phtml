@@ -4,6 +4,7 @@
     <caption>Venues</caption>
     <thead>
         <tr>
+            <th>Logo</th>
             <th>Sponsor</th>
             <th>Name</th>
             <th>Address</th>
@@ -16,6 +17,14 @@
     foreach ($venues as $venue) {
     ?>
         <tr>
+            <td><?php
+                if ($venue->getSponsor() and $venue->getSponsor()->getLogoUrl()) {
+                ?>
+                    <img src="<?= $venue->getSponsor()->getLogoUrl(); ?>" width="40">
+                <?php
+                }
+                ?>
+            </td>
             <td>
                 <?php
                 if ($venue->getSponsor()) {
@@ -33,7 +42,7 @@
                 </a>
             </td>
             <td><?= nl2br($this->escapeHtml($venue->getCompleteAddress())); ?></td>
-            <td><?= $this->escapeHtml($venue->getContact()); ?></td>
+            <td><?= $this->markdown($venue->getContact()); ?></td>
         </tr>
     <?php
     }

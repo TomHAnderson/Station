@@ -16,10 +16,11 @@ of <?= $apiMeetupGroup['members']; ?> Meetup members
     <caption>Events</caption>
     <thead>
         <tr>
+            <th>Logo</th>
+            <th>Venue</th>
             <th>Date</th>
             <th>Name</th>
             <th>RSVP</th>
-            <th>Venue</th>
         </tr>
     </thead>
 
@@ -29,12 +30,14 @@ of <?= $apiMeetupGroup['members']; ?> Meetup members
     ?>
         <tr>
             <td>
-                <a class="btn btn-info" href="<?= $this->url('admin/event', ['id' => $event->getId()]); ?>">
-                    <?= $event->getScheduledAtWithOffset()->format('Y-m-d H:i:s'); ?>
-                </a>
+                <?php
+                if ($event->getVenue() and $event->getVenue()->getSponsor() and $event->getVenue()->getSponsor()->getLogoUrl()) {
+                ?>
+                    <img src="<?= $event->getVenue()->getSponsor()->getLogoUrl(); ?>" width="40">
+                <?php
+                }
+                ?>
             </td>
-            <td><?= $this->escapeHtml($event->getName()); ?></td>
-            <td><?= $this->escapeHtml($event->getYesRsvpCount()); ?></td>
             <td>
                 <?php
                 if ($event->getVenue()) {
@@ -46,6 +49,13 @@ of <?= $apiMeetupGroup['members']; ?> Meetup members
                 }
                 ?>
             </td>
+            <td>
+                <a class="btn btn-info" href="<?= $this->url('admin/event', ['id' => $event->getId()]); ?>">
+                    <?= $event->getScheduledAtWithOffset()->format('Y-m-d H:i:s'); ?>
+                </a>
+            </td>
+            <td><?= $this->escapeHtml($event->getName()); ?></td>
+            <td><?= $this->escapeHtml($event->getYesRsvpCount()); ?></td>
         </tr>
     <?php
     }

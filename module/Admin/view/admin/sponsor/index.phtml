@@ -38,7 +38,7 @@
                     <?= $this->escapeHtml($sponsor->getUrl()); ?>
                 </a>
             </td>
-            <td><?= $this->escapeHtml($sponsor->getDescription()); ?></td>
+            <td><?= $this->markdown($sponsor->getDescription()); ?></td>
         </tr>
     <?php
     }

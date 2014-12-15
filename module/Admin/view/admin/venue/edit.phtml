@@ -45,18 +45,6 @@ echo $this->form()->openTag($form);
 
     <div class="col-md-12">
         <?php
-        echo $this->formLabel($form->get('phone'));
-        echo $this->formText($form->get('phone'));
-        echo $this->formElementErrors()
-            ->setMessageOpenFormat('<div class="alert alert-danger alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button><ul><li>')
-            ->setMessageSeparatorString('</li><li>')
-            ->setMessageCloseString('</li></ul></div>')
-            ->render($form->get('phone'));
-        ?>
-    </div>
-
-    <div class="col-md-12">
-        <?php
         echo $this->formLabel($form->get('capacity'));
         echo $this->formNumber($form->get('capacity'));
         echo $this->formElementErrors()
@@ -68,52 +56,49 @@ echo $this->form()->openTag($form);
     </div>
 
     <div class="col-md-12">
-        <?php
-        echo $this->formLabel($form->get('description'));
-        echo $this->formTextArea($form->get('description'));
-        echo $this->formElementErrors()
-            ->setMessageOpenFormat('<div class="alert alert-danger alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button><ul><li>')
-            ->setMessageSeparatorString('</li><li>')
-            ->setMessageCloseString('</li></ul></div>')
-            ->render($form->get('description'));
-        ?>
+    <?php
+    echo $this->formMarkdown($form->get('description'));
+    echo $this->formElementErrors()
+        ->setMessageOpenFormat('<div class="alert alert-danger alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button><ul><li>')
+        ->setMessageSeparatorString('</li><li>')
+        ->setMessageCloseString('</li></ul></div>')
+        ->render($form->get('description'));
+    ?>
     </div>
 
     <div class="col-md-12">
-        <?php
-        echo $this->formLabel($form->get('contact'));
-        echo $this->formTextarea($form->get('contact'));
-        echo $this->formElementErrors()
-            ->setMessageOpenFormat('<div class="alert alert-danger alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button><ul><li>')
-            ->setMessageSeparatorString('</li><li>')
-            ->setMessageCloseString('</li></ul></div>')
-            ->render($form->get('contact'));
-        ?>
+    <?php
+    echo $this->formMarkdown($form->get('contact'));
+    echo $this->formElementErrors()
+        ->setMessageOpenFormat('<div class="alert alert-danger alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button><ul><li>')
+        ->setMessageSeparatorString('</li><li>')
+        ->setMessageCloseString('</li></ul></div>')
+        ->render($form->get('contact'));
+    ?>
     </div>
 
     <div class="col-md-12">
-        <?php
-        echo $this->formLabel($form->get('security'));
-        echo $this->formTextarea($form->get('security'));
-        echo $this->formElementErrors()
-            ->setMessageOpenFormat('<div class="alert alert-danger alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button><ul><li>')
-            ->setMessageSeparatorString('</li><li>')
-            ->setMessageCloseString('</li></ul></div>')
-            ->render($form->get('security'));
-        ?>
+    <?php
+    echo $this->formMarkdown($form->get('security'));
+    echo $this->formElementErrors()
+        ->setMessageOpenFormat('<div class="alert alert-danger alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button><ul><li>')
+        ->setMessageSeparatorString('</li><li>')
+        ->setMessageCloseString('</li></ul></div>')
+        ->render($form->get('security'));
+    ?>
     </div>
 
     <div class="col-md-12">
-        <?php
-        echo $this->formLabel($form->get('equipment'));
-        echo $this->formTextarea($form->get('equipment'));
-        echo $this->formElementErrors()
-            ->setMessageOpenFormat('<div class="alert alert-danger alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button><ul><li>')
-            ->setMessageSeparatorString('</li><li>')
-            ->setMessageCloseString('</li></ul></div>')
-            ->render($form->get('equipment'));
-        ?>
+    <?php
+    echo $this->formMarkdown($form->get('equipment'));
+    echo $this->formElementErrors()
+        ->setMessageOpenFormat('<div class="alert alert-danger alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button><ul><li>')
+        ->setMessageSeparatorString('</li><li>')
+        ->setMessageCloseString('</li></ul></div>')
+        ->render($form->get('equipment'));
+    ?>
     </div>
+
 </div>
 <br>
 <div class="form-container container">
