@@ -92,12 +92,12 @@ class SponsorContribution extends Form
             ),
         ));
 
+        // Events are populated from controller
         $this->add(array(
             'name' => 'event',
             'type' => 'select',
             'attributes' => array(
                 'placeholder' => 'event',
-                'required' => false,
                 'class' => 'form-control',
             ),
             'options' => array(
