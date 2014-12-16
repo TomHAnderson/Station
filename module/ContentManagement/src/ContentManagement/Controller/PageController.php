@@ -7,10 +7,11 @@ use Zend\View\Model\ViewModel;
 use Db\Entity\Page as PageEntity;
 use ContentManagement\Form\Page as PageForm;
 use Exception;
+use UnexpectedValueException;
 
 class PageController extends AbstractActionController
 {
-    public function indexAction()
+    public function detailAction()
     {
         $objectManager = $this->getServiceLocator()->get('doctrine.entitymanager.orm_default');
         $urlIdentifier = $this->params()->fromRoute('url-identifier');
@@ -35,6 +36,10 @@ class PageController extends AbstractActionController
         $objectManager = $this->getServiceLocator()->get('doctrine.entitymanager.orm_default');
         $page = new PageEntity();
         $inputFilter = $page->getInputFilter();
+
+        if ($urlIdentifier == 'create' or $urlIdentifier == 'edit' or $urlIdentifier == 'delete') {
+            throw new UnexpectedValueException("$urlIdentifier is a reserved word and cannot be a page name");
+        }
 
         $data = [
             'urlIdentifier' => $urlIdentifier,
@@ -87,7 +92,7 @@ class PageController extends AbstractActionController
                 $objectManager->flush();
 
                 // Redirect to list of albums
-                return $this->redirect()->toRoute('page', ['url-identifier' => $form->getData()['urlIdentifier']]);
+                return $this->redirect()->toRoute('page/detail', ['url-identifier' => $form->getData()['urlIdentifier']]);
             }
         } else {
             $form->setData($page->getArrayCopy());

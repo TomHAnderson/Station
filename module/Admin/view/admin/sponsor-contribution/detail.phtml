@@ -39,7 +39,7 @@
             <tr>
                 <th>Event</th>
                 <td>
-                    <a class="btn btn-info" href="<?= $this->url('admin/event', ['id' => $this->sponsorContribution->getEvent()->getId()]); ?>">
+                    <a class="btn btn-info" href="<?= $this->url('admin/event/detail', ['id' => $this->sponsorContribution->getEvent()->getId()]); ?>">
                         <?= $this->escapeHtml($this->sponsorContribution->getEvent()->getName()); ?>
                     </a>
                 </td>

@@ -64,6 +64,11 @@ class SponsorContribution implements InputFilterAwareInterface, ArraySerializabl
             ),
         ]));
 
+        $inputFilter->add($factory->createInput([
+            'name' => 'event',
+            'required' => false,
+        ]));
+
         return $inputFilter;
     }
 

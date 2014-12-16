@@ -127,3 +127,5 @@ if (sizeof($this->sponsor->getVenue())) {
 <?php
 }
 ?>
+
+<?= $this->partial('admin/partial/sponsor-contribution-table', ['sponsorContributions' => $this->sponsor->getSponsorContribution()]); ?>

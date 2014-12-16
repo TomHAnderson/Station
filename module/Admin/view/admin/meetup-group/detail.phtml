@@ -22,6 +22,7 @@ of <?= $apiMeetupGroup['members']; ?> Meetup members
     <thead>
         <tr>
             <th>Logo</th>
+            <th>Sponsor</th>
             <th>Venue</th>
             <th>Date</th>
             <th>Name</th>
@@ -45,6 +46,17 @@ of <?= $apiMeetupGroup['members']; ?> Meetup members
             </td>
             <td>
                 <?php
+                if ($event->getVenue() and $event->getVenue()->getSponsor() and $event->getVenue()->getSponsor()->getLogoUrl()) {
+                ?>
+                    <a class="btn btn-info" href="<?= $this->url('admin/sponsor/detail', ['id' => $event->getVenue()->getSponsor()->getId()]); ?>">
+                        <?= $this->escapeHtml($event->getVenue()->getSponsor()->getName()); ?>
+                    </a>
+                <?php
+                }
+                ?>
+            </td>
+            <td>
+                <?php
                 if ($event->getVenue()) {
                 ?>
                 <a class="btn btn-info" href="<?= $this->url('admin/venue/detail', ['id' => $event->getVenue()->getId()]); ?>">
@@ -55,7 +67,7 @@ of <?= $apiMeetupGroup['members']; ?> Meetup members
                 ?>
             </td>
             <td>
-                <a class="btn btn-info" href="<?= $this->url('admin/event', ['id' => $event->getId()]); ?>">
+                <a class="btn btn-info" href="<?= $this->url('admin/event/detail', ['id' => $event->getId()]); ?>">
                     <?= $event->getScheduledAtWithOffset()->format('Y-m-d H:i:s'); ?>
                 </a>
             </td>

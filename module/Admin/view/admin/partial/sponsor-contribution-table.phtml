@@ -1,0 +1,64 @@
+<table class="table table-striped table-hover">
+    <caption>Sponsor Contributions</caption>
+    <thead>
+        <tr>
+            <th>Logo</th>
+            <th>Sponsor</th>
+            <th>Event Date</th>
+            <th>Event</th>
+            <th>Contribution Created At</th>
+            <th>Contribution Description</th>
+        </tr>
+    </thead>
+
+    <tbody>
+    <?php
+    foreach ($this->sponsorContributions as $sponsorContribution) {
+    ?>
+        <tr>
+            <td>
+                <?php
+                if ($sponsorContribution->getSponsor()->getLogoUrl()) {
+                ?>
+                    <img src="<?= $sponsorContribution->getSponsor()->getLogoUrl(); ?>" width="40">
+                <?php
+                }
+                ?>
+            </td>
+            <td>
+                <a class="btn btn-info" href="<?= $this->url('admin/sponsor/detail', ['id' => $sponsorContribution->getSponsor()->getId()]); ?>">
+                    <?= $this->escapeHtml($sponsorContribution->getSponsor()->getName()); ?>
+                </a>
+            </td>
+            <td>
+                <?php
+                if ($sponsorContribution->getEvent()) {
+                ?>
+                    <a class="btn btn-info" href="<?= $this->url('admin/event/detail', ['id' => $sponsorContribution->getEvent()->getId()]); ?>">
+                        <?= $sponsorContribution->getEvent()->getScheduledAtWithOffset()->format('Y-m-d H:i:s'); ?>
+                    </a>
+                <?php
+                }
+                ?>
+            </td>
+            <td>
+                <?php
+                if ($sponsorContribution->getEvent()) {
+                ?>
+                    <?= $this->escapeHtml($sponsorContribution->getEvent()->getName()); ?>
+                <?php
+                }
+                ?>
+            </td>
+            <td>
+                <a class="btn btn-info" href="<?= $this->url('admin/sponsor-contribution', ['id' => $sponsorContribution->getId()]); ?>">
+                    <?= $sponsorContribution->getCreatedAt()->format('Y-m-d H:i:s'); ?>
+                </a>
+            </td>
+            <td><?= $this->markdown($sponsorContribution->getDescription()); ?></td>
+        </tr>
+    <?php
+    }
+    ?>
+    </tbody>
+</table>

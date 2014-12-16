@@ -6,7 +6,7 @@
 
 <div class="container">
     <div class="pull-right">
-        <form method="POST" action="<?= $this->url('page-create'); ?>">
+        <form method="POST" action="<?= $this->url('page/create'); ?>">
             <input type="text" name="urlIdentifier">
             <button type="submit" class="btn btn-success">Create Page</button>
         </form>
@@ -27,7 +27,7 @@
                 <th>
                     Sort
                 </th>
-                <th>
+                <th class="text-right">
                     Actions
                 </th>
             </tr>
@@ -41,13 +41,15 @@
                 <td><?= $this->escapeHtml($page->getUrlIdentifier()); ?></td>
                 <td><?= $this->escapeHtml($page->getTitle()); ?></td>
                 <td><?= $this->escapeHtml($page->getSort()); ?></td>
-                <td>
-                    <a class="btn btn-warning" href="<?= $this->url('page/edit', ['url-identifier' => $page->getUrlIdentifier()]); ?>">
-                        Edit Page
-                    </a>
-                    <a class="btn btn-danger" href="<?= $this->url('page/delete', ['url-identifier' => $page->getUrlIdentifier()]); ?>">
-                        Delete Page
-                    </a>
+                <td class="text-right">
+                    <div class="btn-group">
+                        <a class="btn btn-warning" href="<?= $this->url('page/edit', ['url-identifier' => $page->getUrlIdentifier()]); ?>">
+                            Edit
+                        </a>
+                        <a class="btn btn-danger" href="<?= $this->url('page/delete', ['url-identifier' => $page->getUrlIdentifier()]); ?>">
+                            Delete
+                        </a>
+                    </div>
                 </td>
             </tr>
         <?php

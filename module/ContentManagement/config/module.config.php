@@ -21,16 +21,6 @@ return array(
 
     'router' => array(
         'routes' => array(
-            'page-create' => array(
-                'type'    => 'Literal',
-                'options' => array(
-                    'route'    => '/page-create',
-                    'defaults' => array(
-                        'controller'    => 'ContentManagement\Controller\Page',
-                        'action'        => 'create',
-                    ),
-                ),
-            ),
             'page-by-id' => array(
                 'type'    => 'Segment',
                 'options' => array(
@@ -42,9 +32,9 @@ return array(
                 ),
             ),
             'page' => array(
-                'type'    => 'Segment',
+                'type'    => 'Literal',
                 'options' => array(
-                    'route'    => '/page/[:url-identifier]',
+                    'route'    => '/page',
                     'defaults' => array(
                         'controller'    => 'ContentManagement\Controller\Page',
                         'action'        => 'index',
@@ -52,10 +42,33 @@ return array(
                 ),
                 'may_terminate' => true,
                 'child_routes' => array(
+                    'detail' => array(
+                        'type'    => 'Segment',
+                        'options' => array(
+                            'route'    => '/:url-identifier',
+                            'defaults' => array(
+                                'controller'    => 'ContentManagement\Controller\Page',
+                                'action'        => 'detail',
+                            ),
+                            'constraints' => array(
+#                                'url-identifier' => '^(!create)|(!edit)$',
+                            ),
+                        ),
+                    ),
+                    'create' => array(
+                        'type'    => 'Literal',
+                        'options' => array(
+                            'route'    => '/create',
+                            'defaults' => array(
+                                'controller'    => 'ContentManagement\Controller\Page',
+                                'action'        => 'create',
+                            ),
+                        ),
+                    ),
                     'edit' => array(
                         'type'    => 'Segment',
                         'options' => array(
-                            'route'    => '/edit',
+                            'route'    => '/edit/:url-identifier',
                             'defaults' => array(
                                 'controller'    => 'ContentManagement\Controller\Page',
                                 'action'        => 'edit',
@@ -65,7 +78,7 @@ return array(
                     'delete' => array(
                         'type'    => 'Segment',
                         'options' => array(
-                            'route'    => '/delete',
+                            'route'    => '/delete/:url-identifier',
                             'defaults' => array(
                                 'controller'    => 'ContentManagement\Controller\Page',
                                 'action'        => 'delete',

@@ -54,7 +54,7 @@ class SponsorContributionController extends AbstractActionController
 
                 $objectManager->flush();
 
-                return $this->plugin('redirect')->toRoute('admin/sponsor-contribution', ['id' => $sponsorContribution->getId()]);
+                return $this->plugin('redirect')->toRoute('admin/sponsor-contribution/detail', ['id' => $sponsorContribution->getId()]);
             }
         } else {
             $form->setData($sponsorContribution->getArrayCopy());
@@ -71,6 +71,13 @@ class SponsorContributionController extends AbstractActionController
         $objectManager = $this->getServiceLocator()->get('doctrine.entitymanager.orm_default');
 
         $meetupGroup = $objectManager->getRepository('Db\Entity\MeetupGroup')->find($this->params()->fromRoute('id'));
+
+        if ($this->params()->fromRoute('event_id')) {
+            $event = $objectManager->getRepository('Db\Entity\Event')->find($this->params()->fromRoute('event_id'));
+        } else {
+            $event = null;
+        }
+
         $form = $this->getServiceLocator()->get('FormElementManager')->get('Admin\Form\SponsorContribution');
 
         // Load filtered list of events for select
@@ -101,13 +108,18 @@ class SponsorContributionController extends AbstractActionController
                 $objectManager->persist($sponsorContribution);
                 $objectManager->flush();
 
-                return $this->plugin('redirect')->toRoute('admin/sponsor-contribution', ['id' => $sponsorContribution->getId()]);
+                return $this->plugin('redirect')->toRoute('admin/sponsor-contribution/detail', ['id' => $sponsorContribution->getId()]);
+            }
+        } else {
+            if ($event) {
+                $form->setData(['event' => $event->getId()]);
             }
         }
 
         return new ViewModel([
             'meetupGroup' => $meetupGroup,
-            'form' => $form
+            'form' => $form,
+            'event' => $event,
         ]);
     }
 

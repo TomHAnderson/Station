@@ -173,7 +173,7 @@ if ($this->venue->getEvent()) {
             <td><?= $this->escapeHtml($event->getMeetupGroup()->getName()); ?></td>
             <td><?= $event->getScheduledAtWithOffset()->format('Y-m-d H:i:s'); ?></td>
             <td>
-                <a class="btn btn-info" href="<?= $this->url('admin/event', ['id' => $event->getId()]); ?>">
+                <a class="btn btn-info" href="<?= $this->url('admin/event/detail', ['id' => $event->getId()]); ?>">
                     <?= $this->escapeHtml($event->getName()); ?>
                 </a>
             </td>
