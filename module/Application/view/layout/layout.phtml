@@ -91,7 +91,7 @@
                     // Fetch all published pages
                     foreach ($this->getPages(null, true) as $page) {
                     ?>
-                        <li><a href="<?= $this->url('page', ['url-identifier' => $page->getUrlIdentifier()]) ?>"><?= $this->escapeHtml($page->getTitle()); ?></a></li>
+                        <li><a href="<?= $this->url('page/detail', ['url-identifier' => $page->getUrlIdentifier()]) ?>"><?= $this->escapeHtml($page->getTitle()); ?></a></li>
                     <?php
                     }
                     ?>
@@ -99,7 +99,7 @@
                     <?php
                     if ($this->isAllowed('administration', 'access')) {
                     ?>
-                        <li><a href="<?= $this->url('admin/meetup-group', ['id' => 120903]); ?>">SF PHP</a></li>
+                        <li><a href="<?= $this->url('admin/meetup-group/detail', ['id' => 120903]); ?>">SF PHP</a></li>
                         <li><a href="<?= $this->url('admin/venue') ?>">Venues</a></li>
                         <li><a href="<?= $this->url('admin/sponsor') ?>">Sponsors</a></li>
                         <li><a href="<?= $this->url('admin') ?>">Administration</a></li>

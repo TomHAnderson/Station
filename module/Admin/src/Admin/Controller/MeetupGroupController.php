@@ -7,7 +7,7 @@ use Zend\View\Model\ViewModel;
 
 class MeetupGroupController extends AbstractActionController
 {
-    public function indexAction()
+    public function detailAction()
     {
         $this->plugin('Meetup')->validateMeetupGroupPermission($this->params()->fromRoute('id'), 'any', true);
         $objectManager = $this->getServiceLocator()->get('doctrine.entitymanager.orm_default');

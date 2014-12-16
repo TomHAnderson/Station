@@ -34,7 +34,7 @@
                 <?php
                 if ($sponsorContribution->getEvent()) {
                 ?>
-                    <a class="btn btn-info" href="<?= $this->url('admin/event', ['id' => $sponsorContribution->getEvent()->getId()]); ?>">
+                    <a class="btn btn-info" href="<?= $this->url('admin/event/detail', ['id' => $sponsorContribution->getEvent()->getId()]); ?>">
                         <?= $sponsorContribution->getEvent()->getScheduledAtWithOffset()->format('Y-m-d H:i:s'); ?>
                     </a>
                 <?php

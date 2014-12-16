@@ -9,24 +9,32 @@ return array(
     'router' => array(
         'routes' => array(
             'member' => array(
-                'type'    => 'Segment',
+                'type'    => 'Literal',
                 'options' => array(
                     'route'    => '/member',
                     'defaults' => array(
-                        '__NAMESPACE__' => 'Station\Controller',
-                        'controller'    => 'Member',
+                        'controller'    => 'Station\Controller\Member',
                         'action'        => 'index',
                     ),
                 ),
                 'may_terminate' => true,
                 'child_routes' => array(
+                    'detail' => array(
+                        'type'    => 'Segment',
+                        'options' => array(
+                            'route'    => '/:id',
+                            'defaults' => array(
+                                'controller'    => 'Station\Controller\Member',
+                                'action'        => 'detail',
+                            ),
+                        ),
+                    ),
                     'refresh' => array(
                         'type'    => 'Segment',
                         'options' => array(
                             'route'    => '/refresh',
                             'defaults' => array(
-                                '__NAMESPACE__' => 'Station\Controller',
-                                'controller'    => 'Member',
+                                'controller'    => 'Station\Controller\Member',
                                 'action'        => 'refresh',
                             ),
                         ),
@@ -36,8 +44,7 @@ return array(
                         'options' => array(
                             'route'    => '/view/:id',
                             'defaults' => array(
-                                '__NAMESPACE__' => 'Station\Controller',
-                                'controller'    => 'Member',
+                                'controller'    => 'Station\Controller\Member',
                                 'action'        => 'view',
                             ),
                         ),

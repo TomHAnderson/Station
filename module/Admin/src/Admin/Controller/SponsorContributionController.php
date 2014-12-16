@@ -54,7 +54,7 @@ class SponsorContributionController extends AbstractActionController
 
                 $objectManager->flush();
 
-                return $this->plugin('redirect')->toRoute('admin/sponsor-contribution', ['id' => $sponsorContribution->getId()]);
+                return $this->plugin('redirect')->toRoute('admin/sponsor-contribution/detail', ['id' => $sponsorContribution->getId()]);
             }
         } else {
             $form->setData($sponsorContribution->getArrayCopy());
@@ -108,7 +108,7 @@ class SponsorContributionController extends AbstractActionController
                 $objectManager->persist($sponsorContribution);
                 $objectManager->flush();
 
-                return $this->plugin('redirect')->toRoute('admin/sponsor-contribution', ['id' => $sponsorContribution->getId()]);
+                return $this->plugin('redirect')->toRoute('admin/sponsor-contribution/detail', ['id' => $sponsorContribution->getId()]);
             }
         } else {
             if ($event) {

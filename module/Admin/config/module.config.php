@@ -39,18 +39,35 @@ return array(
                 ),
                 'may_terminate' => true,
                 'child_routes' => array(
+                    // This route is denied by default and the action does not exist
+                    // Use for a cleaner tree route stack below
                     'event' => array(
-                        'type'    => 'Segment',
+                        'type'    => 'Literal',
                         'options' => array(
-                            'route'    => '/event/:id',
+                            'route'    => '/event',
                             'defaults' => array(
                                 'controller'    => 'Admin\Controller\Event',
                                 'action'        => 'index',
                             ),
                         ),
+                        'may_terminate' => true,
+                        'child_routes' => array(
+                            'detail' => array(
+                                'type'    => 'Segment',
+                                'options' => array(
+                                    'route'    => '/:id',
+                                    'defaults' => array(
+                                        'controller'    => 'Admin\Controller\Event',
+                                        'action'        => 'detail',
+                                    ),
+                                ),
+                            ),
+                        ),
                     ),
+                    // This route is denied by default and the action does not exist
+                    // Use for a cleaner tree route stack below
                     'sponsor-contact' => array(
-                        'type'    => 'Segment',
+                        'type'    => 'Literal',
                         'options' => array(
                             'route'    => '/sponsor-contact',
                             'defaults' => array(
@@ -259,9 +276,9 @@ return array(
                         ),
                     ),
                     'sponsor-contribution' => array(
-                        'type'    => 'Segment',
+                        'type'    => 'Literal',
                         'options' => array(
-                            'route'    => '/sponsor-contribution/:id',
+                            'route'    => '/sponsor-contribution',
                             'defaults' => array(
                                 'controller'    => 'Admin\Controller\SponsorContribution',
                                 'action'        => 'detail',
@@ -269,10 +286,20 @@ return array(
                         ),
                         'may_terminate' => true,
                         'child_routes' => array(
+                            'detail' => array(
+                                'type'    => 'Segment',
+                                'options' => array(
+                                    'route'    => '/:id',
+                                    'defaults' => array(
+                                        'controller'    => 'Admin\Controller\SponsorContribution',
+                                        'action'        => 'detail',
+                                    ),
+                                ),
+                            ),
                             'edit' => array(
                                 'type'    => 'Segment',
                                 'options' => array(
-                                    'route'    => '/edit',
+                                    'route'    => '/:id/edit',
                                     'defaults' => array(
                                         'controller'    => 'Admin\Controller\SponsorContribution',
                                         'action'        => 'edit',
@@ -282,7 +309,7 @@ return array(
                             'delete' => array(
                                 'type'    => 'Segment',
                                 'options' => array(
-                                    'route'    => '/delete',
+                                    'route'    => '/:id/delete',
                                     'defaults' => array(
                                         'controller'    => 'Admin\Controller\SponsorContribution',
                                         'action'        => 'delete',
@@ -292,9 +319,9 @@ return array(
                         ),
                     ),
                     'meetup-group' => array(
-                        'type'    => 'Segment',
+                        'type'    => 'Literal',
                         'options' => array(
-                            'route'    => '/meetup-group/:id',
+                            'route'    => '/meetup-group',
                             'defaults' => array(
                                 'controller'    => 'Admin\Controller\MeetupGroup',
                                 'action'        => 'index',
@@ -302,10 +329,20 @@ return array(
                         ),
                         'may_terminate' => true,
                         'child_routes' => array(
+                            'detail' => array(
+                                'type'    => 'Segment',
+                                'options' => array(
+                                    'route'    => '/:id',
+                                    'defaults' => array(
+                                        'controller'    => 'Admin\Controller\MeetupGroup',
+                                        'action'        => 'detail',
+                                    ),
+                                ),
+                            ),
                             'sponsor-contribution' => array(
                                 'type'    => 'Segment',
                                 'options' => array(
-                                    'route'    => '/sponsor-contribution',
+                                    'route'    => '/:id/sponsor-contribution',
                                     'defaults' => array(
                                         'controller'    => 'Admin\Controller\MeetupGroup',
                                         'action'        => 'sponsorContribution',
@@ -328,7 +365,7 @@ return array(
                             'event-refresh-all' => array(
                                 'type'    => 'Segment',
                                 'options' => array(
-                                    'route'    => '/event/refresh-all',
+                                    'route'    => '/:id/event/refresh-all',
                                     'defaults' => array(
                                         'controller'    => 'Admin\Controller\Event',
                                         'action'        => 'refreshAll',

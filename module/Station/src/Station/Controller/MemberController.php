@@ -5,6 +5,7 @@ namespace Station\Controller;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 use Db\Entity;
+use UnexpectedValueException;
 
 class MemberController extends AbstractActionController
 {
@@ -18,6 +19,17 @@ class MemberController extends AbstractActionController
 
         if (!sizeof($member->getProfile())) {
             return $this->plugin('redirect')->toRoute('member/refresh');
+        }
+
+        return $this->plugin('redirect')->toRoute('member/detail', ['id' => $member->getId()]);
+    }
+
+    public function detailAction()
+    {
+        $member = $this->plugin('Meetup')->getMember();
+
+        if ($member->getId() != $this->params()->fromRoute('id')) {
+            throw new UnexpectedValueException('Your logged in member id does not match the requested id');
         }
 
         return new ViewModel([

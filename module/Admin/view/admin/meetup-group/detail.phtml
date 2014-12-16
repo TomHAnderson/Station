@@ -67,7 +67,7 @@ of <?= $apiMeetupGroup['members']; ?> Meetup members
                 ?>
             </td>
             <td>
-                <a class="btn btn-info" href="<?= $this->url('admin/event', ['id' => $event->getId()]); ?>">
+                <a class="btn btn-info" href="<?= $this->url('admin/event/detail', ['id' => $event->getId()]); ?>">
                     <?= $event->getScheduledAtWithOffset()->format('Y-m-d H:i:s'); ?>
                 </a>
             </td>

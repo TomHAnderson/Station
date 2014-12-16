@@ -9,7 +9,7 @@ use DateTime;
 
 class EventController extends AbstractActionController
 {
-    public function indexAction()
+    public function detailAction()
     {
         $objectManager = $this->getServiceLocator()->get('doctrine.entitymanager.orm_default');
         $event = $objectManager->getRepository('Db\Entity\Event')->find($this->params()->fromRoute('id'));

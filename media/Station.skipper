@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <skipper version="3.0.0.1104" name="sfphp.org.skipper" mvc="Without MVC" orm="Doctrine2" uuid="68b6e974-35fb-4337-a482-3e3553b0227b">
-  <module name="(Meetup) Station" import-format="Doctrine2Xml" import-path="../module/Db/config/xml" uuid="d4d884ea-2c99-4815-b2b0-6a99bb5c7050">
+  <module name="Station" import-format="Doctrine2Xml" import-path="../module/Db/config/xml" uuid="d4d884ea-2c99-4815-b2b0-6a99bb5c7050">
     <entity name="Member" uuid="2d4e12a3-3dc9-4402-87b3-9bb5298cd889">
       <field name="id" type="integer" required="true" unique="true" primary="true" uuid="2a9ee3b7-a63d-42f5-a2d3-a739a29c99a9"/>
       <field name="name" type="string" uuid="b3c6525f-8dd6-46d6-95b5-86f00bc14564"/>
@@ -372,7 +372,7 @@
     <association from="ProfileAnswer" to="Profile" owner-alias="profileAnswer" inverse-alias="profile" uuid="bd7db317-cc2a-4922-8fdb-f2203fcce032">
       <association-field from="profile_id" to="id"/>
     </association>
-    <comment caption="Station" description="Author: Tom Anderson&#10;Version: 1.0.0&#10;Date: 2014-11-20" uuid="484af149-29c2-488e-bae7-12436d51e779"/>
+    <comment caption="Station" description="Tom Anderson&#10;tom.h.anderson@gmail.com" uuid="484af149-29c2-488e-bae7-12436d51e779"/>
     <region caption="Sponsor" uuid="154be245-3bc2-4284-a346-3470850d1417">
       <comment caption="Venue Questions" description="The venue questions are copied into EventQuestion when a venue is assigned to an event.  The EventQuestion (max 6) are posted to Meetup when the event is created." uuid="81ce1590-aff5-4de8-9cb6-19690b156a46"/>
       <entity-ref name="Sponsor"/>
@@ -434,7 +434,7 @@
     <entity uuid="3e2b709b-26d8-4613-bc03-2a74207c51ad" bg-color="4294967295" hdr-color="4292006610" position-x="218" position-y="47" size-x="0" size-x2="20" size-y="0" size-y2="20"/>
     <association uuid="4577a64e-f295-4f08-adbb-053b52790007" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030" split="1"/>
     <region uuid="4816cd95-e5f3-4f5e-8d11-17a8c70d5e0e" bg-color="4293391869" position-x="26" position-y="392" size-x="0" size-x2="524" size-y="0" size-y2="664"/>
-    <comment uuid="484af149-29c2-488e-bae7-12436d51e779" bg-color="4278226874" position-x="0" position-y="1071" size-x="0" size-x2="105" size-y="0" size-y2="59" txt-color="4294967295"/>
+    <comment uuid="484af149-29c2-488e-bae7-12436d51e779" bg-color="4278226874" position-x="0" position-y="1071" size-x="0" size-x2="121" size-y="0" size-y2="55" txt-color="4294967295"/>
     <association uuid="49a40295-fc3a-403d-a9e9-75f53979dbfd" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030" split="1"/>
     <association uuid="4de9c21b-5134-4412-83aa-56783a0a1316" caption1-position-x="0" caption1-position-y="0" center-position-x="0" center-position-y="0" color="4288059030" split="1"/>
     <many-to-many-association uuid="542093a0-9a59-4bfe-bb69-bc18444d6122" color="4288059030"/>
