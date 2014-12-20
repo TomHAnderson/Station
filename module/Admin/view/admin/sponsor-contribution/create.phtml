@@ -119,6 +119,16 @@ echo $this->form()->openTag($form);
 <div class="form-container container">
     <div class="col-md-12">
         <?= $this->formSubmit($form->get('submit')); ?>
+
+        <a class="confirm" href="<?php
+        if ($this->event) {
+            echo $this->url('admin/event/detail', ['id' => $this->event->getId()]);
+        } else {
+            echo $this->url('admin/meetup-group/sponsor-contribution', ['id' => $this->meetupGroup->getId()]);
+        }
+        ?>">
+            cancel
+        </a>
         <?= $this->formHidden($form->get('csrf')); ?>
     </div>
 </div>

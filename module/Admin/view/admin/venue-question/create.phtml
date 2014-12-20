@@ -41,7 +41,9 @@ echo $this->form()->openTag($form);
 <div class="form-container container">
     <div class="col-md-12">
         <?= $this->formSubmit($form->get('submit')); ?>
-        <?= $this->formHidden($form->get('csrf')); ?>
+        <a class="confirm" href="<?= $this->url('admin/venue/detail', ['id' => $this->venue->getId()]); ?>">
+            cancel
+        </a>
     </div>
 </div>
 
