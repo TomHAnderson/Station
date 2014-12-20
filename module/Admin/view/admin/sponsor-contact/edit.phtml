@@ -65,6 +65,9 @@ echo $this->form()->openTag($form);
 <div class="form-container container">
     <div class="col-md-12">
         <?= $this->formSubmit($form->get('submit')); ?>
+        <a class="confirm" href="<?= $this->url('admin/sponsor/detail', ['id' => $this->sponsorContact->getSponsor()->getId()]); ?>">
+            cancel
+        </a>
         <?= $this->formHidden($form->get('csrf')); ?>
     </div>
 </div>

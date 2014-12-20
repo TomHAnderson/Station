@@ -1,5 +1,5 @@
 $(function() {
-	$('.btn-danger').on('click', function(event) {
+	$('.btn-danger, a.confirm').on('click', function(event) {
 		return confirm('Are you sure?');
 	});
 });
